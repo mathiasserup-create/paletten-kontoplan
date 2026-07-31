@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Konverteringsplan — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Ny kontoplan</div>
+<h1>Konverteringsplan</h1>
+<div class="meta">Sådan kommer vi på den nye plan fra 1.1.2026</div></header>
+<div class="nav"><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="on" href="06-konverteringsplan.html">Konverteringsplan</a></div>
+<p><b>Beslutning (MSP):</b> der bogføres på den nye kontoplan fra <b>1.1.2026</b>, og <b>2025 skal med som sammenligningstal</b>.</p>
+<p>Dette dokument beskriver, hvad den beslutning konkret kræver — og de to forhold der afgør, hvordan det skal gribes an.</p>
+<hr>
+<h2>1. Udgangspunktet: 2026 er næsten ikke bogført</h2>
+<p>Posteringsudtrækket (senest opdateret 21.06.2026) viser:</p>
+<div class="tw"><table><thead><tr><th>År</th><th>Posteringer</th><th>Heraf på SPLIT-konti</th></tr></thead><tbody><tr><td>2023</td><td>5.761</td><td>718</td></tr><tr><td>2024</td><td>5.963</td><td>756</td></tr><tr><td>2025</td><td>5.886</td><td>489</td></tr><tr><td><b>2026</b></td><td><b>174</b></td><td><b>18</b></td></tr></tbody></table></div>
+<p>Et normalt halvår ligger på ca. 2.900 posteringer. <b>2026 er altså bogført med under 6 % af det forventede</b> — heraf kun 50 driftsposteringer. Bogføringen har et betydeligt efterslæb.</p>
+<p>Det er i sig selv værd at bemærke, men her er det først og fremmest en <b>mulighed</b>:</p>
+<blockquote><p>Der er i praksis ingenting at ompostere i 2026 endnu. Skiftet koster få timer nu. Hvis efterslæbet først indhentes på den gamle kontoplan, skal ca. 2.700 posteringer omposteres bagefter — en femtendobling af opgaven.</p></blockquote>
+<p><b>Konklusion: vinduet er nu, og det lukker for hver måned bogføringen indhentes.</b></p>
+<hr>
+<h2>2. Forhindringen: 28 kontonumre betyder noget forskelligt i de to planer</h2>
+<p>Den nye kontoplan er tegnet fra bunden, uden hensyn til den gamle nummerering. Derfor genbruges 28 numre til noget helt andet. De alvorligste:</p>
+<div class="tw"><table><thead><tr><th>Nr</th><th>Gammel betydning</th><th>Ny betydning</th></tr></thead><tbody><tr><td>8200</td><td>Viborg Kommune, ombygningslån (4,78 mio.)</td><td>Skyldig løn</td></tr><tr><td>8400</td><td>Nordea Bank</td><td>Tilbagebetaling honorarstøtte</td></tr><tr><td>8210</td><td>Viborg Kommune, rampe</td><td>Skyldige feriepenge</td></tr><tr><td>4010</td><td>Restaurationsbesøg</td><td>Husleje</td></tr><tr><td>4330</td><td>Revisorhonorar</td><td>Småanskaffelser</td></tr><tr><td>3020</td><td>Gager og lønninger</td><td>Løn, timelønnede</td></tr><tr><td>2010</td><td>Arrangementer og honorar, skal indb.</td><td>Kunstnerhonorar, faktura fra CVR m/moms</td></tr></tbody></table></div>
+<p>…og 21 andre. Den fulde liste ligger i <a href="05-mapping-gammel-ny.html">05-mapping-gammel-ny.md</a>.</p>
+<p><b>Konsekvensen:</b> de to kontoplaner kan ikke eksistere side om side i samme e-conomic-regnskab — et kontonummer kan kun bruges én gang. Og selv hvis man lukkede de gamle konti, ville en rapport hen over 2025 og 2026 på fx konto 4010 blande <i>restaurationsbesøg</i> sammen med <i>husleje</i>. Det ødelægger præcis det, sammenligningstallene skal bruges til.</p>
+<hr>
+<h2>3. Tre veje — og anbefalingen</h2>
+<h3>A. Nyt regnskab i e-conomic <i>(anbefales)</i></h3>
+<p>Opret et nyt regnskab med den nye kontoplan. Primobalance pr. 1.1.2026 indlæses fra det gamle regnskab via mappingen, de 174 posteringer bogføres på ny, og 2025 lægges ind som sammenligningstal.</p>
+<ul><li>Ren kontoplan uden arv fra den gamle</li><li>Ingen nummerkollisioner, ingen blandede rapporter</li><li>Det gamle regnskab bevares urørt som historik og som grundlag for de aflagte årsrapporter</li><li>Koster en ekstra e-conomic-aftale, og historik før 2026 ligger et andet sted</li></ul>
+<h3>B. Konvertering i det eksisterende regnskab</h3>
+<p>Kræver at de gamle konti kan omnummereres eller slettes, så numrene frigøres.</p>
+<ul><li><b>Afgørende forbehold:</b> e-conomic tillader som udgangspunkt ikke, at man ændrer nummer på en konto der har posteringer — og alle kollisionskontiene har posteringer tilbage fra 2020. Skal bekræftes af bogholder eller e-conomic support, før vejen overhovedet kan vælges.</li><li>Alt ligger samme sted, ingen ekstra aftale</li><li>Høj risiko for rod undervejs, og 2025-tallene bliver stadig blandede på de 28 numre</li></ul>
+<h3>C. Omnummerér den nye kontoplan så kollisionerne undgås</h3>
+<p>Vi kontrollerer selv den nye nummerering og kunne flytte de 28 konti.</p>
+<ul><li>Undgår problemet uden nyt regnskab</li><li>Men ødelægger den logiske nummerplan — kollisionerne ligger spredt i tætte intervaller, så konsekvensen bliver en kontoplan med huller og skæve spring. Det var netop det, oprydningen skulle væk fra</li><li>2025-tallene ville stadig ligge på gamle konti med gammel betydning</li></ul>
+<p><b>Anbefaling: A.</b> Den er den eneste af de tre, der giver rene sammenligningstal, og den eneste hvor resultatet ikke afhænger af, hvad e-conomic tilfældigvis tillader.</p>
+<hr>
+<h2>4. Sammenligningstal for 2025 — bogføringen skal ikke røres</h2>
+<p>2025 er aflagt, revideret og godkendt. Regnskabsåret <b>omposteres ikke</b> postering for postering. Sammenligningstallene laves i stedet ved at konvertere <b>saldobalancen</b> for 2025 gennem mappingen.</p>
+<p>Det gør opgaven meget mindre: der skal fastlægges en fordeling for de ~20 SPLIT-konti, ikke vurderes 489 enkeltposteringer.</p>
+<p><b>Genvej:</b> Beierholms noter indeholder allerede en del af opdelingen. Note 2 deler fx tilskuddet op i Viborg Kommune, Kulturambassadørerne, Viborg Metal Festival, Statens Kunstfonds Projektstøtteudvalg og Carlsbergfondet hver for sig — præcis den opdeling den nye plan lægger op til. Tilsvarende for note 1, 3 og 4. De tal kan overføres direkte.</p>
+<p>Kun hvor den nye plan er <b>finere</b> end årsrapportens noter, skal der en vurdering til. Den tungeste er note 3&#x27;s linje &quot;Arrangementer&quot; (1.337.516 kr. i 2025), som skal fordeles på honorartyperne 2010 / 2015 / 2020 / 2040.</p>
+<hr>
+<h2>5. Rækkefølge</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Trin</th><th>Hvem</th><th>Bemærkning</th></tr></thead><tbody><tr><td>1</td><td>Bekræft valg af vej (A, B eller C)</td><td>MSP + bogholder</td><td>Blokerer alt andet</td></tr><tr><td>2</td><td>Opret regnskab og importér kontoplanen</td><td>Bogholder</td><td>Importfil laves herfra</td></tr><tr><td>3</td><td>Fastlæg fordelingen på de 20 drifts-SPLITs</td><td>Bogholder + MSP</td><td>Bruges både til primo og til 2025-tal</td></tr><tr><td>4</td><td>Del anlægskartoteket i teknik og øvrigt driftsmateriel</td><td>Bogholder + revisor</td><td>Grundlag for 5200/5300 og afskrivningskonti</td></tr><tr><td>5</td><td>Del de to kommunelån i langfristet og kortfristet</td><td>Bogholder</td><td>Standard årsafslutning</td></tr><tr><td>6</td><td>Indlæs primobalance pr. 1.1.2026</td><td>Bogholder</td><td>Via mappingen</td></tr><tr><td>7</td><td>Ombogfør de 174 posteringer fra 2026</td><td>Bogholder</td><td>Få timer</td></tr><tr><td>8</td><td>Læg 2025 ind som sammenligningstal</td><td>Bogholder</td><td>Fra saldobalance + noter</td></tr><tr><td>9</td><td>Ryd op i kreditorstamdata: CVR-nummer og momsstatus</td><td>Bogholder</td><td>Forudsætning for at honorarkontiene bruges rigtigt</td></tr><tr><td>10</td><td>Indhent bogføringsefterslæbet for 2026</td><td>Bogholder</td><td><b>Nu direkte på den nye plan</b></td></tr></tbody></table></div>
+<p>Trin 9 er ikke konverteringsarbejde, men opsætning: uden CVR-nummer og momsstatus på kreditoren kan bogholderen ikke vælge rigtigt mellem 2010, 2015 og 2020, og så falder hele B-indkomstdesignet fra hinanden. 188 af de 502 modparter på honorarkontiene kan ikke afgøres ud fra navnet alene og skal slås op.</p>
+<hr>
+<h2>6. Det der haster</h2>
+<p>Trin 1 og 2. Hver måned bogføringsefterslæbet indhentes på den gamle plan, vokser trin 7 fra &quot;få timer&quot; mod &quot;flere dage&quot;. Alt det øvrige kan gøres parallelt eller bagefter.</p>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>
