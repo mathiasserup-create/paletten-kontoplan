@@ -106,7 +106,7 @@
   <div class="meta">Status pr. 31. juli 2026 · Den Selvejende Institution Spillestedet Paletten, CVR 16 95 95 88 · e-conomic-aftale 983629</div>
 </header>
 
-<div class="nav"><a class="on" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a></div>
+<div class="nav"><a class="on" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div>
 <p class="lead">Den nye kontoplan er skrevet færdig, og hele den gamle kontoplan er nu mappet over i den. Dette notat samler <b>hvad der er besluttet</b>, <b>hvad der bliver rettet undervejs</b>, og <b>hvad der stadig mangler en beslutning</b> — så arbejdet kan afsluttes med bogholder og revisor.</p>
 
 <div class="stats">
@@ -295,11 +295,24 @@
 
 <p>De to planer kan derfor ikke ligge side om side i samme e-conomic-regnskab — et kontonummer kan kun bruges én gang. Og selv med de gamle konti lukket ville en rapport hen over 2025 og 2026 på konto 4010 blande restaurationsbesøg sammen med husleje. Det ødelægger netop det, sammenligningstallene skal bruges til.</p>
 
-<h3>Anbefaling: nyt regnskab i e-conomic</h3>
+<h3>Løsningen: renummerering i det eksisterende regnskab</h3>
 
-<p>Opret et nyt regnskab med den nye kontoplan, indlæs primobalancen pr. 1.1.2026 gennem mappingen, bogfør de 174 posteringer om, og læg 2025 ind som sammenligningstal. Det gamle regnskab bevares urørt som historik og som grundlag for de aflagte årsrapporter.</p>
+<p>e-conomic kan sættes op til at tillade, at kontonumre ændres på konti der har posteringer. Det afgør sagen — og det er en bedre løsning end et nyt regnskab, af en grund der ikke er indlysende:</p>
 
-<p>Alternativet — at konvertere i det eksisterende regnskab — forudsætter, at gamle konti kan omnummereres eller slettes. Det tillader e-conomic som udgangspunkt ikke, når kontoen har posteringer, og alle kollisionskontiene har posteringer tilbage fra 2020. Det bør bekræftes af bogholderen, men vejen ser lukket ud.</p>
+<div class="box ok">
+  <span class="t">Historikken følger med kontoen</span>
+  <p>Når konto 4330 <i>Revisorhonorar</i> renummereres til 4360 <i>Revisor</i>, flytter alle posteringer fra 2020 og frem med. <b>140 konti får dermed korrekte sammenligningstal for alle år uden en eneste efterpostering.</b> Havde vi oprettet nye konti, ville historikken blive liggende på de gamle, og hvert eneste sammenligningstal skulle flyttes manuelt.</p>
+</div>
+
+<p>Kollisionerne løses ved at flytte de blokerende konti ud i en ledig 9000-serie først, og derefter renummerere. Rækkefølgen er lagt, og den er kontrolleret for at der ikke opstår sammenstød undervejs.</p>
+
+<h3>Efterposteringer pr. 31. december 2025</h3>
+
+<p>Renummereringen kan ikke klare alt. Hvor én gammel konto skal deles på flere nye, eller hvor flere gamle konti skal ende samme sted, skal 2025-tallene flyttes med en postering. Det er <b>37 efterposteringer</b> — ikke 6.000.</p>
+
+<p>De skal alle være <b>resultatneutrale</b>: de flytter beløb mellem konti, men må hverken ændre årets resultat, egenkapitalen eller balancesummen for 2025, da året er revideret og godkendt. Det er kontrolleret, at ingen af dem krydser mellem drift og balance.</p>
+
+<p>Tre af dem kan udfyldes med det samme, fordi Beierholms noter afgør fordelingen præcist — for eksempel viser note 2, at hele tilskuddet fra Viborg Kommune i 2025 er ordinært driftstilskud, og at de 263.750 kr. fra Statens Kunstfond kom fra Projektstøtteudvalget.</p>
 
 <h3>2025 skal ikke omposteres</h3>
 
@@ -563,7 +576,8 @@
 <a href="03-rapporteringskrav.html">Rapporteringskrav</a> — hvad der skal afrapporteres til hvem<br>
 <a href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a> — kontoplanen holdt op mod beierholms noter<br>
 <a href="05-mapping-gammel-ny.html">Mapping gammel → ny</a> — konverteringsnøglen, konto for konto<br>
-<a href="06-konverteringsplan.html">Konverteringsplan</a> — sådan kommer vi på den nye plan fra 1.1.2026<br><br>Konverteringsnøglen findes også som regneark: <a href="mapping-gammel-ny.csv">mapping-gammel-ny.csv</a>.
+<a href="06-konverteringsplan.html">Konverteringsplan</a> — sådan kommer vi på den nye plan fra 1.1.2026<br>
+<a href="07-renummereringsguide.html">Renummereringsguide</a> — trin for trin i e-conomic, konto for konto<br><br>Konverteringsnøglen findes også som regneark: <a href="mapping-gammel-ny.csv">mapping-gammel-ny.csv</a>.
 </footer>
 
 </div>
