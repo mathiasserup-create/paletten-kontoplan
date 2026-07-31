@@ -29,13 +29,13 @@ gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
 2013;Varekøb EU;2310;1:1;8;Varekøb bar, EU (EUV25).
 2014;Provision vedr. arrangementer;2100;1:1;357;Provision / booking / agent.
 2015;Transport;2120;1:1;24;Transport af kunstnere.
-2016;Catering;2140 / 3210;SPLIT;876;1,7 mio. på 876 posteringer. REGEL: cateringfirmaer, restauranter og hoteller (Cafe Baghuset, Peak12, Catering Danmark, Les Jeunes, Palads Hotel m.fl.) = 84% af beløbet → 2140. Supermarkedsindkøb (439 post., ca. 145.000 kr.) kan ikke afgøres fra teksterne → 2140, da personaleforplejning allerede havde sin egen konto 3690.
+2016;Catering;2140 / 3210;SPLIT;876;1,7 mio. på 876 posteringer. REGEL: cateringfirmaer, restauranter og hoteller (Cafe Baghuset, Peak12, Catering Danmark, Les Jeunes, Palads Hotel m.fl.) = 84% af beløbet → 2140. Supermarkedsindkøb (439 post., ca. 145.000 kr.) kan ikke afgøres fra teksterne → 2140, da personaleforplejning allerede havde sin egen konto 3690. Momskode I25 (fuldt fradrag) — rider er kontraktuel, ikke repræsentation.
 2017;Dørvogtere;2160 / 2165;SPLIT;3;"Faktura fra CVR → 2160. Privatpersoner (fx ""Nynne Rasmussen vagt"", ""Dan Bay vagtjob"" — bogført med I25, hvilket er forkert) → 2165 B-indkomst."
 2018;Leje af udstyr mv.;2150;1:1;64;Backline / udstyrsleje til arrangement.
 2019;Kodaafgift;2110;1:1;38;KODA / Gramex.
 2020;Billetlugen, Safeticket;2170;1:1;37;Billetsystem (Safeticket).
 2025;Hotel, ophold (kunstnere);2130;1:1;16;Hotel / ophold, kunstnere.
-2026;Hotel, forplejning (kunstnere);2140;1:1;15;Forplejning, kunstnere (backstage) — REP.
+2026;Hotel, forplejning (kunstnere);2140;1:1;15;Hotel/forplejning kunstnere. MOMSKODE ÆNDRES: lå på REP, men rider er en kontraktuel del af aftalen → fuldt fradrag (I25).
 2029;Udlæg til viderefakturering;2180;1:1;5;"Udlæg til viderefakturering; indtægtssiden på 1350/1355."
 2030;Fødevarestyrelsen, afgift;2350;1:1;1;Fødevareafgift / kontrolgebyr.
 2050;Forbrug, optrædende;2140;1:1;2;Forbrug til optrædende. Konto reelt ubrugt (0 kr.).
