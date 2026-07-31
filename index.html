@@ -196,11 +196,11 @@
 <table>
   <thead><tr><th>Metode</th><th class="num">Antal</th><th>Betydning</th></tr></thead>
   <tbody>
-    <tr><td><span class="tag ok">1:1</span></td><td class="num">140</td><td>Flytter direkte — kan konverteres maskinelt</td></tr>
-    <tr><td><span class="tag">SPLIT</span></td><td class="num">27</td><td>Skal deles på flere konti — kræver manuel gennemgang</td></tr>
+    <tr><td><span class="tag ok">1:1</span></td><td class="num">141</td><td>Flytter direkte — kan konverteres maskinelt</td></tr>
+    <tr><td><span class="tag">SPLIT</span></td><td class="num">28</td><td>Skal deles på flere konti — kræver manuel gennemgang</td></tr>
     <tr><td><span class="tag">SAMLES</span></td><td class="num">13</td><td>Flere gamle konti lægges sammen på én ny</td></tr>
     <tr><td><span class="tag">LUKKES</span></td><td class="num">5</td><td>Legacy (bl.a. covid-hjælpepakker) — saldo flyttes, konto inaktiveres</td></tr>
-    <tr><td><span class="tag warn">AFKLAR</span></td><td class="num">2</td><td>Kan ikke afgøres endeligt endnu</td></tr>
+    <tr><td><span class="tag warn">AFKLAR</span></td><td class="num">0</td><td>Kan ikke afgøres endeligt endnu</td></tr>
   </tbody>
 </table>
 </div>
@@ -242,20 +242,26 @@
 <h2>5. Det mangler en beslutning</h2>
 
 <div class="box warn">
-  <span class="t">Fire åbne punkter</span>
-  <p>Ingen af dem blokerer for at gøre kontoplanen færdig, men de skal afklares inden konverteringen kan køres.</p>
+  <span class="t">Ét spørgsmål til revisor — og det haster mest</span>
+  <p><b>Momsfradraget på forplejning til kunstnere.</b> Der er brugt ca. 1,45 mio. kr. på catering, restauranter og hoteller til optrædende over seks år, og <b>ikke én eneste postering</b> er bogført med repræsentationskode. Der er altså taget fuldt momsfradrag hele vejen.</p>
+  <p>Spørgsmålet er, om backstage-forplejning skal behandles som bevirtning/repræsentation med begrænset fradragsret, eller som en direkte omkostning til den momspligtige koncertaktivitet. Svaret afgør både momskoden fremadrettet og om der er en efterangivelse bagud. Den nye kontoplan er sat forsigtigt til repræsentation, indtil revisor har taget stilling.</p>
 </div>
 
 <div class="tw">
 <table>
-  <thead><tr><th>Punkt</th><th>Hvem</th></tr></thead>
+  <thead><tr><th>Øvrigt punkt</th><th>Hvem</th></tr></thead>
   <tbody>
-    <tr><td><b>Catering, 1,7 mio. kr.</b> Hvor går grænsen mellem kunstner-rider (backstage) og almindelig personaleforplejning? Kan ikke afgøres ud fra posteringsteksterne</td><td>MSP + revisor</td></tr>
-    <tr><td><b>Honorar til kunstnere uden for EU</b> — kildeskat/royalty</td><td>Revisor</td></tr>
-    <tr><td><b>"Nedskrivning af offentlige tilskud"</b>, −96.690 kr. Uklart om posten er tilskudsgæld eller en korrektion til et tilgodehavende</td><td>Beierholm</td></tr>
-    <tr><td><b>Fragt</b> — egen konto, eller skal den følge den omkostning den vedrører?</td><td>Bogholder</td></tr>
+    <tr><td><b>Honorar til kunstnere uden for EU.</b> Momsmæssigt gælder omvendt betalingspligt som ved EU-køb — kontoen var forkert sat til "uden moms". Skattemæssigt afhænger det af, om kunstneren engageres som selvstændig eller som lønmodtager. Der er ingen spor af tredjelandskunstnere i 2020–2026, så det haster ikke</td><td>Revisor</td></tr>
   </tbody>
 </table>
+</div>
+
+<div class="box ok">
+  <span class="t">Lukket siden sidste udgave</span>
+  <p><b>"Nedskrivning af offentlige tilskud" (−96.690 kr.) er identificeret.</b> Kontoen <i>er</i> det periodiserede anlægstilskud til lyd- og lysanlægget. Saldoen pr. 31.12.2023 består af tre posteringer på 37.500 + 12.500 + 46.690 kr., og præcis det beløb indtægtsføres i 2024 og står i årsrapportens note 2 som "Periodiseret tilskud, lys- og lydanlæg". Den skal derfor ikke til Beierholm — den mapper til den nye konto for periodiseret anlægstilskud.</p>
+  <p><b>Catering-opdelingen er løst med en leverandørregel.</b> Cateringfirmaer, restauranter og hoteller — Cafe Baghuset, Peak12, Catering Danmark, Les Jeunes, Palads Hotel m.fl. — udgør 84 % af beløbet og går til kunstnerforplejning. De 439 supermarkedsindkøb (ca. 145.000 kr. over seks år) kan ikke afgøres ud fra posteringsteksterne, men lægges samme sted, da personaleforplejning i forvejen havde sin egen konto.</p>
+  <p><b>Fragt får ingen selvstændig konto.</b> Fragt er en del af kostprisen på det den vedrører og følger varen.</p>
+  <p><b>Alle B-honorarer køres over Salary</b>, så samlekontoen er et komplet grundlag for eIndkomst-afstemningen.</p>
 </div>
 
 <div class="box ok">
@@ -267,7 +273,7 @@
 <h2>6. Næste skridt</h2>
 
 <ol>
-  <li><b>Afklar de fem punkter</b> ovenfor med bogholder og Beierholm.</li>
+  <li><b>Afklar momsspørgsmålet</b> ovenfor med bogholder og Beierholm.</li>
   <li><b>Byg importfilen til e-conomic</b> med den nye kontoplan (kontonummer, navn, type, momskode, subtotaler).</li>
   <li><b>Gennemgå de 27 SPLIT-konti</b> og fastlæg fordelingen — start med de fire store, de udgør hovedparten af beløbsmassen.</li>
   <li><b>Beslut skæringsdato.</b> Anbefaling: 1. januar 2027, så et helt regnskabsår kører på den nye plan og sammenligningstallene bliver rene.</li>
@@ -332,13 +338,13 @@
 <tr><td><span class="kn">2020</span> Kunstnerhonorar, B-indkomst (privatperson) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2010</span> Arrangementer og honorar, skal indb. <span class="tag">delvis</span></div></td></tr>
 <tr><td><span class="kn">2030</span> Kunstnerhonorar, A-indkomst (løn) <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
 <tr><td><span class="kn">2040</span> Kunstnerhonorar, EU <span class="mk">EUY25</span></td><td><div class="src"><span class="kn">2008</span> Arrangementer og honorarer EU</div><div class="src"><span class="kn">2010</span> Arrangementer og honorar, skal indb. <span class="tag">delvis</span></div><div class="src"><span class="kn">2012</span> Ydelseskøb EU <span class="tag">delvis</span> <span class="tag warn">ubrugt</span></div></td></tr>
-<tr><td><span class="kn">2050</span> Kunstnerhonorar, uden for EU <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">2050</span> Kunstnerhonorar, uden for EU <span class="mk">omv. bet.</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
 <tr class="sec"><td colspan="2">Øvrige direkte arrangementsomkostninger</td></tr>
 <tr><td><span class="kn">2100</span> Provision / booking / agent <span class="mk">I25</span></td><td><div class="src"><span class="kn">2014</span> Provision vedr. arrangementer</div></td></tr>
 <tr><td><span class="kn">2110</span> KODA / Gramex <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2019</span> Kodaafgift</div></td></tr>
 <tr><td><span class="kn">2120</span> Transport af kunstnere <span class="mk">I25</span></td><td><div class="src"><span class="kn">2015</span> Transport</div></td></tr>
 <tr><td><span class="kn">2130</span> Hotel / ophold, kunstnere <span class="mk">I25</span></td><td><div class="src"><span class="kn">2025</span> Hotel, ophold (kunstnere)</div></td></tr>
-<tr><td><span class="kn">2140</span> Forplejning, kunstnere (backstage) <span class="mk">REP</span></td><td><div class="src"><span class="kn">2016</span> Catering <span class="tag">delvis</span></div><div class="src"><span class="kn">2026</span> Hotel, forplejning (kunstnere)</div><div class="src"><span class="kn">2050</span> Forbrug, optrædende</div></td></tr>
+<tr><td><span class="kn">2140</span> Forplejning, kunstnere (backstage/rider) <span class="mk">REP</span></td><td><div class="src"><span class="kn">2016</span> Catering <span class="tag">delvis</span></div><div class="src"><span class="kn">2026</span> Hotel, forplejning (kunstnere)</div><div class="src"><span class="kn">2050</span> Forbrug, optrædende</div></td></tr>
 <tr><td><span class="kn">2150</span> Backline / udstyrsleje til arrangement <span class="mk">I25</span></td><td><div class="src"><span class="kn">2018</span> Leje af udstyr mv.</div></td></tr>
 <tr><td><span class="kn">2160</span> Assistance ved afvikling, faktura (afviklere / dørvogtere / teknik) <span class="mk">I25</span></td><td><div class="src"><span class="kn">2017</span> Dørvogtere <span class="tag">delvis</span></div><div class="src"><span class="kn">2605</span> Underentreprenører <span class="tag">delvis</span></div></td></tr>
 <tr><td><span class="kn">2165</span> Assistance ved afvikling, B-indkomst (privatperson) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2017</span> Dørvogtere <span class="tag">delvis</span></div></td></tr>
@@ -414,7 +420,7 @@
 <tr><td><span class="kn">4330</span> Småanskaffelser (&lt; beløbsgrænse) <span class="mk">I25</span></td><td><div class="src"><span class="kn">4312</span> Småanskaffelser</div><div class="src"><span class="kn">4313</span> Dekoration</div></td></tr>
 <tr><td><span class="kn">4340</span> Telefon og internet <span class="mk">I25</span></td><td><div class="src"><span class="kn">4316</span> Telefon og internet</div></td></tr>
 <tr><td><span class="kn">4350</span> Porto og gebyrer (u/moms) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4327</span> Porto og gebyrer</div></td></tr>
-<tr><td><span class="kn">4355</span> Gebyrer, m/moms <span class="mk">I25</span></td><td><div class="src"><span class="kn">4309</span> Fragt</div><div class="src"><span class="kn">4325</span> Gebyrer m/moms</div></td></tr>
+<tr><td><span class="kn">4355</span> Gebyrer, m/moms <span class="mk">I25</span></td><td><div class="src"><span class="kn">4325</span> Gebyrer m/moms</div></td></tr>
 <tr><td><span class="kn">4360</span> Revisor <span class="mk">I25</span></td><td><div class="src"><span class="kn">4330</span> Revisorhonorar</div><div class="src"><span class="kn">4331</span> Revisorhonorar vedrørende tidl. år</div></td></tr>
 <tr><td><span class="kn">4365</span> Bogføring / økonomiassistance <span class="mk">I25</span></td><td><div class="src"><span class="kn">4332</span> Bogholderi</div></td></tr>
 <tr><td><span class="kn">4370</span> Advokat / juridisk bistand <span class="mk">I25</span></td><td><div class="src"><span class="kn">4340</span> Advokat</div></td></tr>
@@ -503,14 +509,14 @@
 <tr><td><span class="kn">8400</span> Tilbagebetaling honorarstøtte (gæld til Erhvervsstyrelsen) </td><td><div class="src"><span class="kn">8870</span> Skyldig Statens Kunstfond</div></td></tr>
 <tr><td><span class="kn">8500</span> Mellemregninger </td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
 <tr><td><span class="kn">8600</span> Forudmodtagne billetindtægter </td><td><div class="src"><span class="kn">8450</span> Forudbetalinger billetter</div></td></tr>
-<tr><td><span class="kn">8610</span> Periodiseret anlægstilskud (lyd/lys) </td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">8610</span> Periodiseret anlægstilskud (lyd/lys) </td><td><div class="src"><span class="kn">8480</span> Nedskrivning af offentlige tilskud</div></td></tr>
 <tr><td><span class="kn">8620</span> Forudmodtagne samarbejdsaftaler / øvrige </td><td><div class="src"><span class="kn">8910</span> Periodeafgrænsningsposter</div><div class="src"><span class="kn">8920</span> Forud faktureret indtægt</div></td></tr>
-<tr><td><span class="kn">8630</span> Forudbetalte tilskud vedr. næste år </td><td><div class="src"><span class="kn">8480</span> Nedskrivning af offentlige tilskud</div><div class="src"><span class="kn">8911</span> Forudbetalt tilskud</div></td></tr>
+<tr><td><span class="kn">8630</span> Forudbetalte tilskud vedr. næste år </td><td><div class="src"><span class="kn">8911</span> Forudbetalt tilskud</div></td></tr>
 <tr class="tot"><td><span class="kn">8998</span> Kortfristet gæld i alt</td><td></td></tr>
 <tr class="tot"><td><span class="kn">8999</span> PASSIVER I ALT</td><td></td></tr>
 <tr><td><span class="kn">9999</span> Afstemnings-/fejlkonto (balance) </td><td><div class="src"><span class="kn">9999</span> Fejlkonto</div></td></tr>
 </tbody></table></div>
-<p style="color:var(--muted);font-size:14px">I alt <b>15</b> af de nye konti har ingen forgænger i den gamle plan — de dækker forhold der i dag enten ikke bogføres særskilt eller ligger gemt i en samlekonto.</p>
+<p style="color:var(--muted);font-size:14px">I alt <b>14</b> af de nye konti har ingen forgænger i den gamle plan — de dækker forhold der i dag enten ikke bogføres særskilt eller ligger gemt i en samlekonto.</p>
 <!--/APPENDIX-->
 
 <footer>

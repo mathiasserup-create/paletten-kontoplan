@@ -29,7 +29,7 @@ gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
 2013;Varekøb EU;2310;1:1;8;Varekøb bar, EU (EUV25).
 2014;Provision vedr. arrangementer;2100;1:1;357;Provision / booking / agent.
 2015;Transport;2120;1:1;24;Transport af kunstnere.
-2016;Catering;2140 / 3210;SPLIT;876;1,7 mio. på 876 posteringer. Backstage/rider til kunstnere → 2140. Frokost/forplejning til personale og frivillige (Føtex m.fl.) → 3210/3200. Kræver gennemgang — se afklaringspunkt 8.
+2016;Catering;2140 / 3210;SPLIT;876;1,7 mio. på 876 posteringer. REGEL: cateringfirmaer, restauranter og hoteller (Cafe Baghuset, Peak12, Catering Danmark, Les Jeunes, Palads Hotel m.fl.) = 84% af beløbet → 2140. Supermarkedsindkøb (439 post., ca. 145.000 kr.) kan ikke afgøres fra teksterne → 2140, da personaleforplejning allerede havde sin egen konto 3690.
 2017;Dørvogtere;2160 / 2165;SPLIT;3;"Faktura fra CVR → 2160. Privatpersoner (fx ""Nynne Rasmussen vagt"", ""Dan Bay vagtjob"" — bogført med I25, hvilket er forkert) → 2165 B-indkomst."
 2018;Leje af udstyr mv.;2150;1:1;64;Backline / udstyrsleje til arrangement.
 2019;Kodaafgift;2110;1:1;38;KODA / Gramex.
@@ -94,7 +94,7 @@ gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
 4305;Leje af udstyr;4120;1:1;2;Leje af udstyr (adm.).
 4306;Licenser;4320;1:1;3;Licenser → IT/software.
 4307;Abonnement u/moms EUY25;4325;1:1;4;Abonnement EU → IT/software EU.
-4309;Fragt;4355;AFKLAR;16;Fragt. Bør principielt følge den underliggende omkostning (varekøb bar → 2320). Beslut ved konvertering.
+4309;Fragt;følger varen;SPLIT;16;BESLUTTET: fragt er en del af kostprisen på det den vedrører og får ingen selvstændig konto. Barvarer → 2300/2320, inventar → anlægskonto, kontorvarer → 4310.
 4310;EDB-omkostninger;4320;1:1;285;EDB-omkostninger → IT/software/licenser.
 4311;EDB u/m EUY;4325;1:1;388;EDB EU → IT/software EU.
 4312;Småanskaffelser;4330;1:1;296;Småanskaffelser.
@@ -162,7 +162,7 @@ gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
 8450;Forudbetalinger billetter;8600;1:1;42;Forudmodtagne billetindtægter.
 8461;Gavekort;8130;1:1;0;Gavekort.
 8475;Revisorhonorar;8110;SAMLES;14;Afsat revisorhonorar → skyldige omkostninger.
-8480;Nedskrivning af offentlige tilskud;8630;AFKLAR;5;"""Nedskrivning af offentlige tilskud"" — afklares med Beierholm om posten er tilskudsgæld (8630) eller korrektion til tilgodehavende. Se hul 5."
+8480;Nedskrivning af offentlige tilskud;8610;1:1;5;IDENTIFICERET: kontoen ER det periodiserede anlægstilskud. Saldoen 31.12.2023 (37.500 + 12.500 + 46.690 = 96.690) indtægtsføres i 2024 og står i årsrapportens note 2 som Periodiseret tilskud, lys- og lydanlæg 96.690. Skulle altså til 8610, ikke 8630.
 8720;Udgående moms;8300;1:1;1316;Udgående moms.
 8730;EU Ydelsesmoms;8320;1:1;747;EU-ydelsesmoms.
 8740;Indgående moms;8310;1:1;3843;Indgående moms.
