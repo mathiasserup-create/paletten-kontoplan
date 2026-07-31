@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sammenhæng med årsrapporten — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Ny kontoplan</div>
+<h1>Sammenhæng med årsrapporten</h1>
+<div class="meta">Kontoplanen holdt op mod Beierholms noter</div></header>
+<div class="nav"><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="on" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a></div>
+<p>Verificeret mod <b>Årsrapport 2025</b> for Den Selvejende Institution Spillestedet Paletten (CVR 16 95 95 88, Tingvej 20, revideret af Beierholm, aflagt efter driftstilskudsloven + bekg. nr. 1701 af 21.12.2010).</p>
+<p>Formål: dokumentere, at den nye kontoplan <b>kan producere den officielle årsrapport uændret</b>. Alle beløb er 2025-tal (DKK) fra årsrapporten.</p>
+<hr>
+<h2>1. Resultatopgørelsen</h2>
+<p>Årsrapportens opstilling (venstre) ↔ kontoplanens grupper (højre):</p>
+<div class="tw"><table><thead><tr><th>Årsrapport-linje</th><th>2025</th><th>Kontoplan-gruppe</th></tr></thead><tbody><tr><td><b>Nettoomsætning</b> (note 1)</td><td>2.753.062</td><td><b>1595</b> (egenindtægter i alt)</td></tr><tr><td><b>Andre driftsindtægter</b> (note 2)</td><td>2.242.881</td><td><b>1695</b> (andre driftsindtægter i alt)</td></tr><tr><td><b>Indtægter i alt</b></td><td>4.995.943</td><td><b>1795</b></td></tr><tr><td><b>Vareforbrug</b> (note 3)</td><td>−2.645.736</td><td><b>2790</b> (direkte omkostninger i alt)</td></tr><tr><td><b>Andre eksterne omkostninger</b> (note 5)</td><td>−747.419</td><td><b>4198 + 4298 + 4498</b></td></tr><tr><td>Bruttofortjeneste I</td><td>1.602.788</td><td><i>(afledt subtotal)</i></td></tr><tr><td><b>Personaleomkostninger</b> (note 4)</td><td>−1.363.018</td><td><b>3398</b></td></tr><tr><td>Bruttofortjeneste II</td><td>239.770</td><td><i>(afledt subtotal)</i></td></tr><tr><td><b>Af- og nedskrivninger</b> (note 6)</td><td>−214.041</td><td><b>4698</b></td></tr><tr><td>Resultat af primær drift</td><td>25.729</td><td><b>4700</b></td></tr><tr><td><b>Finansielle poster</b> (note 7)</td><td>−4.608</td><td><b>4898</b></td></tr><tr><td><b>Årets resultat</b></td><td>21.121</td><td><b>4900</b></td></tr></tbody></table></div>
+<blockquote><p><b>To subtotal-syn på samme konti:</b> Årsrapporten bruger <i>Bruttofortjeneste I/II</i>. Internt beregner kontoplanen desuden et <i>Dækningsbidrag</i> (konto 2999 = indtægter − direkte omkostninger) til ledelsesrapportering. Begge udledes af samme konti — ingen konflikt; det er blot to rapportvisninger (opsættes som layouts i e-conomic).</p></blockquote>
+<h3>Note-for-note (resultatopgørelsen)</h3>
+<div class="tw"><table><thead><tr><th>Note 1 · Nettoomsætning</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Salg af billetter og garderobe</td><td>1.685.269</td><td>1100 + 1110 (+1120)</td></tr><tr><td>Salg i baren</td><td>496.160</td><td>1200 (+1210, 1220)</td></tr><tr><td>Udlejning af lokaler og udstyr</td><td>369.044</td><td>1300–1340</td></tr><tr><td>Sponsorer og samarbejdsaftaler</td><td>195.107</td><td>1400 + 1410</td></tr><tr><td>Medlemskontingenter</td><td>13.300</td><td>1420</td></tr><tr><td>Kassedifferencer</td><td>−5.818</td><td>1520</td></tr></tbody></table></div>
+<div class="tw"><table><thead><tr><th>Note 2 · Andre driftsindtægter</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Tilskud fra Viborg Kommune</td><td>1.875.561</td><td>1600</td></tr><tr><td>Tilskud, Viborg Kommune, projekter</td><td>0</td><td>1605</td></tr><tr><td>Statens Kunstfonds Projektstøtteudvalg</td><td>263.750</td><td>1620 (honorarstøtte) / 1625</td></tr><tr><td>Carlsbergfondet (donation)</td><td>33.589</td><td>1630</td></tr><tr><td>Løntilskud og lønrefusioner</td><td>14.859</td><td>1660</td></tr><tr><td>Periodiseret tilskud, lys- og lydanlæg</td><td>47.732</td><td>1650</td></tr><tr><td>Viderefaktureret udlæg</td><td>7.390</td><td><i>(se afvigelse A nedenfor)</i></td></tr></tbody></table></div>
+<div class="tw"><table><thead><tr><th>Note 3 · Vareforbrug</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Arrangementer (honorar)</td><td>1.337.516</td><td>2010–2050</td></tr><tr><td>Provision ved køb af arrangementer</td><td>176.836</td><td>2100</td></tr><tr><td>Hotel, catering og transport</td><td>211.777</td><td>2120 + 2130 + 2140</td></tr><tr><td>Leje af udstyr</td><td>34.849</td><td>2150</td></tr><tr><td>Safeticket</td><td>28.485</td><td>2170</td></tr><tr><td>Assistance ifm. afvikling</td><td>295.775</td><td>2160</td></tr><tr><td>Varekøb, barsalg</td><td>488.828</td><td>2300 (+2310, 2320)</td></tr><tr><td>KODA</td><td>53.308</td><td>2110</td></tr><tr><td>Lagerregulering</td><td>18.362</td><td>2330</td></tr></tbody></table></div>
+<div class="tw"><table><thead><tr><th>Note 4 · Personaleomkostninger</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Gager</td><td>1.160.670</td><td>3010 + 3020</td></tr><tr><td>Ændring i feriepengeforpligtelse</td><td>−19.166</td><td>3030</td></tr><tr><td>Fratrædelsesgodtgørelse</td><td>167.802</td><td>3050</td></tr><tr><td>Arbejdsskadeforsikring</td><td>4.539</td><td>3090</td></tr><tr><td>ATP-bidrag</td><td>11.979</td><td>3070</td></tr><tr><td>AER-bidrag</td><td>22.528</td><td>3080</td></tr><tr><td>Kursusomkostninger</td><td>4.798</td><td>3230/3240</td></tr><tr><td>Arbejdstøj</td><td>5.174</td><td>3250</td></tr><tr><td>Øvrige personaleomkostninger</td><td>4.694</td><td>3200/3210/3220</td></tr></tbody></table></div>
+<p><i>(Løntilskud/lønrefusion indgår IKKE her — de er andre driftsindtægter, jf. note 2 / konto 1660.)</i></p>
+<div class="tw"><table><thead><tr><th>Note 5 · Andre eksterne omkostninger</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Salgsomkostninger</td><td>226.513</td><td>4210–4260 (gr. 4298)</td></tr><tr><td>Lokaleomkostninger</td><td>24.233*</td><td>4010–4120 (gr. 4198)</td></tr><tr><td>Administrationsomkostninger</td><td>496.673</td><td>4310–4410 (gr. 4498)</td></tr></tbody></table></div>
+<p>\* 2025-lokaleomkostninger er nettet af en éngangs-el-refusion vedr. tidligere år (−147.649).</p>
+<div class="tw"><table><thead><tr><th>Note 6 · Af- og nedskrivninger</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Indretning af lejede lokaler</td><td>97.598</td><td>4610</td></tr><tr><td>Andre anlæg, driftsmateriel og inventar</td><td>116.443</td><td>4620</td></tr></tbody></table></div>
+<div class="tw"><table><thead><tr><th>Note 7 · Finansielle omkostninger</th><th>2025</th><th>Konti</th></tr></thead><tbody><tr><td>Renter, kreditorer</td><td>4.176</td><td>4830</td></tr><tr><td>Valutakursreguleringer</td><td>432</td><td>4850</td></tr></tbody></table></div>
+<hr>
+<h2>2. Balancen</h2>
+<div class="tw"><table><thead><tr><th>Årsrapport (aktiver)</th><th>31.12.25</th><th>Konti</th></tr></thead><tbody><tr><td>Indretning af lejede lokaler</td><td>1.808.907</td><td>5100 − 5110</td></tr><tr><td>Andre anlæg, driftsmateriel og inventar</td><td>1.417.497</td><td>5200 − 5210 (+ 5300/5310 teknik)</td></tr><tr><td>Varebeholdninger</td><td>49.442</td><td>6100</td></tr><tr><td>Tilgodehavender fra salg</td><td>173.063</td><td>6200 (− 6210)</td></tr><tr><td>Andre tilgodehavender</td><td>223.495</td><td>6230</td></tr><tr><td>Periodeafgrænsningsposter (aktiver)</td><td>0</td><td>6240</td></tr><tr><td>Likvide beholdninger (kasse + Nordea)</td><td>520.141</td><td>6800 + 6830</td></tr></tbody></table></div>
+<div class="tw"><table><thead><tr><th>Årsrapport (passiver)</th><th>31.12.25</th><th>Konti</th></tr></thead><tbody><tr><td>Egenkapital (overført resultat)</td><td>353.339</td><td>7100 + 7110</td></tr><tr><td>Anden gæld, langfristet (kommunelån)</td><td>1.711.000</td><td>7510 + 7520</td></tr><tr><td>Kortfristet del af langfristet gæld</td><td>79.200</td><td>8050</td></tr><tr><td>Leverandører</td><td>211.068</td><td>8100 + 8110</td></tr><tr><td>Anden gæld (moms, A-skat, ATP, feriepenge, Erhvervsstyrelsen…)</td><td>487.011</td><td>8200–8400</td></tr><tr><td>— heraf gæld til Erhvervsstyrelsen (uudnyttet honorarstøtte)</td><td>236.250</td><td><b>8400</b></td></tr><tr><td>Periodeafgrænsningsposter (passiver, note 17)</td><td>1.350.927</td><td>8600 + 8610 + 8620</td></tr><tr><td>— Forudmodtaget billetindtægter</td><td>740.997</td><td>8600</td></tr><tr><td>— Tilskud til lyd- og lysanlæg</td><td>609.930</td><td>8610</td></tr></tbody></table></div>
+<hr>
+<h2>3. Bekræftede designvalg (understøttet af årsrapporten)</h2>
+<ul><li><b>Anlægstilskud periodiseres</b> (note 2 indtægt 1650 ↔ note 17 balance 8610) — allerede praksis. ✓</li><li><b>Tilskud efter matching-princippet:</b> &quot;indregnes forholdsmæssigt over den periode, hvori de tilskudsberettigede omkostninger omkostningsføres&quot; — vores adskilte tilskudskonti understøtter dette. ✓</li><li><b>Momsfejl på kunstnerafhængige udgifter</b> (tilbagebetaling 220t.) — netop dét den nye honorarstruktur (2010–2050 efter indberetnings-/momstype) forebygger fremadrettet. ✓</li><li><b>Tilbagebetaling af uudnyttede honorarklip</b> → konto 8400 (gæld til Erhvervsstyrelsen). ✓</li><li>Opstillet som <b>selvejende institution</b> (egenkapital = overført resultat; ingen selskabskapital). ✓</li></ul>
+<h2>4. Bevidste afvigelser (klassifikation — bekræft med Beierholm)</h2>
+<p><b>A. Viderefaktureret udlæg:</b> Årsrapport 2025 lægger 7.390 under <i>andre driftsindtægter</i> (note 2). Kontoplanen lægger viderefakturering under <i>egenindtægter</i> (1350/1355), hvilket er mere retvisende (det er salg, ikke tilskud). Beløbet er ubetydeligt; afklar med revisor hvilken placering der ønskes fremadrettet — begge kan mappes.</p>
+<p><b>B. Teknik (lyd/lys) som egen anlægsgruppe (5300):</b> Til <i>ledelsesrapportering</i>. I <i>årsrapporten</i> aggregeres den fortsat i &quot;Andre anlæg, driftsmateriel og inventar&quot; — ingen konflikt.</p>
+<h2>5. Konklusion</h2>
+<p>Den nye kontoplan er <b>fuldt forenelig</b> med den officielle årsrapport: hver note-linje har en entydig konto/gruppe, og de to eneste afvigelser er bevidste (klassifikation af viderefakturering + intern teknik-undergruppe) og påvirker ikke regnskabets tal. Efter justeringerne i denne runde kan årsrapporten for 2026 aflægges direkte fra den nye kontoplan.</p>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>

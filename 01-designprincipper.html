@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Designprincipper — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Ny kontoplan</div>
+<h1>Designprincipper</h1>
+<div class="meta">Hvorfor kontoplanen er skruet sammen som den er</div></header>
+<div class="nav"><a class="" href="index.html">Oplæg</a><a class="on" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a></div>
+<p>Selvejende institution · CVR 16959588 · e-conomic-aftale 983629 Status: honorarstøttet spillested (fra 2025) + kommunalt driftstilskud fra Viborg Kommune.</p>
+<p>Dette dokument beskriver <b>hvorfor</b> den nye kontoplan er skruet sammen som den er. Selve kontoplanen ligger i <a href="02-ny-kontoplan.html">02-ny-kontoplan.md</a> (+ importfil senere).</p>
+<hr>
+<h2>1. Formål (prioriteret, jf. aftale med MSP)</h2>
+<p>Kontoplanen skal på én gang levere:</p>
+<ol><li><b>Ledelsesrapportering</b> — dækningsbidrag pr. aktivitet: <i>koncerter</i>, <i>bar</i>, <i>udlejning</i>.</li><li><b>Tilskudsrapportering</b> — nem og korrekt afrapportering til Statens Kunstfond (honorarstøtte, pr. koncert) og Viborg Kommune (årsregnskab).</li><li><b>Enklere daglig bogføring</b> — færre, tydeligere konti; entydigt hvor en postering hører hjemme.</li><li><b>Moms-korrekthed</b> — rene momskoder og struktur der understøtter evt. delvis fradragsret.</li></ol>
+<p>Vi bygger den &quot;rigtige&quot; kontoplan fra bunden. Den gamle er <b>ikke</b> bindende; bagefter laves en mapping gammel→ny og evt. ompostering af sammenligningstal.</p>
+<hr>
+<h2>2. Grundstruktur og nummerplan</h2>
+<p>Klassisk dansk driftsopstilling med <b>dækningsbidragstrappe</b>, så ledelsen kan læse lønsomheden ned gennem opgørelsen:</p>
+<div class="tw"><table><thead><tr><th>Interval</th><th>Indhold</th></tr></thead><tbody><tr><td>1000–1699</td><td><b>Indtægter</b> — egenindtægter (entré, bar, udlejning, sponsor, andet) + tilskud (adskilt)</td></tr><tr><td>2000–2399</td><td><b>Direkte omkostninger</b> — kunstnerhonorar m.m. + vareforbrug bar → giver <b>Dækningsbidrag</b></td></tr><tr><td>3000–3399</td><td><b>Personale</b> (drift — ekskl. kunstnere)</td></tr><tr><td>4000–4199</td><td><b>Lokale- og kapacitetsomkostninger</b></td></tr><tr><td>4200–4299</td><td><b>Salg og marketing</b></td></tr><tr><td>4300–4499</td><td><b>Administration</b></td></tr><tr><td>4600–4699</td><td><b>Af- og nedskrivninger</b></td></tr><tr><td>4800–4899</td><td><b>Finansielle poster</b></td></tr><tr><td>4900–4999</td><td><b>Årets resultat / fejlkonto</b></td></tr><tr><td>5000–6899</td><td><b>Aktiver</b> (anlæg, varelager, tilgodehavender, likvider)</td></tr><tr><td>7000–8999</td><td><b>Passiver</b> (egenkapital, hensættelser, gæld, moms, periodisering)</td></tr></tbody></table></div>
+<p><b>Nummer-hygiejne:</b> runde 10-spring mellem konti, så der altid er plads til at indsætte en ny konto uden at bryde rækkefølgen. Subtotaler ender på <code>…95</code>/<code>…98</code>/<code>…99</code>.</p>
+<hr>
+<h2>3. Den vigtigste beslutning: aktivitet i konti, arrangement i dimension</h2>
+<p>Vi styrer <b>to niveauer</b> hver for sig, så kontoplanen forbliver kort:</p>
+<ul><li><b>Aktivitetsopdeling (bar / koncert / udlejning)</b> ligger i <b>selve kontostrukturen</b> (fx separate indtægts- og vareforbrugskonti for bar). Det virker for <i>al</i> bogføring — også de mange små posteringer — uden at kræve ekstra tastning.</li></ul>
+<ul><li><b>Pr.-arrangement-økonomi</b> (billetindtægt vs. honorar vs. klip for den enkelte koncert) styres via en <b>projekt-/dimension i e-conomic</b> — men <b>kun for større arrangementer</b>, hvor det er indsatsen værd. Så kan honorarstøtte-rapporten (dato, kunstner, billetpris, billetindtægt, honorar, antal musikere, klip) trækkes direkte, uden at kontoplanen eksploderer i én konto pr. koncert.</li></ul>
+<blockquote><p>Anbefaling: opret e-conomic-<b>dimensionen &quot;Arrangement&quot;</b> (frivillig) + evt. en simpel dimension &quot;Aktivitet&quot; (Koncert / Bar / Udlejning / Fælles) hvis I vil have DB-rapporter helt automatisk. Se <code>03-dimensioner-og-rapportering.md</code>.</p></blockquote>
+<hr>
+<h2>4. Honorar — struktureret efter indberetningspligt</h2>
+<p>Honorar er Palettens <b>største omkostning</b> (~10 mio. i perioden) og lå spredt rodet over 6+ konti i den gamle plan. Ny plan samler det i én blok, opdelt efter hvordan udgiften skal <b>afregnes og indberettes</b> — det er dét, der afgør bogføringen:</p>
+<div class="tw"><table><thead><tr><th>Type</th><th>Konto</th><th>Moms</th><th>Indberetning</th></tr></thead><tbody><tr><td>Faktura fra momsregistreret CVR</td><td>2010</td><td>I25 (købsmoms)</td><td>Ingen (leverandørfaktura)</td></tr><tr><td>Faktura fra CVR <b>uden</b> moms</td><td>2015</td><td>Ingen</td><td><b>Ingen</b> — det er et CVR/virksomhed, indberettes ikke som B-indkomst</td></tr><tr><td>B-honorar til privatperson</td><td>2020</td><td>Ingen</td><td><b>Paletten indberetter B-indkomst</b> (eIndkomst)</td></tr><tr><td>Honorar afregnet som løn (A-indkomst)</td><td>2030</td><td>Ingen</td><td>Via lønsystem (A-skat/AM)</td></tr><tr><td>EU-kunstner (uden dansk moms)</td><td>2040</td><td>EUY25 (omvendt betalingspligt)</td><td>Ydelsesmoms beregnes</td></tr><tr><td>Kunstner uden for EU</td><td>2050</td><td>(afklares)</td><td>Evt. kildeskat/royalty</td></tr></tbody></table></div>
+<p>Den afgørende sondring: <b>CVR uden moms (2015) må IKKE indberettes som B-indkomst</b> — modparten er en virksomhed, ikke en privatperson. Kun privatpersoner udløser B-indkomstindberetning. Det gør det entydigt for bogholderen og sikrer, at hverken for lidt eller for meget bliver indberettet (compliance-risiko i den gamle plan).</p>
+<h3>B-indkomst gælder ikke kun kunstnere</h3>
+<p>Paletten køber også ydelser af privatpersoner <b>uden</b> CVR: teknikere, afviklere, dørvagter, workshopholdere. De udløser samme indberetningspligt som en kunstner. Samme princip er derfor ført igennem hele planen — én B-indkomstkonto pr. omkostningsart, så både DB-opdelingen og indberetningen holder:</p>
+<div class="tw"><table><thead><tr><th>Omkostningsart</th><th>Faktura (CVR)</th><th>B-indkomst (privatperson)</th></tr></thead><tbody><tr><td>Kunstnerhonorar</td><td>2010 / 2015</td><td><b>2020</b></td></tr><tr><td>Assistance ved afvikling — teknik, vagt, afvikler</td><td>2160</td><td><b>2165</b></td></tr><tr><td>Konsulent, workshop, øvrige ydelser</td><td>4375</td><td><b>4376</b></td></tr></tbody></table></div>
+<p>Baggrund i data: den gamle konto 2017 <i>Dørvogtere</i> indeholder posteringer som &quot;Nynne Rasmussen vagt&quot; og &quot;Dan Bay vagtjob&quot; bogført med momskode <code>I25</code> — privatpersoner kan ikke fakturere moms, så både momsfradrag og manglende B-indberetning var forkert.</p>
+<h3>Samlekonto + fordeling: én låge ind, tre veje ud</h3>
+<p>Tre spredte konti er rigtige <i>regnskabsmæssigt</i>, men de er svære at afstemme mod SKAT, og de passer ikke til hvordan pengene faktisk bogføres: <b>Salary bogfører selv B-honorar som en lønomkostning</b>. Kunstnerhonorar hører imidlertid til under <b>vareforbrug</b> — i Beierholms årsrapport 2025 ligger det på note 3 (&quot;Arrangementer&quot;, 1.337.516 kr.), ikke på note 4 Personaleomkostninger. Uden en aktiv fordeling ville ~7,8 mio. kr. lande det forkerte sted i årsrapporten og ødelægge dækningsbidraget.</p>
+<p>Derfor får B-honorar én fælles indgang og en fordeling ud:</p>
+<div class="tw"><table><thead><tr><th>Konto</th><th>Rolle</th></tr></thead><tbody><tr><td><b>3100</b> · B-honorar til indberetning</td><td><b>Samlekonto.</b> Alt B-honorar bogføres her først — uanset om det kommer fra Salary eller betales direkte. Saldoen er ét tal.</td></tr><tr><td><b>3105</b> · Fordeling af B-honorar</td><td><b>Modkonto.</b> Krediteres når omkostningen føres videre.</td></tr><tr><td>2020 / 2165 / 4376</td><td><b>Destinationer.</b> Debiteres ved fordelingen — kunstner, teknik/afvikling, øvrige.</td></tr></tbody></table></div>
+<p>Fordelingsposteringen laves ved månedsafslutning: kredit 3105, debet 2020/2165/4376. Nettoeffekten på personaleomkostninger er <b>nul</b>, og omkostningen ender hvor den hører til.</p>
+<p><b>Tre afstemninger — og det er hele pointen:</b></p>
+<ol><li><code>3100</code> (år til dato) <b>=</b> det samlede beløb indberettet som B-indkomst til eIndkomst.</li><li><code>3100 + 3105</code> <b>= 0</b> — er summen ikke nul, mangler der en fordeling.</li><li><code>3105</code> **= −(2020 + 2165 + 4376)` — er den ikke det, er noget fordelt forkert.</li></ol>
+<p>To uafhængige kontroller på den samme talmasse. Det er markant stærkere end at skulle sammenholde tre spredte konti med en eIndkomst-udskrift manuelt.</p>
+<blockquote><p>Skyldigt, endnu ikke udbetalt B-honorar ved periodeskift står på balancekonto <b>8225</b>. Der må aldrig bogføres fakturaer fra CVR på 3100 eller på destinationskontiene.</p></blockquote>
+<hr>
+<h2>5. Momskoder — konvention</h2>
+<div class="tw"><table><thead><tr><th>Kode</th><th>Betydning</th></tr></thead><tbody><tr><td><code>U25</code></td><td>Udgående (salgs)moms 25 %</td></tr><tr><td><code>I25</code></td><td>Indgående (købs)moms 25 %, fuldt fradrag</td></tr><tr><td><code>REP</code></td><td>Repræsentation (25 %, begrænset/intet fradrag)</td></tr><tr><td><code>EUY25</code></td><td>EU-køb af ydelser (omvendt betalingspligt)</td></tr><tr><td><code>EUV25</code></td><td>EU-køb af varer</td></tr><tr><td><code>OBPK</code></td><td>Indenlandsk omvendt betalingspligt</td></tr><tr><td><code>Fri</code></td><td>Uden moms (tilskud, løn, renter, gebyrer u/moms)</td></tr></tbody></table></div>
+<p><b>Fuld momspligt (bekræftet):</b> Al Palettens salgsaktivitet (entré, bar, udlejning, sponsor, medlemskab) er <b>fuldt momspligtig</b>. Der er <b>ingen delvis fradragsret</b> — købsmoms på momsbelagte omkostninger fradrages fuldt (<code>I25</code>). Offentlige tilskud ligger uden for momssystemet (<code>Fri</code>) og påvirker ikke fradragsretten. Momsfrie indtægtskonti er derfor udgået af planen.</p>
+<hr>
+<h2>6. Hvad der er ryddet op ift. den gamle plan</h2>
+<ul><li>Honorar samlet fra 6+ rodede konti → 6 klare konti efter indberetningstype (afsnit 4).</li><li>&quot;Carlsberg-tilskud&quot; lå som <i>indtægt</i> med indgående moms. Det er kreditnotaer på varekøb og flyttes til 2305 under vareforbrug — momskoden <code>I25</code> var rigtig, placeringen var ikke.</li><li>Energi samlet og logisk (el / varme / vand / afgift) i stedet for 4 overlappende konti.</li><li>Ødelagte subtotal-referencer (sumfra der pegede på sig selv) fjernet.</li><li>Covid-hjælpepakker udgår som aktive konti (kun til historisk mapping).</li><li>Slåfejl i kontonavne rettet.</li><li>~282 linjer → ca. 130 aktive konti.</li></ul>
+<hr>
+<h2>7. Afskrivningsprincipper og anlægstilskud</h2>
+<p><b>Afskrivning</b> (foreslåede regnskabsmæssige levetider — bekræftes med revisor):</p>
+<p>Levetider følger Beierholms anvendte regnskabspraksis i årsrapport 2025 (lineær afskrivning):</p>
+<div class="tw"><table><thead><tr><th>Aktivgruppe</th><th>Konto</th><th>Levetid</th><th>Bemærkning</th></tr></thead><tbody><tr><td>Indretning af lejede lokaler</td><td>5100</td><td>20 år</td><td>Lineært (jf. årsrapport 2025)</td></tr><tr><td>Teknik, lyd/lys</td><td>5300</td><td>3–15 år</td><td>Ledelsesmæssig undergruppe; i årsrapporten en del af &quot;Andre anlæg…&quot;</td></tr><tr><td>Driftsmateriel og inventar</td><td>5200</td><td>3–15 år</td><td>Lineært, restværdi 0–30 %</td></tr><tr><td>IT-udstyr</td><td>5200</td><td>3 år</td><td></td></tr><tr><td>Småanskaffelser under grænsen</td><td>(drift 4330)</td><td>Straksafskrives</td><td>Skattemæssig grænse (2025: 34.400 kr., reguleres)</td></tr><tr><td>Kunst</td><td>5400</td><td>Afskrives ikke</td><td></td></tr></tbody></table></div>
+<p><b>Anlægstilskud</b> (fx tilskud fra kommune/fonde til indretning eller udstyr) indtægtsføres <b>ikke</b> straks. De optages som <i>periodiseret anlægstilskud</i> på balancekonto <b>8610</b> og indtægtsføres på <b>1650</b> systematisk over aktivets levetid — i takt med afskrivningen — så tilskud og afskrivning modsvarer hinanden i resultatet. Det giver et retvisende driftsresultat og undgår, at et stort anlægstilskud kunstigt &quot;pynter&quot; på ét enkelt års resultat.</p>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>

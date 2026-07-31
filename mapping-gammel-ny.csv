@@ -1,0 +1,188 @@
+gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
+1010;Tilskud, Viborg kommune;1600 / 1605;SPLIT;80;Ordinært driftstilskud → 1600. Øremærkede projekttilskud (Kulturambassadører, festivaler) → 1605. Skal opdeles ved konvertering.
+1012;Tilskud, Kunstrådet;1620 / 1625;SPLIT;49;2025→ honorarstøtte → 1620. Projektstøtteudvalgets puljer → 1625. Historisk regionalt driftstilskud lægges på 1620.
+1014;Tilskud, diverse;1610 / 1630;SPLIT;17;Kommunale/regionale (Kulturregion) → 1610. Private fonde/Nordea o.l. → 1630.
+1015;Offentlige tilskud anlægsinvesteringer;1650;1:1;5;"Anlægstilskud indtægtsføres nu periodiseret; modpost balancekonto 8610."
+1020;Sponsorer, samarbejdsaftaler, annoncer mv;1400 / 1410;SPLIT;85;Rene sponsorater → 1400. Samarbejdsaftaler/annonceindtægt → 1410.
+1021;Billetlugen Safeticket;1120;1:1;0;Billetgebyr viderefaktureret. Konto var ubrugt.
+1024;Billetsalg;1100;1:1;641;Entréindtægter, egne koncerter.
+1025;Medlemsskab;1420;1:1;1;Medlemskaber — nu momspligtig (U25).
+1026;Barsalg;1200 / 1210;SPLIT;354;"Drikkevarer → 1200. Mad/snacks → 1210 hvis det ønskes særskilt; ellers alt på 1200."
+1027;Carlsberg Tilskud;2305;1:1;7;FLYTTES TIL VAREFORBRUG: produktrabat fra Carlsberg er kreditnotaer på varekøb, ikke indtægt. Momskode I25 bevares — kreditnotaen modregner købsmomsen.
+1028;Garderobeafgift;1110;1:1;39;Garderobeindtægt.
+1029;Kassedifferencer, indtægt;1520;1:1;5;Kassedifferencer, indtægt.
+1030;Salg, diverse;1500 / 1220;SPLIT;114;Restpost → 1500. Merchandisesalg → 1220. Gennemgå de 114 posteringer ved konvertering.
+1035;Kompensation for faste omkostninger;1690;LUKKES;25;Covid-kompensation. Legacy — konto inaktiveres efter konvertering.
+1040;Hjælpepakker til kulturlivet;1690;LUKKES;12;Hjælpepakker kulturliv. Legacy — inaktiveres.
+1710;Udlejning af sal;1300;1:1;90;Udlejning af sal.
+1712;Udlejning af udstyr;1310;1:1;25;Udlejning af udstyr.
+1714;Salg Teknikerhjælp;1320;1:1;25;Salg af teknikerhjælp.
+1716;Salg Rengøringsassistance;1340;1:1;6;Salg af rengøring/service.
+1718;Salg personale timer;1330;1:1;14;Salg af personaletimer.
+1719;Viderefakturering af udlæg;1350;1:1;14;Viderefakturering af udlæg, m/moms.
+1720;Viderefakturering af udlæg uden moms;1355;1:1;1;Viderefakturering af udlæg, u/moms.
+2008;Arrangementer og honorarer EU;2040;1:1;3;Kunstnerhonorar EU — omvendt betalingspligt (EUY25).
+2009;Arrangementer og honorar CVR;2010 / 2015;SPLIT;212;KERNEOPDELING: faktura fra momsregistreret CVR → 2010 (I25). CVR uden moms → 2015 (Fri, indberettes IKKE som B-indkomst). Kun 3 af 212 posteringer havde momskode — hovedparten forventes 2015.
+2010;Arrangementer og honorar, skal indb.;2020 / 2040;SPLIT;690;Hovedkontoen (7,8 mio.). B-indkomst privatpersoner → 2020. De 4 posteringer med EUY25 → 2040. De 12 med I25 → 2010 (fejlplacering).
+2011;Varekøb;2300;1:1;540;Varekøb, bar.
+2012;Ydelseskøb EU;2040 / 4220 / 4325;SPLIT;0;Ubrugt samlekonto for EU-ydelser. Opdeles efter art: kunstnerhonorar → 2040, annoncering → 4220, software → 4325.
+2013;Varekøb EU;2310;1:1;8;Varekøb bar, EU (EUV25).
+2014;Provision vedr. arrangementer;2100;1:1;357;Provision / booking / agent.
+2015;Transport;2120;1:1;24;Transport af kunstnere.
+2016;Catering;2140 / 3210;SPLIT;876;1,7 mio. på 876 posteringer. Backstage/rider til kunstnere → 2140. Frokost/forplejning til personale og frivillige (Føtex m.fl.) → 3210/3200. Kræver gennemgang — se afklaringspunkt 8.
+2017;Dørvogtere;2160 / 2165;SPLIT;3;"Faktura fra CVR → 2160. Privatpersoner (fx ""Nynne Rasmussen vagt"", ""Dan Bay vagtjob"" — bogført med I25, hvilket er forkert) → 2165 B-indkomst."
+2018;Leje af udstyr mv.;2150;1:1;64;Backline / udstyrsleje til arrangement.
+2019;Kodaafgift;2110;1:1;38;KODA / Gramex.
+2020;Billetlugen, Safeticket;2170;1:1;37;Billetsystem (Safeticket).
+2025;Hotel, ophold (kunstnere);2130;1:1;16;Hotel / ophold, kunstnere.
+2026;Hotel, forplejning (kunstnere);2140;1:1;15;Forplejning, kunstnere (backstage) — REP.
+2029;Udlæg til viderefakturering;2180;1:1;5;"Udlæg til viderefakturering; indtægtssiden på 1350/1355."
+2030;Fødevarestyrelsen, afgift;2350;1:1;1;Fødevareafgift / kontrolgebyr.
+2050;Forbrug, optrædende;2140;1:1;2;Forbrug til optrædende. Konto reelt ubrugt (0 kr.).
+2051;Forbrug egne varer;2340;1:1;0;Forbrug egne varer → spild/svind.
+2052;Spild;2340;1:1;0;Spild.
+2510;Varelager, Regulering;2330;1:1;8;Lagerregulering — modpost varelager 6100.
+2605;Underentreprenører;2160 / 4375;SPLIT;308;2,2 mio. Teknik-/afviklingsleverandører (Unit1, Invi, Tinghallen) → 2160. Administrativ konsulentbistand → 4375.
+2610;Underentreprænører B-honorar, skal indb.;4376;1:1;15;B-honorar til ikke-kunstnere. Ny konto 4376 oprettet.
+2620;Kulturambassadør / Julia;4376 / 4375;SPLIT;4;Kulturambassadør-projekt. Honorar til privatperson → 4376, faktura fra CVR → 4375. Tilskudssiden ligger på 1605.
+3020;Gager og lønninger;3010 / 3020;SPLIT;235;Fast personale → 3010. Timelønnede/afløsere → 3020 (kræver oplysning fra lønsystem).
+3021;Aconto løn;8200;1:1;0;Aconto løn er en balancepost (skyldig løn), ikke drift. Ubrugt.
+3022;Ledighedsdage;3020;1:1;1;Ledighedsdage — timelønnede.
+3023;Store Bededagstillæg;3040;1:1;12;Store Bededagstillæg.
+3024;Skattefri godtgørelse;3260 / 3270;SPLIT;2;Skattefri godtgørelse: kørsel → 3260, rejse → 3270.
+3025;Feriepenge, indefrosne;7200;1:1;1;Indefrosne feriepenge = hensat forpligtelse (balance), ikke drift.
+3026;Jubilæumsgratiale og fratrædelsesgodtgørelse;3050;1:1;2;Fratrædelse / jubilæum.
+3230;Feriepengeforpligtelse, reg.;3030;1:1;40;Feriepengeforpligtelse, regulering.
+3310;Ref. syge- og barselsdagpenge;1665;1:1;4;FLYTTES TIL INDTÆGT: refusion syge-/barselsdagpenge vises som andre driftsindtægter, ikke som negativ løn.
+3320;Løntilskud;1660;1:1;1;FLYTTES TIL INDTÆGT: løntilskud/lønrefusion vises brutto under andre driftsindtægter.
+3610;Arbejdsskadeforsikring;3090;1:1;1;Arbejdsskadeforsikring.
+3630;Pensioner;3060;1:1;0;Pension.
+3655;ATP-bidrag;3070;1:1;158;ATP.
+3675;Øvrige forsikringer;4380;1:1;0;Øvrige forsikringer hører under administration (drift), ikke personale.
+3680;Kursusomkostninger, bøger mv.;3230;1:1;8;Kurser / uddannelse, m/moms.
+3681;Kursusomkostninger u/moms;3240;1:1;5;Kurser / uddannelse, u/moms.
+3690;Personaleomkostninger;3210 / 3200;SPLIT;146;Personaleomkostninger: personalepleje/frokost → 3210. Frivillige (Paletkorpset) → 3200. Opdeling kræver gennemgang af de 146 posteringer.
+3691;Bestyrelsesmøder mv.;3220;1:1;8;Bestyrelse / generalforsamling.
+3700;Befordringsgodtgørelse;3260;1:1;1;Befordringsgodtgørelse.
+3740;Arbejdstøj m/moms;3250;1:1;6;Arbejdstøj / uniform.
+3750;Databehandling løn;3280;1:1;61;Lønadministration / databehandling.
+3751;Samlet betaling;3080;1:1;33;"IDENTIFICERET: ""Samlet betaling"" er ATP's kvartalsopkrævning af AES/AUB/Barsel.dk. Årssummerne matcher årsrapportens AER-bidrag krone for krone (2024: 21.821, 2025: 22.528)."
+3760;Bøder;4410;1:1;0;Bøder → diverse/ekstraordinært (ej fradragsberettiget).
+3765;Kørselsgodtgørelse;3260;1:1;6;Kørselsgodtgørelse.
+4010;Restaurationsbesøg;4250;1:1;8;Restaurationsbesøg → repræsentation.
+4060;Annoncer;4210;1:1;157;Annoncering / markedsføring.
+4061;Annonce  EUY;4220;1:1;276;Online annoncering EU (Meta/Google) — EUY25.
+4063;Reklamerartikler;4230;1:1;6;Reklameartikler.
+4065;Konference osv.;3230;1:1;3;Konferencer → kurser/uddannelse m/moms.
+4080;Gaver og repræsentation;4250;1:1;9;Repræsentation og gaver.
+4090;Rejser;4260;1:1;27;Rejser (ikke kunstnere).
+4210;Leasing kopimaskine;4120;1:1;0;Leasing kopimaskine → leje/leasing driftsmateriel.
+4211;Leasing Jool;4120;1:1;34;Leasing Jool.
+4212;Leasing højtaleranlæg;4120;1:1;0;Leasing højttaleranlæg.
+4213;Leje kaffemaskin;4120;1:1;33;Leje kaffemaskine.
+4260;Lokale udgifter;4080;1:1;2;Lokaleudgifter → vedligeholdelse, lokaler.
+4271;Varme;4030;1:1;24;Varme.
+4275;El, vand og gas;4040 / 4050;SPLIT;69;El → 4040, vand → 4050. Gas lægges på 4030 (varme).
+4280;Elafgift;4045;1:1;13;Elafgift, refusion (kredit).
+4285;Driftsydelser Tinghallen;4020;1:1;18;Driftsydelser Tinghallen → driftsbidrag/fællesudgifter.
+4291;Vedligeholdelse;4080;1:1;88;Vedligeholdelse, lokaler.
+4293;Alarm;4100;1:1;0;Alarm / overvågning.
+4295;Rengøring og renovation;4070 / 4060;SPLIT;149;Rengøring (Elis) → 4070. Renovation (Marius Pedersen, Viborg Renovation) → 4060.
+4308;Vedligeholdelse inventar;4090;1:1;51;Vedligeholdelse inventar og teknik (fx flygelstemning).
+4351;Vagtværn;4110;1:1;30;Vagtværn → fast vagtordning.
+4302;Kontorartikler/tryksager;4310;1:1;57;Kontorartikler / tryksager.
+4305;Leje af udstyr;4120;1:1;2;Leje af udstyr (adm.).
+4306;Licenser;4320;1:1;3;Licenser → IT/software.
+4307;Abonnement u/moms EUY25;4325;1:1;4;Abonnement EU → IT/software EU.
+4309;Fragt;4355;AFKLAR;16;Fragt. Bør principielt følge den underliggende omkostning (varekøb bar → 2320). Beslut ved konvertering.
+4310;EDB-omkostninger;4320;1:1;285;EDB-omkostninger → IT/software/licenser.
+4311;EDB u/m EUY;4325;1:1;388;EDB EU → IT/software EU.
+4312;Småanskaffelser;4330;1:1;296;Småanskaffelser.
+4313;Dekoration;4330;1:1;17;Dekoration → småanskaffelser.
+4316;Telefon og internet;4340;1:1;163;Telefon og internet.
+4325;Gebyrer m/moms;4355;1:1;3;Gebyrer m/moms.
+4327;Porto og gebyrer;4350;1:1;627;Porto og gebyrer u/moms (iZettle-gebyr, bankgebyr).
+4330;Revisorhonorar;4360;1:1;28;Revisor.
+4331;Revisorhonorar vedrørende tidl. år;4360;SAMLES;5;Revisorhonorar tidl. år samles på 4360.
+4332;Bogholderi;4365;1:1;16;Bogføring / økonomiassistance.
+4335;Konsulent;4375;1:1;19;Konsulentbistand.
+4340;Advokat;4370;1:1;3;Advokat / juridisk bistand.
+4350;Forsikringer;4380;1:1;19;Forsikringer (drift).
+4370;Kontingenter m/moms;4390;1:1;149;Kontingenter, m/moms.
+4371;Kontingenter u/moms;4395;1:1;41;Kontingenter, u/moms.
+4375;Konstateret tab på debitorer;4400;1:1;0;Konstateret tab på debitorer.
+4380;Regulering af hensættelse til tab på debitorer;6210;1:1;0;Regulering af hensættelse til tab → balancekonto 6210.
+4395;Ekstraord. indtægter/udgifter;4410;1:1;9;Ekstraordinære indtægter/udgifter → diverse.
+4458;Afskrivning andre anlæg, driftsmat. og inv;4620 / 4625;SPLIT;33;Driftsmateriel → 4620 (modpost 5210). Teknik lyd/lys → 4625 (modpost 5310). Følger opdelingen af anlægskartoteket.
+4459;Afskrivning indretning lejede lokaler;4610;1:1;5;Afskrivning, indretning af lejede lokaler.
+4460;Tab/avance driftsmidler;4630;1:1;3;Tab/avance ved salg af anlæg.
+4650;Renteindtægt, pengeinstitutter;4810;1:1;0;Renteindtægter.
+4660;Renter, debitorer;4810;SAMLES;0;Renter debitorer samles i 4810.
+4730;Renter, pengeinstitutter;4820;1:1;11;Renteudgifter, pengeinstitut.
+4743;Renter, kreditorer;4830;1:1;19;Renteudgifter, leverandører.
+4746;Renter, ej skm fradrag;4840;1:1;37;Renter, ej fradragsberettigede.
+4755;Kassedifference mv.;4860;1:1;6;Kassedifference (finansiel).
+4760;Valutadifferencer;4850;1:1;65;Valutakursdifferencer.
+4999;Fejlkonto;4999;1:1;0;Fejlkonto — bevares, afstemmes til 0.
+5101;Indretning af lejede lokaler, primo;5100;SAMLES;2;Primo og tilgang samles på én kostpriskonto 5100.
+5102;Indretning af lejede lokaler, tilgang;5100;SAMLES;5;Tilgang bogføres direkte på 5100.
+5111;Afskrivninger primo;5110;SAMLES;3;Afskrivninger primo → 5110.
+5115;Årets afskrivninger;5110;SAMLES;10;Årets afskrivninger → 5110 (modpost drift 4610).
+5701;Anskaffelsessum, primo;5200 / 5300;SPLIT;16;Anskaffelsessum primo. Teknik (lyd/lys) udskilles til 5300, øvrigt driftsmateriel → 5200.
+5702;Tilgang i årets løb;5200 / 5300;SPLIT;38;Tilgang i året — samme opdeling.
+5703;Årets afgang;5200 / 5300;SPLIT;7;Årets afgang — samme opdeling.
+5711;Afskrivninger, primo;5210 / 5310;SPLIT;18;Afskrivninger primo — samme opdeling.
+5715;Årets afskrivninger;5210 / 5310;SPLIT;49;Årets afskrivninger — samme opdeling.
+5716;Tilbageførte afskrivninger;5210 / 5310;SPLIT;8;Tilbageførte afskrivninger ved afgang.
+6540;Varebeholdning;6100;1:1;18;Varebeholdning, bar.
+6550;Kunst;5400;1:1;2;Kunst flyttes til anlægsaktiver (afskrives ikke).
+6610;Tilgodehavender, salg og tjen.;6200;1:1;452;Tilgodehavender fra salg (debitorer).
+6611;Hensat til tab på debitorer;6210;1:1;0;Hensat til tab på debitorer.
+6612;Manuelle debitorer CW;6200;LUKKES;8;Manuelle debitorer fra C&W — legacy, saldo nulstilles og konto lukkes.
+6630;Kortindbetaling iZettle;6220;1:1;76;Kortindløsning under afregning (iZettle).
+6640;Andre tilgodehavender;6230;1:1;44;Andre tilgodehavender.
+6641;Forudbetalinger;6240;1:1;62;Forudbetalte omkostninger (periodeafgrænsning).
+6642;Øvrige tilgodehavender;6230;SAMLES;2;Øvrige tilgodehavender samles i 6230.
+6668;Tilgodehavende moms;6250;1:1;0;Tilgodehavende moms.
+6806;Valutakasse;6810;1:1;23;Valutakasse.
+6810;Kasse;6800;1:1;432;Kasse.
+6811;Teller;6220;LUKKES;0;Teller — ubrugt, lukkes.
+6812;Dankort;6220;1:1;712;Dankort under afregning.
+6840;Mobilepay;6820;1:1;451;MobilePay.
+7311;Overført resultat, primo;7100;1:1;18;Egenkapital (formue) primo.
+7337;Årets overførte resultat;7110;1:1;0;Overført af årets resultat.
+8200;Viborg kommune, ombygningslån;7510 + 8050;SPLIT;11;Ombygningslån: langfristet del → 7510, næste års afdrag → 8050.
+8210;Viborg kommune, rampe;7520 + 8050;SPLIT;2;Rampe/anlægslån: langfristet del → 7520, næste års afdrag → 8050.
+8400;Nordea Bank;6830;1:1;7009;FLYTTES TIL AKTIVER: bankkonto vises som likvid beholdning (6830), ikke som gæld — kun ved overtræk vises den som gæld.
+8405;Betalingskort - e-conomic;6840;1:1;64;Betalingskort e-conomic → likvide beholdninger.
+8440;Skyldige poster;8110;1:1;254;Skyldige omkostninger (afsatte).
+8441;Skyldig kreditor;8100;1:1;3842;Leverandører (kreditorer).
+8442;EU Kreditorer;8100;SAMLES;80;EU-kreditorer samles i 8100 (adskilles via momskode).
+8443;Manuelle kreditorer fra CW;8100;LUKKES;41;Manuelle kreditorer fra C&W — legacy, lukkes.
+8450;Forudbetalinger billetter;8600;1:1;42;Forudmodtagne billetindtægter.
+8461;Gavekort;8130;1:1;0;Gavekort.
+8475;Revisorhonorar;8110;SAMLES;14;Afsat revisorhonorar → skyldige omkostninger.
+8480;Nedskrivning af offentlige tilskud;8630;AFKLAR;5;"""Nedskrivning af offentlige tilskud"" — afklares med Beierholm om posten er tilskudsgæld (8630) eller korrektion til tilgodehavende. Se hul 5."
+8720;Udgående moms;8300;1:1;1316;Udgående moms.
+8730;EU Ydelsesmoms;8320;1:1;747;EU-ydelsesmoms.
+8740;Indgående moms;8310;1:1;3843;Indgående moms.
+8795;Elafgift;8330;1:1;17;Elafgift.
+8797;Overført til omsætningsaktiver;6250;1:1;0;Overført til omsætningsaktiver → tilgodehavende moms.
+8798;Afregnet moms;8340;1:1;30;Momsafregning.
+8801;Skyldig A-skat mv. primo;8230;SAMLES;46;A-skat primo samles på 8230.
+8804;Tilbageholdt A-skat;8230;1:1;163;Tilbageholdt A-skat.
+8805;Tilbageholdt AM-bidrag;8240;1:1;137;Tilbageholdt AM-bidrag.
+8808;Afregnet A-skat mv.;8230;SAMLES;31;Afregnet A-skat → 8230.
+8811;Skyldig ATP;8220;1:1;109;Skyldig ATP.
+8812;Andre skyldige lønposter;8220;SAMLES;24;Andre skyldige lønposter → 8220.
+8813;B honorar til indberetning;8225;1:1;0;Skyldigt B-honorar til indberetning. Konto var aldrig i brug (0 posteringer) — videreføres som hvilende konto.
+8815;Skyldige feriepenge;8210;1:1;158;Skyldige feriepenge.
+8817;Skyldige Store Bededagstillæg;8220;SAMLES;13;Skyldige Store Bededagstillæg → 8220.
+8820;Afsat skyldige feriepengeforpl;8215;1:1;23;Feriepengeforpligtelse, funktionærer.
+8825;Afsat skyldige feriepengeforpl Indefrosne;7200;1:1;8;Indefrosne feriepenge → hensat forpligtelse.
+8860;Skattekonto;8350;1:1;81;Skattekonto.
+8870;Skyldig Statens Kunstfond;8400;1:1;2;Tilbagebetaling honorarstøtte (uudnyttede klip).
+8910;Periodeafgrænsningsposter;8620;1:1;18;Periodeafgrænsningsposter → forudmodtagne øvrige.
+8911;Forudbetalt tilskud;8630;1:1;185;Forudbetalte tilskud vedr. næste år.
+8920;Forud faktureret indtægt;8620;1:1;11;Forud faktureret indtægt.
+9999;Fejlkonto;9999;1:1;19;Afstemnings-/fejlkonto (balance).

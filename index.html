@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oplæg: Ny kontoplan — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Oplæg til drøftelse</div>
+  <h1>Ny kontoplan for Spillestedet Paletten</h1>
+  <div class="meta">Status pr. 31. juli 2026 · Den Selvejende Institution Spillestedet Paletten, CVR 16 95 95 88 · e-conomic-aftale 983629</div>
+</header>
+
+<div class="nav"><a class="on" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a></div>
+<p class="lead">Den nye kontoplan er skrevet færdig, og hele den gamle kontoplan er nu mappet over i den. Dette notat samler <b>hvad der er besluttet</b>, <b>hvad der bliver rettet undervejs</b>, og <b>hvad der stadig mangler en beslutning</b> — så arbejdet kan afsluttes med bogholder og revisor.</p>
+
+<div class="stats">
+  <div class="stat"><span class="n">187</span><span class="l">gamle konti — alle mappet</span></div>
+  <div class="stat"><span class="n">164</span><span class="l">konti faktisk i brug</span></div>
+  <div class="stat"><span class="n">29.693</span><span class="l">posteringer gennemgået (2020–26)</span></div>
+  <div class="stat"><span class="n">~135</span><span class="l">konti i den nye plan</span></div>
+</div>
+
+<h2>1. Hvorfor</h2>
+
+<p>Den nuværende kontoplan er vokset frem over mange år og har tre konkrete problemer:</p>
+
+<ul>
+  <li><b>Honorar — Palettens største omkostning, ca. 10 mio. kr. over perioden — ligger spredt over 6+ konti</b> uden en klar regel for hvad der hører hvorhen. Det gør det svært at vide, om det rigtige er blevet indberettet til SKAT.</li>
+  <li><b>Der er ingen dækningsbidragstrappe.</b> Man kan ikke aflæse, om baren, koncerterne eller udlejningen tjener penge hver for sig.</li>
+  <li><b>Enkelte poster ligger forkert</b> — bl.a. bankkontoen, der står under gæld i stedet for under aktiver.</li>
+</ul>
+
+<p>Samtidig skiftede Paletten fra 2025 status fra <b>regionalt spillested</b> til <b>honorarstøttet spillested</b>. Det ændrer rapporteringskravet: der skal nu afrapporteres pr. koncert til Statens Kunstfond med dato, kunstner, billetindtægt, honorarudgift, antal musikere og klip. Kontoplanen skal kunne levere de tal uden manuelt detektivarbejde.</p>
+
+<h2>2. De fem greb i den nye plan</h2>
+
+<h3>2.1 Honorar struktureres efter indberetningspligt</h3>
+
+<p>Det bærende greb. I stedet for at gruppere honorar efter hvem der optræder, grupperes det efter <b>hvordan udgiften skal afregnes og indberettes</b> — for det er dét, der afgør bogføringen:</p>
+
+<div class="tw">
+<table>
+  <thead><tr><th>Omkostningsart</th><th>Faktura fra CVR</th><th>B-indkomst (privatperson)</th></tr></thead>
+  <tbody>
+    <tr><td>Kunstnerhonorar</td><td>2010 (m/moms) · 2015 (u/moms)</td><td><b>2020</b></td></tr>
+    <tr><td>Assistance ved afvikling — teknik, vagt, afvikler</td><td>2160</td><td><b>2165</b></td></tr>
+    <tr><td>Konsulent, workshop, øvrige ydelser</td><td>4375</td><td><b>4376</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <span class="t">Den afgørende sondring</span>
+  <p>Et honorar til et <b>CVR uden momsregistrering</b> (konto 2015) må <b>ikke</b> indberettes som B-indkomst — modparten er en virksomhed, ikke en privatperson. Kun privatpersoner udløser indberetning. Den skelnen findes slet ikke i den gamle plan, og det er kernen i, at man i dag ikke kan se om indberetningen er rigtig.</p>
+</div>
+
+<p>Gennemgangen af posteringerne viste, at problemet ikke kun gælder kunstnere: på den gamle konto <i>Dørvogtere</i> ligger poster som "Nynne Rasmussen vagt" og "Dan Bay vagtjob" bogført <b>med moms</b>. Privatpersoner kan ikke fakturere moms — så der er både trukket et momsfradrag der ikke måtte trækkes, og formentlig ikke indberettet B-indkomst.</p>
+
+<h3>2.2 Alt B-honorar gennem én låge — og fordeles derfra</h3>
+
+<p>Salary bogfører selv B-honorar som en <i>lønomkostning</i>. Men kunstnerhonorar hører til under <b>vareforbrug</b> — i Beierholms årsrapport 2025 ligger det på note 3 "Arrangementer" (1.337.516 kr.), ikke på note 4 Personaleomkostninger. Uden en aktiv fordeling ville millionbeløb lande det forkerte sted i årsrapporten og ødelægge dækningsbidraget.</p>
+
+<p>Løsningen er en samlekonto med en fordeling ud:</p>
+
+<div class="flow">
+  <div class="node key"><b>3100</b>B-honorar til indberetning<br><span style="color:var(--muted);font-size:12.5px">alt ind her først</span></div>
+  <span class="arrow">→</span>
+  <div class="node"><b>3105</b>Fordeling (modkonto)</div>
+  <span class="arrow">→</span>
+  <div class="node"><b>2020 / 2165 / 4376</b>kunstner · teknik · øvrige</div>
+</div>
+
+<p>Alle B-honorarer køres over Salary, så Salary bogfører automatisk til 3100. Fordelingen laves ved månedsafslutning. Nettoeffekten på personaleomkostninger er nul, og omkostningen ender hvor den hører til. Gevinsten er, at der nu er <b>tre uafhængige afstemninger</b>:</p>
+
+<ol>
+  <li><code>3100</code> for året <b>=</b> det samlede beløb indberettet som B-indkomst til eIndkomst.</li>
+  <li><code>3100 + 3105 = 0</code> — er summen ikke nul, mangler der en fordeling.</li>
+  <li><code>3105 = −(2020 + 2165 + 4376)</code> — er den ikke det, er noget fordelt forkert.</li>
+</ol>
+
+<p>Det er markant stærkere end i dag, hvor det samlede B-honorar skal stykkes sammen manuelt fra flere konti før det kan holdes op mod SKAT.</p>
+
+<h3>2.3 Aktivitet i konti, arrangement i dimension</h3>
+
+<p>Opdelingen på <b>bar / koncert / udlejning</b> ligger i selve kontostrukturen — den virker automatisk, også for de mange små posteringer. Økonomien <b>pr. arrangement</b> styres i stedet via en dimension i e-conomic, og kun for de større arrangementer hvor det er indsatsen værd. Så kan honorarstøtte-rapporten trækkes direkte, uden at kontoplanen eksploderer i én konto pr. koncert.</p>
+
+<h3>2.4 Fuld momspligt — ingen delvis fradragsret</h3>
+
+<p>Al Palettens salgsaktivitet (entré, bar, udlejning, sponsorat, medlemskab) er fuldt momspligtig. Koncerter er ikke omfattet af momsfritagelsen. Købsmoms fradrages derfor fuldt, og alle konti for momsfrit salg er taget ud af planen. Offentlige tilskud ligger uden for momssystemet og påvirker ikke fradragsretten.</p>
+
+<h3>2.5 Anlægstilskud periodiseres</h3>
+
+<p>Tilskud til indretning eller udstyr indtægtsføres ikke straks, men optages på balancen (konto 8610) og indtægtsføres over aktivets levetid i takt med afskrivningen. Dermed modsvarer tilskud og afskrivning hinanden, og et stort anlægstilskud "pynter" ikke kunstigt på ét enkelt års resultat. Teknik (lyd/lys) har fået sin egen anlægsgruppe med tilhørende afskrivningskonto.</p>
+
+<h2>3. Mappingen — hvor meget arbejde ligger der?</h2>
+
+<p>Alle 187 drifts- og statuskonti fra den gamle plan er mappet, og alle 164 konti der faktisk er brugt i de 29.693 posteringer er dækket. Ingen huller.</p>
+
+<div class="tw">
+<table>
+  <thead><tr><th>Metode</th><th class="num">Antal</th><th>Betydning</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag ok">1:1</span></td><td class="num">140</td><td>Flytter direkte — kan konverteres maskinelt</td></tr>
+    <tr><td><span class="tag">SPLIT</span></td><td class="num">27</td><td>Skal deles på flere konti — kræver manuel gennemgang</td></tr>
+    <tr><td><span class="tag">SAMLES</span></td><td class="num">13</td><td>Flere gamle konti lægges sammen på én ny</td></tr>
+    <tr><td><span class="tag">LUKKES</span></td><td class="num">5</td><td>Legacy (bl.a. covid-hjælpepakker) — saldo flyttes, konto inaktiveres</td></tr>
+    <tr><td><span class="tag warn">AFKLAR</span></td><td class="num">2</td><td>Kan ikke afgøres endeligt endnu</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Arbejdet er ikke jævnt fordelt. Fire konti bærer stort set hele indsatsen:</p>
+
+<div class="tw">
+<table>
+  <thead><tr><th>Gammel konto</th><th class="num">Beløb</th><th class="num">Post.</th><th>Skal deles på</th></tr></thead>
+  <tbody>
+    <tr><td>2010 Arrangementer og honorar, skal indb.</td><td class="num">7.835.824</td><td class="num">690</td><td>2020 B-indkomst / 2040 EU</td></tr>
+    <tr><td>1010 Tilskud, Viborg Kommune</td><td class="num">10.637.953</td><td class="num">80</td><td>1600 drift / 1605 projekt</td></tr>
+    <tr><td>3020 Gager og lønninger</td><td class="num">6.904.082</td><td class="num">235</td><td>3010 fast / 3020 timeløn</td></tr>
+    <tr><td>2016 Catering</td><td class="num">1.726.307</td><td class="num">876</td><td>2140 kunstner-rider / 3200–3210 personale</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>4. Fejl der bliver rettet undervejs</h2>
+
+<p>Gennemgangen fandt otte konkrete fejl, som konverteringen retter op på:</p>
+
+<div class="tw">
+<table>
+  <thead><tr><th>Fejl i dag</th><th>Rettes til</th></tr></thead>
+  <tbody>
+    <tr><td><b>Bankkontoen står under gæld</b> i kontoplanen</td><td>Flyttes til likvide beholdninger under aktiver</td></tr>
+    <tr><td><b>Vagter og teknikere</b> (privatpersoner) bogført med moms og uden B-indberetning</td><td>Deles på faktura (2160) og B-indkomst (2165)</td></tr>
+    <tr><td><b>Carlsberg produktrabat</b> bogført som en indtægt</td><td>Det er kreditnotaer på varekøb — flyttes til vareforbrug (2305). Momskoden var rigtig, placeringen ikke. Giver samtidig et korrekt dækningsbidrag på baren</td></tr>
+    <tr><td><b>Honorar fra CVR med og uden moms</b> blandet på samme konto</td><td>Deles på 2010 / 2015 — kernen i indberetningsrodet</td></tr>
+    <tr><td><b>Løntilskud og dagpengerefusion</b> vist som negativ løn</td><td>Vises som indtægt — svarer til Beierholms note 2</td></tr>
+    <tr><td><b>Kunst</b> ligger under omsætningsaktiver</td><td>Flyttes til anlægsaktiver (afskrives ikke)</td></tr>
+    <tr><td><b>Indefrosne feriepenge</b> blandet mellem drift og balance</td><td>Samles som hensat forpligtelse</td></tr>
+    <tr><td><b>"Samlet betaling"</b>, 123.641 kr. på en uidentificeret konto i driften</td><td>Identificeret som ATP's kvartalsopkrævning af AES/AUB/Barsel.dk. Årssummerne matcher årsrapportens AER-bidrag krone for krone. Får sin egen konto</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>5. Det mangler en beslutning</h2>
+
+<div class="box warn">
+  <span class="t">Fire åbne punkter</span>
+  <p>Ingen af dem blokerer for at gøre kontoplanen færdig, men de skal afklares inden konverteringen kan køres.</p>
+</div>
+
+<div class="tw">
+<table>
+  <thead><tr><th>Punkt</th><th>Hvem</th></tr></thead>
+  <tbody>
+    <tr><td><b>Catering, 1,7 mio. kr.</b> Hvor går grænsen mellem kunstner-rider (backstage) og almindelig personaleforplejning? Kan ikke afgøres ud fra posteringsteksterne</td><td>MSP + revisor</td></tr>
+    <tr><td><b>Honorar til kunstnere uden for EU</b> — kildeskat/royalty</td><td>Revisor</td></tr>
+    <tr><td><b>"Nedskrivning af offentlige tilskud"</b>, −96.690 kr. Uklart om posten er tilskudsgæld eller en korrektion til et tilgodehavende</td><td>Beierholm</td></tr>
+    <tr><td><b>Fragt</b> — egen konto, eller skal den følge den omkostning den vedrører?</td><td>Bogholder</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box ok">
+  <span class="t">Afklaret undervejs</span>
+  <p><b>Alle B-honorarer køres over Salary.</b> Dermed bogfører Salary automatisk til samlekonto 3100, og kontoen er et komplet grundlag for eIndkomst-afstemningen — der er ingen honorarer der går uden om.</p>
+  <p><b>Husleje er formentlig ikke et spørgsmål.</b> Der findes ingen huslejekonto i den nuværende kontoplan og ingen huslejeposteringer i 2020–2026; lokaleomkostningerne kommer som driftsydelser fra Tinghallen. Kontoen oprettes som hvilende.</p>
+</div>
+
+<h2>6. Næste skridt</h2>
+
+<ol>
+  <li><b>Afklar de fem punkter</b> ovenfor med bogholder og Beierholm.</li>
+  <li><b>Byg importfilen til e-conomic</b> med den nye kontoplan (kontonummer, navn, type, momskode, subtotaler).</li>
+  <li><b>Gennemgå de 27 SPLIT-konti</b> og fastlæg fordelingen — start med de fire store, de udgør hovedparten af beløbsmassen.</li>
+  <li><b>Beslut skæringsdato.</b> Anbefaling: 1. januar 2027, så et helt regnskabsår kører på den nye plan og sammenligningstallene bliver rene.</li>
+  <li><b>Månedsrapport-model</b> ovenpå den nye plan: resultat mod budget, aktivitets-KPI, bar-nøgletal, likviditet og tilskudsstatus. Excel først, e-conomic API senere.</li>
+</ol>
+
+<div class="box ok">
+  <span class="t">Bemærk</span>
+  <p>Den nye kontoplan er verificeret forenelig med Beierholms årsrapport 2025 — alle noter i årsrapporten kan dannes af den. Skiftet kræver altså ikke en ny opstilling eller en ny aftale med revisor.</p>
+</div>
+
+<!--APPENDIX-->
+<h2>7. Bilag: den nye kontoplan med mapping</h2>
+<p>Venstre side er den nye kontoplan i sin helhed. Højre side viser, hvilke konti fra den nuværende kontoplan der lander på den enkelte nye konto. <span class="tag">delvis</span> betyder, at den gamle konto deles ud på flere nye konti og derfor kræver manuel gennemgang. Konti markeret <span class="tag warn">ubrugt</span> har ingen posteringer i 2020–2026.</p>
+<div class="tw"><table class="plan">
+<thead><tr><th style="width:46%">Ny kontoplan</th><th>Fra den gamle kontoplan</th></tr></thead><tbody>
+<tr class="sec"><td colspan="2">1000 · Egenindtægter</td></tr>
+<tr class="sec"><td colspan="2">Entré / koncerter</td></tr>
+<tr class="hdr"><td><span class="kn">1000</span> INDTÆGTER</td><td></td></tr>
+<tr><td><span class="kn">1100</span> Entréindtægter, egne koncerter <span class="mk">U25</span></td><td><div class="src"><span class="kn">1024</span> Billetsalg</div></td></tr>
+<tr><td><span class="kn">1110</span> Garderobeindtægt <span class="mk">U25</span></td><td><div class="src"><span class="kn">1028</span> Garderobeafgift</div></td></tr>
+<tr><td><span class="kn">1120</span> Billetgebyr, viderefaktureret <span class="mk">U25</span></td><td><div class="src"><span class="kn">1021</span> Billetlugen Safeticket <span class="tag warn">ubrugt</span></div></td></tr>
+<tr class="sec"><td colspan="2">Barsalg</td></tr>
+<tr><td><span class="kn">1200</span> Barsalg, drikkevarer <span class="mk">U25</span></td><td><div class="src"><span class="kn">1026</span> Barsalg <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1210</span> Salg af mad/snacks <span class="mk">U25</span></td><td><div class="src"><span class="kn">1026</span> Barsalg <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1220</span> Salg, merchandise/diverse <span class="mk">U25</span></td><td><div class="src"><span class="kn">1030</span> Salg, diverse <span class="tag">delvis</span></div></td></tr>
+<tr class="sec"><td colspan="2">Udlejning og serviceydelser</td></tr>
+<tr><td><span class="kn">1300</span> Udlejning af sal <span class="mk">U25</span></td><td><div class="src"><span class="kn">1710</span> Udlejning af sal</div></td></tr>
+<tr><td><span class="kn">1310</span> Udlejning af udstyr <span class="mk">U25</span></td><td><div class="src"><span class="kn">1712</span> Udlejning af udstyr</div></td></tr>
+<tr><td><span class="kn">1320</span> Salg af teknikerhjælp <span class="mk">U25</span></td><td><div class="src"><span class="kn">1714</span> Salg Teknikerhjælp</div></td></tr>
+<tr><td><span class="kn">1330</span> Salg af personaletimer <span class="mk">U25</span></td><td><div class="src"><span class="kn">1718</span> Salg personale timer</div></td></tr>
+<tr><td><span class="kn">1340</span> Salg af rengøring/service <span class="mk">U25</span></td><td><div class="src"><span class="kn">1716</span> Salg Rengøringsassistance</div></td></tr>
+<tr><td><span class="kn">1350</span> Viderefakturering af udlæg, m/moms <span class="mk">U25</span></td><td><div class="src"><span class="kn">1719</span> Viderefakturering af udlæg</div></td></tr>
+<tr><td><span class="kn">1355</span> Viderefakturering af udlæg, u/moms <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1720</span> Viderefakturering af udlæg uden moms</div></td></tr>
+<tr class="sec"><td colspan="2">Sponsorater, samarbejder, medlemskab</td></tr>
+<tr><td><span class="kn">1400</span> Sponsorindtægter <span class="mk">U25</span></td><td><div class="src"><span class="kn">1020</span> Sponsorer, samarbejdsaftaler, annoncer mv <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1410</span> Samarbejdsaftaler / annonceindtægt <span class="mk">U25</span></td><td><div class="src"><span class="kn">1020</span> Sponsorer, samarbejdsaftaler, annoncer mv <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1420</span> Medlemskaber <span class="mk">U25</span></td><td><div class="src"><span class="kn">1025</span> Medlemsskab</div></td></tr>
+<tr class="sec"><td colspan="2">Andre driftsindtægter</td></tr>
+<tr><td><span class="kn">1500</span> Andre indtægter <span class="mk">U25</span></td><td><div class="src"><span class="kn">1030</span> Salg, diverse <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1510</span> Andre indtægter, u/moms <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">1520</span> Kassedifferencer, indtægt <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1029</span> Kassedifferencer, indtægt</div></td></tr>
+<tr class="tot"><td><span class="kn">1595</span> Nettoomsætning (egenindtægter) i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">1600 · Andre driftsindtægter (tilskud m.v. — svarer til note 2)</td></tr>
+<tr><td><span class="kn">1600</span> Driftstilskud, Viborg Kommune <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1010</span> Tilskud, Viborg kommune <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1605</span> Projekttilskud, Viborg Kommune (Kulturambassadører, festivaler) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1010</span> Tilskud, Viborg kommune <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1610</span> Andre kommunale/regionale tilskud (Kulturregion m.fl.) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1014</span> Tilskud, diverse <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1620</span> Honorarstøtte, Statens Kunstfond <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1012</span> Tilskud, Kunstrådet <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1625</span> Projekttilskud, Statens Kunstfonds Projektstøtteudvalg <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1012</span> Tilskud, Kunstrådet <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1630</span> Donationer, private fonde (Carlsbergfondet m.fl.) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1014</span> Tilskud, diverse <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">1650</span> Periodiseret anlægstilskud, indtægtsført (lyd/lys) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1015</span> Offentlige tilskud anlægsinvesteringer</div></td></tr>
+<tr><td><span class="kn">1660</span> Løntilskud og lønrefusioner <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3320</span> Løntilskud</div></td></tr>
+<tr><td><span class="kn">1665</span> Refusion af syge-/barselsdagpenge <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3310</span> Ref. syge- og barselsdagpenge</div></td></tr>
+<tr><td><span class="kn">1690</span> Ekstraordinære tilskud (covid o.l.) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">1035</span> Kompensation for faste omkostninger</div><div class="src"><span class="kn">1040</span> Hjælpepakker til kulturlivet</div></td></tr>
+<tr class="tot"><td><span class="kn">1695</span> Andre driftsindtægter i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">1795</span> INDTÆGTER I ALT</td><td></td></tr>
+<tr class="sec"><td colspan="2">2000 · Direkte omkostninger</td></tr>
+<tr class="sec"><td colspan="2">Kunstnerhonorar (efter indberetningstype — se designprincip 4)</td></tr>
+<tr class="hdr"><td><span class="kn">2000</span> DIREKTE OMKOSTNINGER</td><td></td></tr>
+<tr><td><span class="kn">2010</span> Kunstnerhonorar, faktura fra momsregistreret CVR <span class="mk">I25</span></td><td><div class="src"><span class="kn">2009</span> Arrangementer og honorar CVR <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">2015</span> Kunstnerhonorar, faktura fra CVR uden moms <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2009</span> Arrangementer og honorar CVR <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">2020</span> Kunstnerhonorar, B-indkomst (privatperson) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2010</span> Arrangementer og honorar, skal indb. <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">2030</span> Kunstnerhonorar, A-indkomst (løn) <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">2040</span> Kunstnerhonorar, EU <span class="mk">EUY25</span></td><td><div class="src"><span class="kn">2008</span> Arrangementer og honorarer EU</div><div class="src"><span class="kn">2010</span> Arrangementer og honorar, skal indb. <span class="tag">delvis</span></div><div class="src"><span class="kn">2012</span> Ydelseskøb EU <span class="tag">delvis</span> <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">2050</span> Kunstnerhonorar, uden for EU <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr class="sec"><td colspan="2">Øvrige direkte arrangementsomkostninger</td></tr>
+<tr><td><span class="kn">2100</span> Provision / booking / agent <span class="mk">I25</span></td><td><div class="src"><span class="kn">2014</span> Provision vedr. arrangementer</div></td></tr>
+<tr><td><span class="kn">2110</span> KODA / Gramex <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2019</span> Kodaafgift</div></td></tr>
+<tr><td><span class="kn">2120</span> Transport af kunstnere <span class="mk">I25</span></td><td><div class="src"><span class="kn">2015</span> Transport</div></td></tr>
+<tr><td><span class="kn">2130</span> Hotel / ophold, kunstnere <span class="mk">I25</span></td><td><div class="src"><span class="kn">2025</span> Hotel, ophold (kunstnere)</div></td></tr>
+<tr><td><span class="kn">2140</span> Forplejning, kunstnere (backstage) <span class="mk">REP</span></td><td><div class="src"><span class="kn">2016</span> Catering <span class="tag">delvis</span></div><div class="src"><span class="kn">2026</span> Hotel, forplejning (kunstnere)</div><div class="src"><span class="kn">2050</span> Forbrug, optrædende</div></td></tr>
+<tr><td><span class="kn">2150</span> Backline / udstyrsleje til arrangement <span class="mk">I25</span></td><td><div class="src"><span class="kn">2018</span> Leje af udstyr mv.</div></td></tr>
+<tr><td><span class="kn">2160</span> Assistance ved afvikling, faktura (afviklere / dørvogtere / teknik) <span class="mk">I25</span></td><td><div class="src"><span class="kn">2017</span> Dørvogtere <span class="tag">delvis</span></div><div class="src"><span class="kn">2605</span> Underentreprenører <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">2165</span> Assistance ved afvikling, B-indkomst (privatperson) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2017</span> Dørvogtere <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">2170</span> Billetsystem / billetgebyr (Safeticket m.fl.) <span class="mk">I25</span></td><td><div class="src"><span class="kn">2020</span> Billetlugen, Safeticket</div></td></tr>
+<tr><td><span class="kn">2180</span> Øvrige direkte arrangementsomkostninger <span class="mk">I25</span></td><td><div class="src"><span class="kn">2029</span> Udlæg til viderefakturering</div></td></tr>
+<tr class="sec"><td colspan="2">Vareforbrug, bar</td></tr>
+<tr><td><span class="kn">2300</span> Varekøb, bar <span class="mk">I25</span></td><td><div class="src"><span class="kn">2011</span> Varekøb</div></td></tr>
+<tr><td><span class="kn">2305</span> Leverandørbonus / produktrabat, bar <span class="mk">I25</span></td><td><div class="src"><span class="kn">1027</span> Carlsberg Tilskud</div></td></tr>
+<tr><td><span class="kn">2310</span> Varekøb, bar (EU) <span class="mk">EUV25</span></td><td><div class="src"><span class="kn">2013</span> Varekøb EU</div></td></tr>
+<tr><td><span class="kn">2320</span> Emballage / forbrugsartikler, bar <span class="mk">I25</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">2330</span> Lagerregulering <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2510</span> Varelager, Regulering</div></td></tr>
+<tr><td><span class="kn">2340</span> Spild / svind <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2051</span> Forbrug egne varer <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">2052</span> Spild <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">2350</span> Fødevareafgift / kontrolgebyr <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2030</span> Fødevarestyrelsen, afgift</div></td></tr>
+<tr class="tot"><td><span class="kn">2790</span> Direkte omkostninger i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">2999</span> DÆKNINGSBIDRAG</td><td></td></tr>
+<tr class="sec"><td colspan="2">3000 · Personaleomkostninger (drift — ekskl. kunstnere)</td></tr>
+<tr class="hdr"><td><span class="kn">3000</span> PERSONALEOMKOSTNINGER</td><td></td></tr>
+<tr><td><span class="kn">3010</span> Lønninger, fast personale <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3020</span> Gager og lønninger <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">3020</span> Løn, timelønnede / afløsere <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3020</span> Gager og lønninger <span class="tag">delvis</span></div><div class="src"><span class="kn">3022</span> Ledighedsdage</div></td></tr>
+<tr><td><span class="kn">3030</span> Feriepenge / feriepengeforpligtelse, regulering <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3230</span> Feriepengeforpligtelse, reg.</div></td></tr>
+<tr><td><span class="kn">3040</span> Store Bededagstillæg <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3023</span> Store Bededagstillæg</div></td></tr>
+<tr><td><span class="kn">3050</span> Fratrædelse / jubilæum <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3026</span> Jubilæumsgratiale og fratrædelsesgodtgørelse</div></td></tr>
+<tr><td><span class="kn">3060</span> Pension <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3630</span> Pensioner <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">3070</span> ATP <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3655</span> ATP-bidrag</div></td></tr>
+<tr><td><span class="kn">3080</span> AES / AUB / Barsel.dk-bidrag <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3751</span> Samlet betaling</div></td></tr>
+<tr><td><span class="kn">3090</span> Arbejdsskadeforsikring <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3610</span> Arbejdsskadeforsikring</div></td></tr>
+<tr><td><span class="kn">3100</span> B-honorar til indberetning (samlekonto) <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">3105</span> Fordeling af B-honorar (modkonto) <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">3200</span> Frivillige (Paletkorpset) — pleje/godtgørelse <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3690</span> Personaleomkostninger <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">3210</span> Personalepleje / -arrangementer <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2016</span> Catering <span class="tag">delvis</span></div><div class="src"><span class="kn">3690</span> Personaleomkostninger <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">3220</span> Bestyrelse / generalforsamling <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3691</span> Bestyrelsesmøder mv.</div></td></tr>
+<tr><td><span class="kn">3230</span> Kurser / uddannelse, m/moms <span class="mk">I25</span></td><td><div class="src"><span class="kn">3680</span> Kursusomkostninger, bøger mv.</div><div class="src"><span class="kn">4065</span> Konference osv.</div></td></tr>
+<tr><td><span class="kn">3240</span> Kurser / uddannelse, u/moms <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3681</span> Kursusomkostninger u/moms</div></td></tr>
+<tr><td><span class="kn">3250</span> Arbejdstøj / uniform <span class="mk">I25</span></td><td><div class="src"><span class="kn">3740</span> Arbejdstøj m/moms</div></td></tr>
+<tr><td><span class="kn">3260</span> Kørselsgodtgørelse (skattefri) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3024</span> Skattefri godtgørelse <span class="tag">delvis</span></div><div class="src"><span class="kn">3700</span> Befordringsgodtgørelse</div><div class="src"><span class="kn">3765</span> Kørselsgodtgørelse</div></td></tr>
+<tr><td><span class="kn">3270</span> Rejsegodtgørelse (skattefri) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3024</span> Skattefri godtgørelse <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">3280</span> Lønadministration / databehandling <span class="mk">I25</span></td><td><div class="src"><span class="kn">3750</span> Databehandling løn</div></td></tr>
+<tr class="tot"><td><span class="kn">3398</span> Personaleomkostninger i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">4000 · Lokale- og kapacitetsomkostninger</td></tr>
+<tr class="sec"><td colspan="2">Leje af lokaler (beredskab — hvilende indtil der indgås en lejeaftale)</td></tr>
+<tr class="hdr"><td><span class="kn">4000</span> KAPACITETSOMKOSTNINGER</td><td></td></tr>
+<tr><td><span class="kn">4010</span> Husleje <span class="mk">I25</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">4012</span> Husleje, uden moms <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">4014</span> Aconto forbrug til udlejer <span class="mk">I25</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">4016</span> Regulering af aconto / årsopgørelse <span class="mk">I25</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">4018</span> Ejendomsskat / dækningsafgift, viderefaktureret <span class="mk">Fri</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr class="sec"><td colspan="2">Drift af lokaler</td></tr>
+<tr><td><span class="kn">4020</span> Driftsbidrag / fællesudgifter (Tinghallen) <span class="mk">I25</span></td><td><div class="src"><span class="kn">4285</span> Driftsydelser Tinghallen</div></td></tr>
+<tr><td><span class="kn">4030</span> Varme <span class="mk">I25</span></td><td><div class="src"><span class="kn">4271</span> Varme</div></td></tr>
+<tr><td><span class="kn">4040</span> El <span class="mk">I25</span></td><td><div class="src"><span class="kn">4275</span> El, vand og gas <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4045</span> Elafgift, refusion <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4280</span> Elafgift</div></td></tr>
+<tr><td><span class="kn">4050</span> Vand <span class="mk">I25</span></td><td><div class="src"><span class="kn">4275</span> El, vand og gas <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4060</span> Renovation <span class="mk">I25</span></td><td><div class="src"><span class="kn">4295</span> Rengøring og renovation <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4070</span> Rengøring <span class="mk">I25</span></td><td><div class="src"><span class="kn">4295</span> Rengøring og renovation <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4080</span> Vedligeholdelse, lokaler <span class="mk">I25</span></td><td><div class="src"><span class="kn">4260</span> Lokale udgifter</div><div class="src"><span class="kn">4291</span> Vedligeholdelse</div></td></tr>
+<tr><td><span class="kn">4090</span> Vedligeholdelse, inventar og teknik <span class="mk">I25</span></td><td><div class="src"><span class="kn">4308</span> Vedligeholdelse inventar</div></td></tr>
+<tr><td><span class="kn">4100</span> Alarm / overvågning <span class="mk">I25</span></td><td><div class="src"><span class="kn">4293</span> Alarm <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">4110</span> Fast vagtordning <span class="mk">I25</span></td><td><div class="src"><span class="kn">4351</span> Vagtværn</div></td></tr>
+<tr><td><span class="kn">4120</span> Leje / leasing af driftsmateriel <span class="mk">I25</span></td><td><div class="src"><span class="kn">4210</span> Leasing kopimaskine <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4211</span> Leasing Jool</div><div class="src"><span class="kn">4212</span> Leasing højtaleranlæg <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4213</span> Leje kaffemaskin</div><div class="src"><span class="kn">4305</span> Leje af udstyr</div></td></tr>
+<tr class="tot"><td><span class="kn">4198</span> Kapacitetsomkostninger i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">4200 · Salg og marketing</td></tr>
+<tr><td><span class="kn">4210</span> Annoncering / markedsføring <span class="mk">I25</span></td><td><div class="src"><span class="kn">4060</span> Annoncer</div></td></tr>
+<tr><td><span class="kn">4220</span> Online annoncering, EU (Meta/Google) <span class="mk">EUY25</span></td><td><div class="src"><span class="kn">2012</span> Ydelseskøb EU <span class="tag">delvis</span> <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4061</span> Annonce  EUY</div></td></tr>
+<tr><td><span class="kn">4230</span> Reklameartikler / merchandise (indkøb) <span class="mk">I25</span></td><td><div class="src"><span class="kn">4063</span> Reklamerartikler</div></td></tr>
+<tr><td><span class="kn">4240</span> Web / grafik / foto <span class="mk">I25</span></td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">4250</span> Repræsentation og gaver <span class="mk">REP</span></td><td><div class="src"><span class="kn">4010</span> Restaurationsbesøg</div><div class="src"><span class="kn">4080</span> Gaver og repræsentation</div></td></tr>
+<tr><td><span class="kn">4260</span> Rejser (ikke kunstnere) <span class="mk">I25</span></td><td><div class="src"><span class="kn">4090</span> Rejser</div></td></tr>
+<tr class="tot"><td><span class="kn">4298</span> Salg og marketing i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">4300 · Administration</td></tr>
+<tr><td><span class="kn">4310</span> Kontorartikler / tryksager <span class="mk">I25</span></td><td><div class="src"><span class="kn">4302</span> Kontorartikler/tryksager</div></td></tr>
+<tr><td><span class="kn">4320</span> IT / software / licenser <span class="mk">I25</span></td><td><div class="src"><span class="kn">4306</span> Licenser</div><div class="src"><span class="kn">4310</span> EDB-omkostninger</div></td></tr>
+<tr><td><span class="kn">4325</span> IT / software, EU <span class="mk">EUY25</span></td><td><div class="src"><span class="kn">2012</span> Ydelseskøb EU <span class="tag">delvis</span> <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4307</span> Abonnement u/moms EUY25</div><div class="src"><span class="kn">4311</span> EDB u/m EUY</div></td></tr>
+<tr><td><span class="kn">4330</span> Småanskaffelser (&lt; beløbsgrænse) <span class="mk">I25</span></td><td><div class="src"><span class="kn">4312</span> Småanskaffelser</div><div class="src"><span class="kn">4313</span> Dekoration</div></td></tr>
+<tr><td><span class="kn">4340</span> Telefon og internet <span class="mk">I25</span></td><td><div class="src"><span class="kn">4316</span> Telefon og internet</div></td></tr>
+<tr><td><span class="kn">4350</span> Porto og gebyrer (u/moms) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4327</span> Porto og gebyrer</div></td></tr>
+<tr><td><span class="kn">4355</span> Gebyrer, m/moms <span class="mk">I25</span></td><td><div class="src"><span class="kn">4309</span> Fragt</div><div class="src"><span class="kn">4325</span> Gebyrer m/moms</div></td></tr>
+<tr><td><span class="kn">4360</span> Revisor <span class="mk">I25</span></td><td><div class="src"><span class="kn">4330</span> Revisorhonorar</div><div class="src"><span class="kn">4331</span> Revisorhonorar vedrørende tidl. år</div></td></tr>
+<tr><td><span class="kn">4365</span> Bogføring / økonomiassistance <span class="mk">I25</span></td><td><div class="src"><span class="kn">4332</span> Bogholderi</div></td></tr>
+<tr><td><span class="kn">4370</span> Advokat / juridisk bistand <span class="mk">I25</span></td><td><div class="src"><span class="kn">4340</span> Advokat</div></td></tr>
+<tr><td><span class="kn">4375</span> Konsulentbistand <span class="mk">I25</span></td><td><div class="src"><span class="kn">2605</span> Underentreprenører <span class="tag">delvis</span></div><div class="src"><span class="kn">2620</span> Kulturambassadør / Julia <span class="tag">delvis</span></div><div class="src"><span class="kn">4335</span> Konsulent</div></td></tr>
+<tr><td><span class="kn">4376</span> Honorar, B-indkomst (ikke-kunstnere) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">2610</span> Underentreprænører B-honorar, skal indb.</div><div class="src"><span class="kn">2620</span> Kulturambassadør / Julia <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4380</span> Forsikringer (drift) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3675</span> Øvrige forsikringer <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4350</span> Forsikringer</div></td></tr>
+<tr><td><span class="kn">4390</span> Kontingenter, m/moms <span class="mk">I25</span></td><td><div class="src"><span class="kn">4370</span> Kontingenter m/moms</div></td></tr>
+<tr><td><span class="kn">4395</span> Kontingenter, u/moms <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4371</span> Kontingenter u/moms</div></td></tr>
+<tr><td><span class="kn">4400</span> Tab på debitorer <span class="mk">U25</span></td><td><div class="src"><span class="kn">4375</span> Konstateret tab på debitorer <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">4410</span> Diverse / ekstraordinære omkostninger <span class="mk">Fri</span></td><td><div class="src"><span class="kn">3760</span> Bøder <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4395</span> Ekstraord. indtægter/udgifter</div></td></tr>
+<tr class="tot"><td><span class="kn">4498</span> Administrationsomkostninger i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">4500</span> RESULTAT FØR AF- OG NEDSKRIVNINGER</td><td></td></tr>
+<tr class="sec"><td colspan="2">4600 · Af- og nedskrivninger</td></tr>
+<tr><td><span class="kn">4610</span> Afskrivning, indretning af lejede lokaler <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4459</span> Afskrivning indretning lejede lokaler</div></td></tr>
+<tr><td><span class="kn">4620</span> Afskrivning, driftsmateriel og inventar <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4458</span> Afskrivning andre anlæg, driftsmat. og inv <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4625</span> Afskrivning, teknik (lyd/lys) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4458</span> Afskrivning andre anlæg, driftsmat. og inv <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">4630</span> Tab/avance ved salg af anlæg <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4460</span> Tab/avance driftsmidler</div></td></tr>
+<tr class="tot"><td><span class="kn">4698</span> Af- og nedskrivninger i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">4700</span> RESULTAT FØR FINANSIELLE POSTER</td><td></td></tr>
+<tr class="sec"><td colspan="2">4800 · Finansielle poster</td></tr>
+<tr><td><span class="kn">4810</span> Renteindtægter <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4650</span> Renteindtægt, pengeinstitutter <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">4660</span> Renter, debitorer <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">4820</span> Renteudgifter, pengeinstitut <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4730</span> Renter, pengeinstitutter</div></td></tr>
+<tr><td><span class="kn">4830</span> Renteudgifter, leverandører <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4743</span> Renter, kreditorer</div></td></tr>
+<tr><td><span class="kn">4840</span> Renter, ej fradragsberettigede <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4746</span> Renter, ej skm fradrag</div></td></tr>
+<tr><td><span class="kn">4850</span> Valutakursdifferencer <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4760</span> Valutadifferencer</div></td></tr>
+<tr><td><span class="kn">4860</span> Kassedifferencer (finansiel) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4755</span> Kassedifference mv.</div></td></tr>
+<tr class="tot"><td><span class="kn">4898</span> Finansielle poster i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">4900</span> ÅRETS RESULTAT</td><td></td></tr>
+<tr><td><span class="kn">4999</span> Fejlkonto (skal nulstilles) <span class="mk">Fri</span></td><td><div class="src"><span class="kn">4999</span> Fejlkonto <span class="tag warn">ubrugt</span></div></td></tr>
+<tr class="sec"><td colspan="2">5000 · Anlægsaktiver</td></tr>
+<tr class="hdr"><td><span class="kn">5000</span> AKTIVER</td><td></td></tr>
+<tr><td><span class="kn">5100</span> Indretning af lejede lokaler, kostpris </td><td><div class="src"><span class="kn">5101</span> Indretning af lejede lokaler, primo</div><div class="src"><span class="kn">5102</span> Indretning af lejede lokaler, tilgang</div></td></tr>
+<tr><td><span class="kn">5110</span> Indretning af lejede lokaler, af-/nedskrivninger </td><td><div class="src"><span class="kn">5111</span> Afskrivninger primo</div><div class="src"><span class="kn">5115</span> Årets afskrivninger</div></td></tr>
+<tr><td><span class="kn">5200</span> Driftsmateriel og inventar, kostpris </td><td><div class="src"><span class="kn">5701</span> Anskaffelsessum, primo <span class="tag">delvis</span></div><div class="src"><span class="kn">5702</span> Tilgang i årets løb <span class="tag">delvis</span></div><div class="src"><span class="kn">5703</span> Årets afgang <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">5210</span> Driftsmateriel og inventar, af-/nedskrivninger </td><td><div class="src"><span class="kn">5711</span> Afskrivninger, primo <span class="tag">delvis</span></div><div class="src"><span class="kn">5715</span> Årets afskrivninger <span class="tag">delvis</span></div><div class="src"><span class="kn">5716</span> Tilbageførte afskrivninger <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">5300</span> Teknik (lyd/lys), kostpris </td><td><div class="src"><span class="kn">5701</span> Anskaffelsessum, primo <span class="tag">delvis</span></div><div class="src"><span class="kn">5702</span> Tilgang i årets løb <span class="tag">delvis</span></div><div class="src"><span class="kn">5703</span> Årets afgang <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">5310</span> Teknik (lyd/lys), af-/nedskrivninger </td><td><div class="src"><span class="kn">5711</span> Afskrivninger, primo <span class="tag">delvis</span></div><div class="src"><span class="kn">5715</span> Årets afskrivninger <span class="tag">delvis</span></div><div class="src"><span class="kn">5716</span> Tilbageførte afskrivninger <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">5400</span> Kunst </td><td><div class="src"><span class="kn">6550</span> Kunst</div></td></tr>
+<tr class="tot"><td><span class="kn">5498</span> Anlægsaktiver i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">6000 · Omsætningsaktiver</td></tr>
+<tr><td><span class="kn">6100</span> Varebeholdning, bar </td><td><div class="src"><span class="kn">6540</span> Varebeholdning</div></td></tr>
+<tr><td><span class="kn">6200</span> Tilgodehavender fra salg (debitorer) </td><td><div class="src"><span class="kn">6610</span> Tilgodehavender, salg og tjen.</div><div class="src"><span class="kn">6612</span> Manuelle debitorer CW</div></td></tr>
+<tr><td><span class="kn">6210</span> Hensat til tab på debitorer </td><td><div class="src"><span class="kn">4380</span> Regulering af hensættelse til tab på debitorer <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">6611</span> Hensat til tab på debitorer <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">6220</span> Kortindløsning under afregning (iZettle/Nets) </td><td><div class="src"><span class="kn">6630</span> Kortindbetaling iZettle</div><div class="src"><span class="kn">6811</span> Teller <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">6812</span> Dankort</div></td></tr>
+<tr><td><span class="kn">6230</span> Andre tilgodehavender </td><td><div class="src"><span class="kn">6640</span> Andre tilgodehavender</div><div class="src"><span class="kn">6642</span> Øvrige tilgodehavender</div></td></tr>
+<tr><td><span class="kn">6240</span> Forudbetalte omkostninger (periodeafgr.) </td><td><div class="src"><span class="kn">6641</span> Forudbetalinger</div></td></tr>
+<tr><td><span class="kn">6260</span> Deposita (husleje m.v.) </td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">6250</span> Tilgodehavende moms </td><td><div class="src"><span class="kn">6668</span> Tilgodehavende moms <span class="tag warn">ubrugt</span></div><div class="src"><span class="kn">8797</span> Overført til omsætningsaktiver <span class="tag warn">ubrugt</span></div></td></tr>
+<tr class="tot"><td><span class="kn">6298</span> Tilgodehavender i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">6800 · Likvide beholdninger</td></tr>
+<tr><td><span class="kn">6800</span> Kasse </td><td><div class="src"><span class="kn">6810</span> Kasse</div></td></tr>
+<tr><td><span class="kn">6810</span> Valutakasse </td><td><div class="src"><span class="kn">6806</span> Valutakasse</div></td></tr>
+<tr><td><span class="kn">6820</span> MobilePay </td><td><div class="src"><span class="kn">6840</span> Mobilepay</div></td></tr>
+<tr><td><span class="kn">6830</span> Bank, Nordea drift </td><td><div class="src"><span class="kn">8400</span> Nordea Bank</div></td></tr>
+<tr><td><span class="kn">6840</span> Betalingskort, e-conomic / udlægskort </td><td><div class="src"><span class="kn">8405</span> Betalingskort - e-conomic</div></td></tr>
+<tr class="tot"><td><span class="kn">6898</span> Likvide beholdninger i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">6999</span> AKTIVER I ALT</td><td></td></tr>
+<tr class="sec"><td colspan="2">7000 · Egenkapital og hensættelser</td></tr>
+<tr class="hdr"><td><span class="kn">7000</span> PASSIVER</td><td></td></tr>
+<tr><td><span class="kn">7100</span> Egenkapital (formue), primo </td><td><div class="src"><span class="kn">7311</span> Overført resultat, primo</div></td></tr>
+<tr><td><span class="kn">7110</span> Overført af årets resultat </td><td><div class="src"><span class="kn">7337</span> Årets overførte resultat <span class="tag warn">ubrugt</span></div></td></tr>
+<tr class="tot"><td><span class="kn">7198</span> Egenkapital i alt</td><td></td></tr>
+<tr><td><span class="kn">7200</span> Hensat feriepengeforpligtelse (indefrosne) </td><td><div class="src"><span class="kn">3025</span> Feriepenge, indefrosne</div><div class="src"><span class="kn">8825</span> Afsat skyldige feriepengeforpl Indefrosne</div></td></tr>
+<tr class="sec"><td colspan="2">7500 · Langfristet gæld</td></tr>
+<tr><td><span class="kn">7510</span> Viborg Kommune, ombygningslån </td><td><div class="src"><span class="kn">8200</span> Viborg kommune, ombygningslån <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">7520</span> Viborg Kommune, rampe / anlægslån </td><td><div class="src"><span class="kn">8210</span> Viborg kommune, rampe <span class="tag">delvis</span></div></td></tr>
+<tr class="tot"><td><span class="kn">7598</span> Langfristet gæld i alt</td><td></td></tr>
+<tr class="sec"><td colspan="2">8000 · Kortfristet gæld</td></tr>
+<tr><td><span class="kn">8050</span> Kortfristet del af langfristet gæld (kommunelån) </td><td><div class="src"><span class="kn">8200</span> Viborg kommune, ombygningslån <span class="tag">delvis</span></div><div class="src"><span class="kn">8210</span> Viborg kommune, rampe <span class="tag">delvis</span></div></td></tr>
+<tr><td><span class="kn">8100</span> Leverandører (kreditorer) </td><td><div class="src"><span class="kn">8441</span> Skyldig kreditor</div><div class="src"><span class="kn">8442</span> EU Kreditorer</div><div class="src"><span class="kn">8443</span> Manuelle kreditorer fra CW</div></td></tr>
+<tr><td><span class="kn">8110</span> Skyldige omkostninger (revisor, afsatte) </td><td><div class="src"><span class="kn">8440</span> Skyldige poster</div><div class="src"><span class="kn">8475</span> Revisorhonorar</div></td></tr>
+<tr><td><span class="kn">8130</span> Gavekort </td><td><div class="src"><span class="kn">8461</span> Gavekort <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">8200</span> Skyldig løn </td><td><div class="src"><span class="kn">3021</span> Aconto løn <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">8210</span> Skyldige feriepenge </td><td><div class="src"><span class="kn">8815</span> Skyldige feriepenge</div></td></tr>
+<tr><td><span class="kn">8215</span> Feriepengeforpligtelse, funktionærer </td><td><div class="src"><span class="kn">8820</span> Afsat skyldige feriepengeforpl</div></td></tr>
+<tr><td><span class="kn">8220</span> Skyldig ATP / Store Bededag / øvrige lønposter </td><td><div class="src"><span class="kn">8811</span> Skyldig ATP</div><div class="src"><span class="kn">8812</span> Andre skyldige lønposter</div><div class="src"><span class="kn">8817</span> Skyldige Store Bededagstillæg</div></td></tr>
+<tr><td><span class="kn">8225</span> Skyldigt B-honorar til indberetning </td><td><div class="src"><span class="kn">8813</span> B honorar til indberetning <span class="tag warn">ubrugt</span></div></td></tr>
+<tr><td><span class="kn">8230</span> Skyldig A-skat </td><td><div class="src"><span class="kn">8801</span> Skyldig A-skat mv. primo</div><div class="src"><span class="kn">8804</span> Tilbageholdt A-skat</div><div class="src"><span class="kn">8808</span> Afregnet A-skat mv.</div></td></tr>
+<tr><td><span class="kn">8240</span> Skyldig AM-bidrag </td><td><div class="src"><span class="kn">8805</span> Tilbageholdt AM-bidrag</div></td></tr>
+<tr><td><span class="kn">8300</span> Udgående moms </td><td><div class="src"><span class="kn">8720</span> Udgående moms</div></td></tr>
+<tr><td><span class="kn">8310</span> Indgående moms </td><td><div class="src"><span class="kn">8740</span> Indgående moms</div></td></tr>
+<tr><td><span class="kn">8320</span> EU-ydelsesmoms </td><td><div class="src"><span class="kn">8730</span> EU Ydelsesmoms</div></td></tr>
+<tr><td><span class="kn">8330</span> Elafgift </td><td><div class="src"><span class="kn">8795</span> Elafgift</div></td></tr>
+<tr><td><span class="kn">8340</span> Momsafregning </td><td><div class="src"><span class="kn">8798</span> Afregnet moms</div></td></tr>
+<tr><td><span class="kn">8350</span> Skattekonto </td><td><div class="src"><span class="kn">8860</span> Skattekonto</div></td></tr>
+<tr><td><span class="kn">8400</span> Tilbagebetaling honorarstøtte (gæld til Erhvervsstyrelsen) </td><td><div class="src"><span class="kn">8870</span> Skyldig Statens Kunstfond</div></td></tr>
+<tr><td><span class="kn">8500</span> Mellemregninger </td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">8600</span> Forudmodtagne billetindtægter </td><td><div class="src"><span class="kn">8450</span> Forudbetalinger billetter</div></td></tr>
+<tr><td><span class="kn">8610</span> Periodiseret anlægstilskud (lyd/lys) </td><td><div class="src none">Ny konto — ingen forgænger</div></td></tr>
+<tr><td><span class="kn">8620</span> Forudmodtagne samarbejdsaftaler / øvrige </td><td><div class="src"><span class="kn">8910</span> Periodeafgrænsningsposter</div><div class="src"><span class="kn">8920</span> Forud faktureret indtægt</div></td></tr>
+<tr><td><span class="kn">8630</span> Forudbetalte tilskud vedr. næste år </td><td><div class="src"><span class="kn">8480</span> Nedskrivning af offentlige tilskud</div><div class="src"><span class="kn">8911</span> Forudbetalt tilskud</div></td></tr>
+<tr class="tot"><td><span class="kn">8998</span> Kortfristet gæld i alt</td><td></td></tr>
+<tr class="tot"><td><span class="kn">8999</span> PASSIVER I ALT</td><td></td></tr>
+<tr><td><span class="kn">9999</span> Afstemnings-/fejlkonto (balance) </td><td><div class="src"><span class="kn">9999</span> Fejlkonto</div></td></tr>
+</tbody></table></div>
+<p style="color:var(--muted);font-size:14px">I alt <b>15</b> af de nye konti har ingen forgænger i den gamle plan — de dækker forhold der i dag enten ikke bogføres særskilt eller ligger gemt i en samlekonto.</p>
+<!--/APPENDIX-->
+
+<footer>
+  <b>Underliggende dokumentation</b><br>
+<a href="01-designprincipper.html">Designprincipper</a> — hvorfor kontoplanen er skruet sammen som den er<br>
+<a href="02-ny-kontoplan.html">Den nye kontoplan</a> — alle konti med type, momskode og noter<br>
+<a href="03-rapporteringskrav.html">Rapporteringskrav</a> — hvad der skal afrapporteres til hvem<br>
+<a href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a> — kontoplanen holdt op mod beierholms noter<br>
+<a href="05-mapping-gammel-ny.html">Mapping gammel → ny</a> — konverteringsnøglen, konto for konto<br><br>Konverteringsnøglen findes også som regneark: <a href="mapping-gammel-ny.csv">mapping-gammel-ny.csv</a>.
+</footer>
+
+</div>
+</body>
+</html>

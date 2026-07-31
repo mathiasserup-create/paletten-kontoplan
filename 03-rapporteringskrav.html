@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rapporteringskrav — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Ny kontoplan</div>
+<h1>Rapporteringskrav</h1>
+<div class="meta">Hvad der skal afrapporteres til hvem</div></header>
+<div class="nav"><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="on" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a></div>
+<p>Formål: sikre, at kontoplanen og bogføringsopsætningen kan levere de afrapporteringer, Paletten er (og kan blive) forpligtet til. Kilder er anført nederst.</p>
+<blockquote><p><b>Bemærk:</b> Konkrete frister, beløbsgrænser og skabeloner ændres løbende. Bekræft altid mod gældende tilsagnsbrev og Slots- og Kulturstyrelsens / Statens Kunstfonds aktuelle vejledning.</p></blockquote>
+<hr>
+<h2>A. Nuværende status (fra 2025): honorarstøttet spillested</h2>
+<h3>A1. Honorarstøtte, Statens Kunstfond — afrapportering <b>pr. koncert</b></h3>
+<p>For hver honorarstøttet koncert skal rapporteres:</p>
+<ul><li>dato</li><li>kunstner/navn</li><li>billetpris</li><li><b>billetindtægt</b></li><li><b>honorarudgift</b></li><li>antal musikere</li><li>antal brugte <b>klip</b> (honorarstøtteklip)</li></ul>
+<p>Desuden: kort beretning om hvordan støtten er brugt (udvikling/nye tiltag i koncertvirksomheden).</p>
+<ul><li><b>Frist:</b> senest <b>30. april</b> året efter.</li><li><b>Revision:</b> revisor-/regnskabskyndig påtegning kræves, hvis støtten overstiger <b>100.000 kr.</b></li><li>Ledelseserklæring (skabelon bag på tilsagnsbrevet) vedlægges.</li><li>Bilag/materiale opbevares i <b>5 år</b>.</li></ul>
+<p><b>Kontoplan-understøttelse:</b></p>
+<ul><li>Billetindtægt pr. koncert → konto <b>1100</b> + dimension <b>&quot;Arrangement&quot;</b> (ved større koncerter).</li><li>Honorarudgift pr. koncert → konti <b>2010–2050</b> + samme arrangement-dimension.</li><li>Modtagne klip/tilskud → konto <b>1610</b> (Honorarstøtte, Statens Kunstfond).</li><li>Så kan en rapport pr. arrangement (billetindtægt vs. honorar vs. klip) trækkes direkte.</li></ul>
+<h3>A2. Viborg Kommune — driftstilskud</h3>
+<p>Paletten modtager fortsat kommunalt driftstilskud (jeres største finansieringskilde). Kommunen fastsætter de konkrete vilkår i tilsagn/aftale; typisk kræves <b>budget</b> og <b>revideret årsregnskab</b>. Afklares konkret med kommunen. Kontoplanen leverer et årsregnskab med tydelig adskillelse mellem egenindtægter (1000-serien) og offentlige tilskud (1600-serien).</p>
+<hr>
+<h2>B. Hvis Paletten bliver regionalt spillested igen (rammeaftale)</h2>
+<p>En genudpegning udløser en <b>4-årig rammeaftale</b> mellem <b>staten, Viborg Kommune og Paletten</b>. Under den gælder væsentligt mere formaliserede krav:</p>
+<h3>B1. Finansieringsmodel</h3>
+<ul><li><b>Statstilskud</b> ydes som <b>driftstilskud</b> (via Statens Kunstfond / Slots- og Kulturstyrelsen).</li><li><b>Kommunalt tilskud</b> ydes som <b>øremærket projekttilskud</b> (medfinansiering).</li><li>Begge kilder holdes adskilt i kontoplanen: <b>1600</b> (kommune) og <b>1620/1610</b> (stat).</li></ul>
+<h3>B2. Budget (forud for regnskabsåret)</h3>
+<ul><li>Budget indsendes til den <b>tilsynsførende kommune</b> (Viborg) til <b>godkendelse</b> senest <b>2 måneder før</b> regnskabsårets start.</li><li>Uanset organisationsform følges budget-/regnskabskravene, der gælder for <b>selvejende institutioner</b> (med mulighed for dispensation for krav, der åbenlyst ikke passer).</li></ul>
+<h3>B3. Årsregnskab / årsrapport (efter regnskabsåret)</h3>
+<p>Indsendes til kommunen til godkendelse senest <b>6 måneder efter</b> regnskabsårets udløb, som <b>én samlet PDF</b> bestående af:</p>
+<ol><li>Slots- og Kulturstyrelsens <b>tjekliste</b> for udarbejdelse af årsrapport (udfyldt og underskrevet af daglig leder).</li><li><b>Revideret årsregnskab (årsrapport)</b> underskrevet af institutionens ledelse.</li><li><b>Revisorpåtegning</b>, hvor revisionen er udført efter driftstilskudsbekendtgørelsen.</li></ol>
+<p>Regnskabet aflægges efter <b>driftstilskudsbekendtgørelsen</b> (bekendtgørelse om økonomiske og administrative forhold for modtagere af driftstilskud fra Kulturministeriet — jf. bekg. nr. 1701 af 21/12 2010; bekræft gældende version).</p>
+<h3>B4. Aktivitets-/nøgletalsrapportering</h3>
+<p>Ud over det finansielle skal der leveres <b>økonomisk oversigt og nøgletal for koncertaktivitet</b>, typisk:</p>
+<ul><li><b>antal koncerter</b></li><li><b>antal betalende publikum</b></li><li><b>egenindtægter</b> (og egenindtægtsandel)</li><li>fordeling på genrer / vækstlag / nye navne mv.</li><li>data-drevet opfølgning på rammeaftalens mål</li></ul>
+<p><b>Kontoplan-/dimensions-understøttelse:</b></p>
+<ul><li>Egenindtægter aflæses direkte som subtotal <b>1595</b>.</li><li>Offentlige tilskud som subtotal <b>1695</b> — adskilt, som rammeaftalen kræver.</li><li><b>Antal koncerter / publikum</b> er <i>ikke</i> finansielle tal og bør registreres i en <b>dimension eller et simpelt aktivitetslog</b> (fx dimension &quot;Arrangement&quot; + et regneark med publikumstal pr. koncert). Anbefaling: log publikumstal fast pr. arrangement allerede nu, så tidsserien findes, hvis/ når rammeaftalen kommer.</li></ul>
+<h3>B5. Konsekvens for kontoplanen — allerede indbygget</h3>
+<p>Den nye kontoplan er designet, så en overgang til regionalt spillested <b>ikke kræver omstrukturering</b>:</p>
+<ul><li>Regnskab opstillet som selvejende institution (egenkapital/formue, ingen selskabskapital).</li><li>Egenindtægter og tilskud adskilt og subtotaleret hver for sig.</li><li>Tilskudskilder på separate konti (stat vs. kommune vs. fonde).</li><li>Dimension &quot;Arrangement&quot; giver koncert-nøgletal uden nye konti.</li></ul>
+<hr>
+<h2>C. Fælles anbefaling: registrér publikums- og koncerttal fra dag 1</h2>
+<p>Både honorarstøtte (nu) og en evt. rammeaftale (senere) kræver <b>koncert- og publikumstal</b>. Det er billigst at etablere vanen med det samme: ét fast felt/logark pr. arrangement med dato, kunstner, antal solgte billetter, antal publikum, honorar og evt. klip. Så er afrapporteringen et træk — ikke et rekonstruktionsarbejde.</p>
+<hr>
+<h2>Kilder</h2>
+<ul><li>Statens Kunstfond — afrapportering for honorarstøtte: https://www.kunst.dk/kunststoette/afrapportering-og-kreditering/honorarstoette</li><li>SLKS — regionale spillesteder: https://slks.dk/regionale-spillesteder/</li><li>SLKS — aflæg regnskab / driftstilskud: https://slks.dk/services/aflaeg-regnskab/driftstilskud</li><li>Statens Kunstfond — regionale spillesteder 2025-2028: https://www.kunst.dk/for-ansoegere/soeg-tilskud/regionale-spillesteder-2025-2028</li><li>Driftstilskudsbekendtgørelsen (bekg. nr. 1701 af 21/12 2010) — bekræft gældende version.</li></ul>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>
