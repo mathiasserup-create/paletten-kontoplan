@@ -83,7 +83,10 @@
   }
 </style>
 <style>
-  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
   .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
   .nav a:hover{color:var(--accent);border-color:var(--accent)}
   .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
@@ -97,7 +100,7 @@
 <header><div class="eyebrow">Spillestedet Paletten · Ny kontoplan</div>
 <h1>Den nye kontoplan</h1>
 <div class="meta">Alle konti med type, momskode og noter</div></header>
-<div class="nav"><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="on" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="on" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="" href="kasse-05-checkliste.html">Checkliste</a></div>
 <p>Læses sammen med <a href="01-designprincipper.html">01-designprincipper.md</a>. Momskoder forklaret i afsnit 5 dér. Kolonnen <b>Type</b>: <code>O</code>=overskrift, <code>D</code>=driftskonto, <code>S</code>=statuskonto, <code>Σ</code>=sum/subtotal.</p>
 <p>Konti markeret <b>(revisor)</b> har et åbent afklaringspunkt.</p>
 <hr>

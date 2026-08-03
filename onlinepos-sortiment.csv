@@ -1,0 +1,49 @@
+﻿Varegruppe;Konto;Kontonavn;Knapgruppe;Position;Produkt;Variant;Pris kr;Kostpris kr (anslået);Kostpris hentet fra;DB pr. stk kr;DG %
+Fadøl;1200;Barsalg, drikkevarer;FADØL;1;Tuborg Pilsner;;60.00;14.67;«TUBORG FADØL»;33.33;69
+Fadøl;1200;Barsalg, drikkevarer;FADØL;2;Tuborg Classic;;60.00;14.67;«TUBORG FADØL»;33.33;69
+Fadøl;1200;Barsalg, drikkevarer;FADØL;3;1664;;60.00;20.54;«KRONBOURG 1664 BLANC»;27.46;57
+Fadøl;1200;Barsalg, drikkevarer;FADØL;4;GRIMBERGEN;;60.00;14.24;«GRIMBERGN FADØL»;33.76;70
+Fadøl;1200;Barsalg, drikkevarer;FADØL;5;IPA;;60.00;22.00;«MIKKELLER IPA»;26.00;54
+Fadøl;1200;Barsalg, drikkevarer;FADØL;6;Alkoholfri Fadøl;;60.00;21.56;«BROOKLYN ALKOHOLFRI FADØL»;26.44;55
+Fadøl;1200;Barsalg, drikkevarer;FADØL;7;Viborg bryg tilbud;;50.00;15.93;«VIBORG BRYGHUS FADØL»;24.07;60
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;1;Gin Hass;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;2;Rom & cola;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;3;Rabarber mix;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;4;Dark’n’kinda’stormy;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;5;Jack D & cola;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;6;Gin/tonic;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;7;Vodka/Redbull;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Drinks/spiritus;1200;Barsalg, drikkevarer;DRINKS 4cl;8;Fantasi drink;;75.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;45.82;76
+Sodavand/vand;1200;Barsalg, drikkevarer;Sodavand / Red Bull;1;Cola Zero;;30.00;6.50;«SODAVAND/TONIC»;17.50;73
+Sodavand/vand;1200;Barsalg, drikkevarer;Sodavand / Red Bull;2;Coca Cola;;30.00;6.50;«SODAVAND/TONIC»;17.50;73
+Sodavand/vand;1200;Barsalg, drikkevarer;Sodavand / Red Bull;3;Fanta;;30.00;6.50;«SODAVAND/TONIC»;17.50;73
+Sodavand/vand;1200;Barsalg, drikkevarer;Sodavand / Red Bull;4;Sprite;;30.00;6.50;«SODAVAND/TONIC»;17.50;73
+Sodavand/vand;1200;Barsalg, drikkevarer;Sodavand / Red Bull;5;Ramlösa;;30.00;6.50;«SODAVAND/TONIC»;17.50;73
+Sodavand/vand;1200;Barsalg, drikkevarer;Sodavand / Red Bull;6;Ramlösa Citrus;;30.00;6.50;«SODAVAND/TONIC»;17.50;73
+Energidrik;1200;Barsalg, drikkevarer;Sodavand / Red Bull;7;Redbull;;30.00;13.16;«Red Bull/Skinny Bull»;10.84;45
+Energidrik;1200;Barsalg, drikkevarer;Sodavand / Red Bull;8;Redbull Zero;;30.00;13.16;«Red Bull/Skinny Bull»;10.84;45
+Alkopops/cider;1200;Barsalg, drikkevarer;Breezer 3 stk.;1;Breezer Orange;;60.00;8.25;«ALKOPOPS / Bacardi Breezer orange»;39.75;83
+Alkopops/cider;1200;Barsalg, drikkevarer;Breezer 3 stk.;2;Breezer Lime;;60.00;8.25;«ALKOPOPS / Bacardi Breezer orange»;39.75;83
+Alkopops/cider;1200;Barsalg, drikkevarer;Breezer 3 stk.;3;Breezer Pinapple;;60.00;8.25;«ALKOPOPS / Bacardi Breezer orange»;39.75;83
+Shots;1200;Barsalg, drikkevarer;SHOTS;1;Råstof Lakrids;1 stk;30.00;9.50;«SHOTS / Shot 1 stk»;14.50;60
+Shots;1200;Barsalg, drikkevarer;SHOTS;1;Råstof Lakrids;4 stk;100.00;38.00;«SHOTS / Shot 4 stk»;42.00;52
+Shots;1200;Barsalg, drikkevarer;SHOTS;2;Sismofytter;1 stk;30.00;9.50;«SHOTS / Shot 1 stk»;14.50;60
+Shots;1200;Barsalg, drikkevarer;SHOTS;2;Sismofytter;4 stk;100.00;38.00;«SHOTS / Shot 4 stk»;42.00;52
+Shots;1200;Barsalg, drikkevarer;SHOTS;3;Sure Fisk;1 stk;30.00;9.50;«SHOTS / Shot 1 stk»;14.50;60
+Shots;1200;Barsalg, drikkevarer;SHOTS;3;Sure Fisk;4 stk;30.00;38.00;«SHOTS / Shot 4 stk»;-14.00;-58
+Vin;1200;Barsalg, drikkevarer;VIN;1;Rødvin;;65.00;10.00;«VIN - 1 GLAS»;42.00;81
+Vin;1200;Barsalg, drikkevarer;VIN;2;Hvidvin;;65.00;10.00;«VIN - 1 GLAS»;42.00;81
+Sodavand/vand;1200;Barsalg, drikkevarer;(forside);1;Kildevand;;20.00;6.50;«SODAVAND/TONIC»;9.50;59
+Varme drikke;1200;Barsalg, drikkevarer;(forside);1;Kaffe;;20.00;5.00;«Økologisk Fairtrade Kaffe»;11.00;69
+Snacks;1210;Salg af mad/snacks;(forside);1;Snacks;Peanuts;15.00;7.25;«SNACKS»;4.75;40
+Snacks;1210;Salg af mad/snacks;(forside);1;Snacks;Chips;15.00;7.25;«SNACKS»;4.75;40
+Drinks/spiritus;1200;Barsalg, drikkevarer;On THE ROX;1;ROM 4cl;;50.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;25.82;65
+Drinks/spiritus;1200;Barsalg, drikkevarer;On THE ROX;2;Whisky 4cl;;50.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;25.82;65
+Drinks/spiritus;1200;Barsalg, drikkevarer;On THE ROX;3;GIN 4cl;;50.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;25.82;65
+Drinks/spiritus;1200;Barsalg, drikkevarer;On THE ROX;4;Vodka;;50.00;14.18;«DRINKS / Drink+soda 4 cl (dobbelt)»;25.82;65
+Garderobe;1110;Garderobeindtægt;(forside);1;GARDEROBE;;20.00;0.00;ingen vareforbrug;16.00;100
+Billetter;1100;Entréindtægter, egne koncerter;BILETTER;1;Baskery - Billet;;295.00;;SKAL UDFYLDES;;
+Billetter;1100;Entréindtægter, egne koncerter;BILETTER;2;NielsSkousen - Billet;;345.00;;SKAL UDFYLDES;;
+Billetter;1100;Entréindtægter, egne koncerter;BILETTER;3;Juncker - Billet;;270.00;;SKAL UDFYLDES;;
+Billetter;1100;Entréindtægter, egne koncerter;(forside);1;JamNight;;0.00;;SKAL UDFYLDES;;
+Vin;1200;Barsalg, drikkevarer;(forside);1;Rødvin;;65.00;10.00;«VIN - 1 GLAS»;42.00;81

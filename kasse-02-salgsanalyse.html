@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salgsanalyse — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Kasseskift Zettle → OnlinePOS</div>
+<h1>Salgsanalyse</h1>
+<div class="meta">Tre sæsoners barsalg — hvad tallene viser</div></header>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="on" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="" href="kasse-05-checkliste.html">Checkliste</a></div>
+<p>Grundlag: 32.232 salg / 43.548 varelinjer over 215 åbne dage. Alle beløb i kroner. Kilde: <a href="salg-pr-varegruppe.csv">salg-pr-varegruppe.csv</a> m.fl.</p>
+<hr>
+<h2>1. Hovedtal</h2>
+<div class="tw"><table><thead><tr><th></th><th>Beløb</th></tr></thead><tbody><tr><td>Bruttosalg (før rabat, inkl. moms)</td><td><b>2.853.466</b></td></tr><tr><td>− Rabatter og gratis udleveringer</td><td>−272.971</td></tr><tr><td>= Nettosalg inkl. moms</td><td><b>2.580.496</b></td></tr><tr><td>= Nettosalg ekskl. moms</td><td>2.064.397</td></tr><tr><td>− Vareforbrug (kostpris)</td><td>−545.264</td></tr><tr><td><b>= Dækningsbidrag</b></td><td><b>1.519.133</b></td></tr><tr><td><b>Dækningsgrad</b></td><td><b>73,6 %</b></td></tr></tbody></table></div>
+<p>Gennemsnitlig bon: <b>89 kr</b> (median 60 kr). 28.951 salg med beløb &gt; 0.</p>
+<hr>
+<h2>2. Udviklingen: omsætningen falder</h2>
+<p>Opgjort pr. sæson (august–juli), som er Palettens naturlige driftsår:</p>
+<div class="tw"><table><thead><tr><th>Sæson</th><th>Omsætning</th><th>Salg</th><th>Åbne dage</th><th><b>Kr. pr. åben dag</b></th></tr></thead><tbody><tr><td>2023/24</td><td>1.013.814</td><td>12.551</td><td>83</td><td><b>12.215</b></td></tr><tr><td>2024/25</td><td>791.793</td><td>10.108</td><td>68</td><td><b>11.644</b></td></tr><tr><td>2025/26</td><td>772.882</td><td>9.573</td><td>80</td><td><b>9.661</b></td></tr></tbody></table></div>
+<p>Faldet fra 2023/24 til 2025/26 er <b>−24 % i omsætning</b> og <b>−21 % pr. åben dag</b>. Antallet af åbne dage er nogenlunde stabilt (83 → 80), så det er ikke et aktivitetsproblem: <b>der omsættes mindre pr. arrangement.</b></p>
+<blockquote><p>Bemærk: 2025/26-sæsonen mangler juni–juli i datasættet (sidste salg 26. maj 2026), men de måneder er historisk næsten uden salg, så sammenligningen holder.</p></blockquote>
+<p>Travleste dage: 7. marts 2026 (1.150 salg), 2. marts 2024 (1.127), 1. marts 2024 (1.035) — marts er konsekvent årets største måned.</p>
+<hr>
+<h2>3. Hvad sælges</h2>
+<div class="tw"><table><thead><tr><th>Varegruppe</th><th>Konto</th><th>Netto inkl. moms</th><th>Andel</th><th>Vareforbrug</th><th>DG %</th></tr></thead><tbody><tr><td>Fadøl</td><td>1200</td><td>1.525.644</td><td>59,1 %</td><td>389.914</td><td>68,1</td></tr><tr><td>Drinks/spiritus</td><td>1200</td><td>478.374</td><td>18,5 %</td><td>89.292</td><td>76,7</td></tr><tr><td>Garderobe</td><td>1110</td><td>156.640</td><td>6,1 %</td><td>—</td><td>100</td></tr><tr><td>Billetter</td><td>1100</td><td>119.519</td><td>4,6 %</td><td>4.230</td><td>95,6</td></tr><tr><td>Vin</td><td>1200</td><td>80.607</td><td>3,1 %</td><td>12.869</td><td>80,0</td></tr><tr><td>Shots</td><td>1200</td><td>41.000</td><td>1,6 %</td><td>12.179</td><td>62,9</td></tr><tr><td>Sodavand/vand</td><td>1200</td><td>39.300</td><td>1,5 %</td><td>1.576</td><td>95,0</td></tr><tr><td>Alkopops/cider</td><td>1200</td><td>35.224</td><td>1,4 %</td><td>4.349</td><td>84,6</td></tr><tr><td>Flaskeøl</td><td>1200</td><td>34.741</td><td>1,3 %</td><td>12.531</td><td>54,9</td></tr><tr><td>Varme drikke</td><td>1200</td><td>26.120</td><td>1,0 %</td><td>4.165</td><td>80,1</td></tr><tr><td>Snacks</td><td>1210</td><td>17.570</td><td>0,7 %</td><td>6.757</td><td>51,9</td></tr><tr><td>Energidrik</td><td>1200</td><td>14.580</td><td>0,6 %</td><td>4.422</td><td>62,1</td></tr><tr><td>Merchandise</td><td>1220</td><td>2.260</td><td>0,1 %</td><td>—</td><td>100</td></tr><tr><td>Øvrigt/uspecificeret</td><td>1500</td><td>8.700</td><td>0,3 %</td><td>24</td><td>99</td></tr><tr><td>Medlemskort <i>(registrering)</i></td><td>1420</td><td>56</td><td>0,0 %</td><td>—</td><td>—</td></tr><tr><td>Personaleforbrug <i>(intern)</i></td><td>3210</td><td>60</td><td>0,0 %</td><td>—</td><td>—</td></tr></tbody></table></div>
+<p>De to sidste grupper er ikke salg: <b>3.026 medlemsregistreringer</b> og <b>572 udleveringer til personale</b> er slået ind som varer til 0 kr, alene for at registrere dem. De hører regnskabsmæssigt ikke hjemme i omsætningen — se afsnit 4.1 og <a href="kasse-03-varegrupper-og-kontoplan.html">03-varegrupper-og-kontoplan.md</a>.</p>
+<p><b>Barsalg i alt (konto 1200): 2.275.590 kr = 88 % af omsætningen.</b> Øl alene (fadøl + flaskeøl) er <b>60 %</b>.</p>
+<h3>Enkeltprodukter</h3>
+<div class="tw"><table><thead><tr><th>Produkt</th><th>Antal</th><th>Omsætning</th><th>DG %</th></tr></thead><tbody><tr><td>Tuborg fadøl</td><td>12.185</td><td>655.827</td><td>74,3</td></tr><tr><td>Sodavand/tonic (gl. samleknap)</td><td>6.863</td><td>178.336</td><td>75,0</td></tr><tr><td>Kronenbourg 1664 Blanc</td><td>3.314</td><td>169.318</td><td>59,8</td></tr><tr><td>Drinks + sodavand 2 cl</td><td>3.223</td><td>151.174</td><td>80,2</td></tr><tr><td>Garderobe</td><td>7.580</td><td>151.080</td><td>100</td></tr><tr><td>Brooklyn fadøl</td><td>2.650</td><td>137.802</td><td>58,5</td></tr><tr><td>Grimbergen fadøl</td><td>2.197</td><td>116.121</td><td>73,7</td></tr></tbody></table></div>
+<p>Tuborg fadøl alene er <b>en fjerdedel</b> af hele omsætningen.</p>
+<hr>
+<h2>4. Tre fund der har konsekvenser</h2>
+<h3>4.1 273.000 kr er givet væk — uden spor af hvorfor</h3>
+<p>9,6 % af bruttosalget er slettet med <b>100 % rabat</b> i kassen: 7.988 enheder til en listeværdi af 272.971 kr over tre sæsoner — ca. <b>91.000 kr om året</b>.</p>
+<div class="tw"><table><thead><tr><th>Varegruppe</th><th>Rabatteret værdi</th><th>Enheder</th></tr></thead><tbody><tr><td>Fadøl</td><td>152.916</td><td>2.749</td></tr><tr><td>Drinks/spiritus</td><td>74.563</td><td>1.731</td></tr><tr><td>Vin</td><td>15.338</td><td>277</td></tr><tr><td>Billetter</td><td>5.870</td><td>104</td></tr><tr><td>Øvrige</td><td>24.284</td><td>3.127</td></tr></tbody></table></div>
+<p>Rabatterne bærer <b>ingen begrundelse</b>. Der findes ingen oprettede rabatkoder i Zettle (0 stk.) — alt er slået ind manuelt. Bagefter kan man ikke skelne mellem:</p>
+<ul><li>kunstnerforplejning (rider) → direkte omkostning, konto <b>2140</b>, fuldt momsfradrag</li><li>personalets egne drikkevarer → personalegode, konto <b>3210</b></li><li>frivillige/Paletkorpset → konto <b>3200</b></li><li>sponsor- og medlemsindløsninger → skal modregnes den solgte ydelse</li><li>fejlslag og svind → konto <b>2340</b></li></ul>
+<p>Fire vidt forskellige regnskabsmæssige og skattemæssige behandlinger, som i dag ligger i én udifferentieret bunke. Det er <b>den enkeltstående vigtigste ting at rette i OnlinePOS</b> — se <a href="kasse-04-opsaetning-onlinepos.html">04-opsaetning-onlinepos.md</a>, afsnit 4.</p>
+<h3>4.2 Kostpriserne er forsvundet</h3>
+<p>Produktbiblioteket blev bygget om i august 2025 og igen i 2026. I den nuværende opsætning har <b>67 af 146 aktive knapper ingen kostpris</b> — herunder samtlige fadøl, drinks og sodavand.</p>
+<p>Konsekvens: dækningsbidraget kan beregnes for 2023–2025, men <b>ikke for 2026</b>. Alle DG-tal ovenfor stammer reelt fra den gamle opsætning. Uden kostpriser er der ingen måde at se, om prisstigninger følger med indkøbspriserne.</p>
+<h3>4.3 Produktstrukturen er blevet grovere over tid</h3>
+<p>Den gamle opsætning havde specifikke knapper (<i>Tuborg fadøl</i>, <i>Brooklyn fadøl</i>, <i>Grimbergen fadøl</i>). Den nuværende har generiske: <b>«Øl» 2.096 stk / 114.450 kr</b> og <b>«Anden Øl» 446 stk / 23.460 kr</b>. 138.000 kr salg uden at man kan se hvad der blev solgt.</p>
+<p>Samtidig er der 333 forskellige produktnavne i historikken mod 167 i biblioteket — navnene er skiftet flere gange, så tidsserier pr. produkt er brudt. Derfor er al analyse ovenfor lavet på <b>varegruppe</b>-niveau, som er stabilt.</p>
+<p>Værre: <b>den samme vare sælges under flere knapper samtidig.</b> I sæson 2025/26 alene:</p>
+<div class="tw"><table><thead><tr><th>Vare</th><th>Knapper i brug samtidig</th><th>Omsætning</th></tr></thead><tbody><tr><td>Kronenbourg 1664</td><td>«KRONBOURG 1664 BLANC» + «Kronenbourg 1664 Blanc» + «1664»</td><td>48.600</td></tr><tr><td>Tuborg / almindelig øl</td><td>«TUBORG FADØL» + «Øl» + «Tuborg Pilsner» + «Anden Øl»</td><td>275.118</td></tr><tr><td>Grimbergen</td><td>«GRIMBERGN FADØL» + «GRIMBERGEN»</td><td>18.180</td></tr><tr><td>IPA</td><td>«IPA» + «MIKKELLER IPA»</td><td>22.230</td></tr><tr><td>Vin, 1 glas</td><td>«VIN / 1 glas» + «VIN - 1 GLAS» + «RØD / HVID VIN / 1 glas»</td><td>16.486</td></tr><tr><td>Garderobe</td><td>«GARDEROBE» + «Garderobe»</td><td>48.020</td></tr><tr><td>Kaffe</td><td>«Økologisk Fairtrade Kaffe» + «Kaffe»</td><td>4.220</td></tr></tbody></table></div>
+<p>Det sker, fordi terminalerne ikke kører samme produktbibliotek: nogle er blevet opdateret til den nye opsætning, andre kører videre på den gamle. <b>Ingen produktrapport fra Zettle har derfor været retvisende de sidste to sæsoner.</b> Ét fælles varekatalog på tværs af alle terminaler er det mest værdifulde OnlinePOS kan levere fra dag ét.</p>
+<hr>
+<h2>5. Drift: hvornår og hvor sælges der</h2>
+<p><b>Ugedag</b> (netto kr): Lørdag 1.129.976 · Fredag 917.011 · Torsdag 376.934 · Onsdag 76.402 · Søndag 54.625 · Tirsdag 25.395 · Mandag 153. Fredag+lørdag er <b>79 %</b> af omsætningen.</p>
+<p><b>Betalingsmiddel:</b></p>
+<div class="tw"><table><thead><tr><th>År</th><th>Kort</th><th>Kontant</th><th>MobilePay</th></tr></thead><tbody><tr><td>2023</td><td>90,0 %</td><td>5,8 %</td><td>4,2 %</td></tr><tr><td>2024</td><td>93,6 %</td><td>6,3 %</td><td>0,1 %</td></tr><tr><td>2025</td><td>94,7 %</td><td>5,3 %</td><td>—</td></tr><tr><td>2026</td><td>97,1 %</td><td>2,9 %</td><td>—</td></tr></tbody></table></div>
+<p>Kontant er nede på <b>under 3 %</b> — under 13.000 kr på et helt år. MobilePay er reelt ophørt efter 2023. Det har betydning for kasseopgørelse og for, hvor mange kontantkasser der overhovedet skal bemandes.</p>
+<p><b>Terminaler:</b> 16 oprettede, 30 forskellige navne i historikken (nogle er omdøbt/genoprettet). De fire største bar-terminaler tager 51 % af omsætningen:</p>
+<div class="tw"><table><thead><tr><th>Terminal</th><th>Omsætning</th></tr></thead><tbody><tr><td>Bar i sal 2</td><td>399.539</td></tr><tr><td>Bar i sal 1</td><td>330.009</td></tr><tr><td>Bar i foyer</td><td>326.498</td></tr><tr><td>Bar i sal 3</td><td>248.967</td></tr><tr><td>Garderobe/indgang (2 stk.)</td><td>234.829</td></tr><tr><td>Øvrige 24</td><td>1.040.654</td></tr></tbody></table></div>
+<p>De mange «Ekstra terminal 1–8» og «Mobil Kasse 1–3» tyder på ad hoc-oprettelse ved større arrangementer. Det bør struktureres i OnlinePOS, så omsætning kan aflæses pr. salgssted uden at navngivningen skrider.</p>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>

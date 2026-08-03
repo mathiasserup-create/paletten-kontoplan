@@ -83,7 +83,10 @@
   }
 </style>
 <style>
-  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
   .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
   .nav a:hover{color:var(--accent);border-color:var(--accent)}
   .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
@@ -96,8 +99,8 @@
 </head><body><div class="wrap">
 <header><div class="eyebrow">Spillestedet Paletten · Ny kontoplan</div>
 <h1>Konverteringsplan</h1>
-<div class="meta">Sådan kommer vi på den nye plan fra 1.1.2026</div></header>
-<div class="nav"><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="on" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div>
+<div class="meta">Skæringsdato 1.1.2026 med 2025 som sammenligningstal</div></header>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="on" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="" href="kasse-05-checkliste.html">Checkliste</a></div>
 <p><b>Beslutning (MSP):</b> der bogføres på den nye kontoplan fra <b>1.1.2026</b>, og <b>2025 skal med som sammenligningstal</b>.</p>
 <p>Dette dokument beskriver, hvad den beslutning konkret kræver — og de to forhold der afgør, hvordan det skal gribes an.</p>
 <hr>

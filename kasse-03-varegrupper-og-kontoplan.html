@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Varegrupper → konti — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Kasseskift Zettle → OnlinePOS</div>
+<h1>Varegrupper → konti</h1>
+<div class="meta">Så dagsopgøret kan bogføres uden fortolkning</div></header>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="on" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="" href="kasse-05-checkliste.html">Checkliste</a></div>
+<p>Formålet er, at et dagsopgør fra kassen kan bogføres <b>uden fortolkning</b>: hver varegruppe peger på præcis én konto, og summen af varegrupperne er dagens omsætning.</p>
+<p>Læses sammen med <a href="02-ny-kontoplan.html">02-ny-kontoplan.md</a>.</p>
+<hr>
+<h2>1. Mappingen</h2>
+<div class="tw"><table><thead><tr><th>Varegruppe i OnlinePOS</th><th>Konto</th><th>Kontonavn</th><th>Moms</th></tr></thead><tbody><tr><td>Fadøl</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Flaskeøl</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Drinks/spiritus</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Shots</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Vin</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Alkopops/cider</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Sodavand/vand</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Energidrik</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Varme drikke</td><td>1200</td><td>Barsalg, drikkevarer</td><td>U25</td></tr><tr><td>Snacks</td><td>1210</td><td>Salg af mad/snacks</td><td>U25</td></tr><tr><td>Merchandise</td><td>1220</td><td>Salg, merchandise/diverse</td><td>U25</td></tr><tr><td>Garderobe</td><td>1110</td><td>Garderobeindtægt</td><td>U25</td></tr><tr><td>Billetter (dørsalg)</td><td>1100</td><td>Entréindtægter, egne koncerter</td><td>U25</td></tr><tr><td>Medlemskort</td><td>1420</td><td>Medlemskaber</td><td>U25</td></tr></tbody></table></div>
+<p><b>Ni varegrupper peger på 1200.</b> Det er med vilje: kontoplanen skal ikke have ni barkonti, men kassen skal kunne vise, om det er øllet eller drinksene der falder. Detaljeringen hører hjemme i POS-rapporten, ikke i kontoplanen — samme princip som <a href="01-designprincipper.html">01-designprincipper.md</a> afsnit 3 (aktivitet i konti, detalje i dimension).</p>
+<blockquote><p><b>Én ting skal afklares med bogholder:</b> om dagsopgøret skal bogføres på <b>én</b> samlet barlinje (1200) eller på grupperne hver for sig. Anbefaling: én linje på 1200, og lad OnlinePOS-rapporten bære opdelingen. Ellers vokser kassekladden unødigt.</p></blockquote>
+<hr>
+<h2>2. De poster der <i>ikke</i> er omsætning</h2>
+<p>Det er her den nuværende Zettle-opsætning svigter. Fire ting slås i dag ind som varer, men er regnskabsmæssigt noget helt andet:</p>
+<div class="tw"><table><thead><tr><th>Det der sker i baren</th><th>I dag i Zettle</th><th>Skal i OnlinePOS registreres som</th><th>Konto</th></tr></thead><tbody><tr><td>Kunstner får øl/mad iht. rider</td><td>100 % rabat på en almindelig vare</td><td><b>Betalingsform «Kunstnerforplejning»</b></td><td>2140</td></tr><tr><td>Personale drikker i vagten</td><td>100 % rabat eller «(P)»-knap til 0 kr</td><td><b>Betalingsform «Personale»</b></td><td>3210</td></tr><tr><td>Frivillig fra Paletkorpset får en øl</td><td>100 % rabat</td><td><b>Betalingsform «Frivillige»</b></td><td>3200</td></tr><tr><td>Fejlslag / spildt fadøl</td><td>100 % rabat</td><td><b>Betalingsform «Spild»</b></td><td>2340</td></tr><tr><td>Medlem/sponsor indløser fribillet</td><td>Knap pr. person til 0-1 kr</td><td><b>Betalingsform «Medlemsindløsning»</b></td><td>modregnes 1420</td></tr></tbody></table></div>
+<h3>Hvorfor betalingsform og ikke rabat</h3>
+<p>En <b>rabat</b> fjerner omsætningen: varen blev solgt for 0 kr, og der er intet spor af vareforbruget. En <b>betalingsform</b> beholder salget til fuld pris og flytter modposten: salget bogføres på 1200, og «betalingen» bogføres på 2140/3210/3200/2340.</p>
+<p>Det giver tre ting på én gang:</p>
+<ol><li><b>Vareforbruget bliver rigtigt.</b> 2.749 gratis fadøl er ikke gratis — de har kostet ca. 40.000 kr i indkøb. I dag ligger de i vareforbruget uden en indtægt at måle mod, hvilket trykker dækningsgraden kunstigt.</li><li><b>Momsen bliver rigtig.</b> Kunstnerforplejning efter rider giver fuldt momsfradrag (se <a href="02-ny-kontoplan.html">02-ny-kontoplan.md</a>, boksen ved konto 2140). Personalegoder gør ikke. Den sondring kan ikke laves bagud på en udifferentieret rabat.</li><li><b>Honorarstøtterapporten bliver mulig.</b> Statens Kunstfond skal have honorarudgift pr. koncert (<a href="03-rapporteringskrav.html">03-rapporteringskrav.md</a> A1). Rider-forplejning er en del af den udgift.</li></ol>
+<blockquote><p><b>Beløbet det handler om: ca. 91.000 kr om året</b> fordelt på ~2.660 udleveringer. Det er ikke en detalje.</p></blockquote>
+<hr>
+<h2>3. Dagsopgøret — sådan bogføres det</h2>
+<p>Kassekladden pr. spilledag (eller pr. uge uden for sæsonen):</p>
+<p>``<code> Debet   5820  Tilgodehavende kortindløser        (kortsalg jf. OnlinePOS-rapport) Debet   5810  Kassebeholdning                    (kontantsalg) Debet   2140  Forplejning, kunstnere             (betalingsform «Kunstnerforplejning») Debet   3210  Personalepleje                     (betalingsform «Personale») Debet   3200  Frivillige, Paletkorpset           (betalingsform «Frivillige») Debet   2340  Spild / svind                      (betalingsform «Spild»)     Kredit  1200  Barsalg, drikkevarer           (U25)     Kredit  1210  Salg af mad/snacks             (U25)     Kredit  1110  Garderobeindtægt               (U25)     Kredit  1100  Entréindtægter, egne koncerter (U25)     Kredit  1420  Medlemskaber                   (U25) </code>``</p>
+<p>Kontrol: summen af debet skal være lig summen af kredit. Er den ikke det, er der en kassedifference → <b>1520</b> (indtægt) eller tilsvarende omkostningskonto.</p>
+<p>Kontonumre på balancesiden (5810/5820) skal bekræftes mod den endelige kontoplan.</p>
+<hr>
+<h2>4. Dimensionen «Arrangement»</h2>
+<p><a href="01-designprincipper.html">01-designprincipper.md</a> lægger op til dimensionen <b>Arrangement</b> for større koncerter. OnlinePOS bør derfor kunne mærke et salg med arrangement — enten via en &quot;event&quot;-funktion eller ved at bruge dagen som nøgle (Paletten har sjældent to arrangementer samme dag).</p>
+<p>Det er dét, der gør honorarstøtterapporten til et træk frem for et rekonstruktionsarbejde: billetindtægt fra 1100 + barsalg fra 1200 vs. honorar på 2010–2050, alt sammen med samme arrangement-mærkat.</p>
+<p><b>Afklares ved opsætningen:</b> kan OnlinePOS sende arrangement/dimension med i bogføringsintegrationen til e-conomic? Hvis ikke, bruges dato-nøglen.</p>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>

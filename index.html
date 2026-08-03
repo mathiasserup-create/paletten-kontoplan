@@ -85,7 +85,10 @@
   }
 </style>
 <style>
-  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;font-size:13px}
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
   .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
   .nav a:hover{color:var(--accent);border-color:var(--accent)}
   .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
@@ -106,7 +109,7 @@
   <div class="meta">Status pr. 31. juli 2026 · Den Selvejende Institution Spillestedet Paletten, CVR 16 95 95 88 · e-conomic-aftale 983629</div>
 </header>
 
-<div class="nav"><a class="on" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="on" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="" href="kasse-05-checkliste.html">Checkliste</a></div>
 <p class="lead">Den nye kontoplan er skrevet færdig, og hele den gamle kontoplan er nu mappet over i den. Dette notat samler <b>hvad der er besluttet</b>, <b>hvad der bliver rettet undervejs</b>, og <b>hvad der stadig mangler en beslutning</b> — så arbejdet kan afsluttes med bogholder og revisor.</p>
 
 <div class="stats">
@@ -576,8 +579,14 @@
 <a href="03-rapporteringskrav.html">Rapporteringskrav</a> — hvad der skal afrapporteres til hvem<br>
 <a href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a> — kontoplanen holdt op mod beierholms noter<br>
 <a href="05-mapping-gammel-ny.html">Mapping gammel → ny</a> — konverteringsnøglen, konto for konto<br>
-<a href="06-konverteringsplan.html">Konverteringsplan</a> — sådan kommer vi på den nye plan fra 1.1.2026<br>
-<a href="07-renummereringsguide.html">Renummereringsguide</a> — trin for trin i e-conomic, konto for konto<br><br>Konverteringsnøglen findes også som regneark: <a href="mapping-gammel-ny.csv">mapping-gammel-ny.csv</a>.
+<a href="06-konverteringsplan.html">Konverteringsplan</a> — skæringsdato 1.1.2026 med 2025 som sammenligningstal<br>
+<a href="07-renummereringsguide.html">Renummereringsguide</a> — trin for trin i e-conomic<br><br>Konverteringsnøglen findes også som regneark: <a href="mapping-gammel-ny.csv">mapping-gammel-ny.csv</a>.<br><br>
+  <b>Kasseskift — Zettle til OnlinePOS</b><br>
+<a href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a> — hvad der er hentet ud af zettle, og hvor det ligger<br>
+<a href="kasse-02-salgsanalyse.html">Salgsanalyse</a> — tre sæsoners barsalg — hvad tallene viser<br>
+<a href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a> — så dagsopgøret kan bogføres uden fortolkning<br>
+<a href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a> — sortiment, priser, betalingsformer, terminaler<br>
+<a href="kasse-05-checkliste.html">Checkliste</a> — fra zettle til onlinepos inden 15. august
 </footer>
 
 </div>

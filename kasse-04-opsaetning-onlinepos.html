@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Opsætning af OnlinePOS — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Kasseskift Zettle → OnlinePOS</div>
+<h1>Opsætning af OnlinePOS</h1>
+<div class="meta">Sortiment, priser, betalingsformer, terminaler</div></header>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="on" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="" href="kasse-05-checkliste.html">Checkliste</a></div>
+<p>Målet: kassen skal åbne til efterårssæsonen <b>15. august 2026</b> med et sortiment, der kan bogføres uden fortolkning, og hvor dækningsbidraget kan aflæses.</p>
+<p>Grundlaget er <a href="onlinepos-sortiment.csv">onlinepos-sortiment.csv</a> — 48 produkter, klar til indtastning eller import.</p>
+<hr>
+<h2>1. Sortimentet: 146 knapper bliver til 48 produkter</h2>
+<p>Zettle-layoutet har i dag <b>146 knapper</b>. Anbefalingen er at føre <b>48</b> over:</p>
+<div class="tw"><table><thead><tr><th>Fjernes</th><th>Antal</th><th>Hvorfor</th></tr></thead><tbody><tr><td>Medlemsknapper (én pr. person)</td><td>89</td><td>Bliver betalingsformen «Medlemsindløsning»</td></tr><tr><td>Personaleknapper «(P) …»</td><td>11</td><td>Bliver betalingsformen «Personale»</td></tr><tr><td>Løse gæsteknapper på forsiden</td><td>2</td><td>To navngivne 0-kr-knapper — samme mekanisme</td></tr></tbody></table></div>
+<p>De 89 medlemsknapper er den største enkeltforenkling. De bruges i dag til at registrere <b>3.026 medlemsbesøg</b> ved at slå en 0-kr-vare ind — én knap pr. person, der skal vedligeholdes manuelt hver gang medlemslisten ændrer sig. Det hører ikke hjemme i varekataloget.</p>
+<blockquote><p><b>Bemærk:</b> medlemslisten er ikke tabt — den ligger i arkivet på OneDrive (<code>Zettle-arkiv/udtraek-csv/kasse-layout.csv</code>). Den skal bare bo et andet sted end i kassens produktkatalog. Listen er holdt ude af dette repo, fordi den indeholder navne.</p></blockquote>
+<hr>
+<h2>2. Knapgrupper og priser</h2>
+<p>Priserne er de nuværende Zettle-priser pr. 23. juli 2026. Kostpriserne er <b>anslået</b> ud fra Zettles historiske kostpriser og skal bekræftes mod leverandørfakturaer.</p>
+<div class="tw"><table><thead><tr><th>Knapgruppe</th><th>Produkter</th><th>Pris</th><th>Kostpris</th><th>DG</th></tr></thead><tbody><tr><td><b>FADØL</b></td><td>Tuborg Pilsner, Tuborg Classic, Grimbergen</td><td>60</td><td>14,24–14,67</td><td>69–70 %</td></tr><tr><td></td><td>1664</td><td>60</td><td>20,54</td><td>57 %</td></tr><tr><td></td><td>IPA</td><td>60</td><td>22,00</td><td>54 %</td></tr><tr><td></td><td>Alkoholfri fadøl</td><td>60</td><td>21,56</td><td>55 %</td></tr><tr><td></td><td>Viborg Bryghus (tilbud)</td><td>50</td><td>15,93</td><td>60 %</td></tr><tr><td><b>DRINKS 4 cl</b></td><td>Gin Hass, Rom &amp; cola, Rabarber mix, Dark&#x27;n&#x27;kinda&#x27;stormy, Jack D &amp; cola, Gin/tonic, Vodka/Redbull, Fantasi drink</td><td>75</td><td>14,18</td><td>76 %</td></tr><tr><td><b>ON THE ROX</b></td><td>Rom, Whisky, Gin, Vodka (4 cl)</td><td>50</td><td>14,18</td><td>65 %</td></tr><tr><td><b>SHOTS</b></td><td>Råstof Lakrids, Sismofytter, Sure Fisk — 1 stk</td><td>30</td><td>9,50</td><td>60 %</td></tr><tr><td></td><td>samme — 4 stk</td><td>100</td><td>38,00</td><td>52 %</td></tr><tr><td><b>VIN</b></td><td>Rødvin, Hvidvin (glas)</td><td>65</td><td>10,00</td><td>81 %</td></tr><tr><td><b>SODAVAND</b></td><td>Cola, Cola Zero, Fanta, Sprite, Ramlösa, Ramlösa Citrus</td><td>30</td><td>6,50</td><td>73 %</td></tr><tr><td></td><td>Red Bull, Red Bull Zero</td><td>30</td><td>13,16</td><td>45 %</td></tr><tr><td></td><td>Kildevand</td><td>20</td><td>6,50</td><td>59 %</td></tr><tr><td><b>BREEZER</b></td><td>Orange, Lime, Pineapple</td><td>60</td><td>8,25</td><td>83 %</td></tr><tr><td><b>ØVRIGT</b></td><td>Kaffe</td><td>20</td><td>5,00</td><td>69 %</td></tr><tr><td></td><td>Snacks (peanuts / chips)</td><td>15</td><td>7,25</td><td>40 %</td></tr><tr><td></td><td>Garderobe</td><td>20</td><td>—</td><td>100 %</td></tr><tr><td><b>BILLETTER</b></td><td>Oprettes pr. koncert</td><td>varierer</td><td>—</td><td>—</td></tr></tbody></table></div>
+<h3>To prisfejl der skal rettes ved opsætningen</h3>
+<ol><li><b>«Sure Fisk / 4 stk» koster 30 kr</b> — samme som 1 stk, mens de to andre shots koster 100 kr for 4 stk. Dækningsbidraget er <b>−14 kr pr. salg</b>. Solgt 2 gange, så tabet er ubetydeligt, men fejlen skal ikke med over.</li><li><b>«JamNight»-knappen på forsiden står til 0 kr.</b> JamNight-billetter er ellers solgt til 40 kr (2023–25) og 60 kr (2025/26). Knappen er brugt 5 gange til 0 kr.</li></ol>
+<p>Desuden findes <b>«Rødvin» to steder</b> — både i VIN-mappen og løst på forsiden. Ét produkt, én knap.</p>
+<hr>
+<h2>3. Sæt kostpris på alt fra dag ét</h2>
+<p>67 af de 146 nuværende knapper har <b>ingen kostpris</b>. Uden kostpriser kan OnlinePOS ikke vise dækningsbidrag, og prisstigninger fra Carlsberg m.fl. kan ikke opdages.</p>
+<p>Kostpriserne i <a href="onlinepos-sortiment.csv">onlinepos-sortiment.csv</a> er et <b>udgangspunkt fra 2023–2025</b> og skal opdateres til aktuelle indkøbspriser. 4 produkter har intet historisk modstykke og skal udfyldes fra bunden (de tre navngivne koncertbilletter samt JamNight-knappen — for billetter er kostprisen 0).</p>
+<blockquote><p><b>Gør det til en fast rutine:</b> når leverandørprisen ændrer sig, opdateres kostprisen i kassen. Det tager to minutter og er den eneste måde, dækningsgraden forbliver sand.</p></blockquote>
+<hr>
+<h2>4. Det vigtigste: gratis udleveringer skal have en årsag</h2>
+<p><b>91.000 kr om året</b> gives væk i baren uden registrering af hvorfor (<a href="kasse-02-salgsanalyse.html">02-salgsanalyse.md</a>, afsnit 4.1). I OnlinePOS oprettes i stedet fem <b>betalingsformer</b>:</p>
+<div class="tw"><table><thead><tr><th>Betalingsform</th><th>Bruges til</th><th>Bogføres på</th></tr></thead><tbody><tr><td>Kunstnerforplejning</td><td>Rider — mad og drikke til kunstnere</td><td>2140</td></tr><tr><td>Personale</td><td>Personalets eget forbrug i vagten</td><td>3210</td></tr><tr><td>Frivillige</td><td>Paletkorpset</td><td>3200</td></tr><tr><td>Spild</td><td>Fejlslag, spildt fadøl, brækage</td><td>2340</td></tr><tr><td>Medlemsindløsning</td><td>Medlemmers og sponsorers fribilletter/drikkevarer</td><td>modregnes 1420</td></tr></tbody></table></div>
+<p>Varen slås ind til <b>fuld pris</b> og afsluttes med den relevante betalingsform. Så bliver både omsætning, vareforbrug og modpost rigtige — se <a href="kasse-03-varegrupper-og-kontoplan.html">03-varegrupper-og-kontoplan.md</a> afsnit 2 for begrundelsen og afsnit 3 for konteringen.</p>
+<p><b>Sig det højt til personalet:</b> «Ingen 100 %-rabat. Vælg en betalingsform.» Det er den eneste adfærdsændring, hele omlægningen kræver af baren.</p>
+<hr>
+<h2>5. Ét varekatalog på alle terminaler</h2>
+<p>I dag kører terminalerne forskellige produktbiblioteker — derfor findes samme øl under tre knapper (<a href="kasse-02-salgsanalyse.html">02-salgsanalyse.md</a>, afsnit 4.3). Krav til OnlinePOS-opsætningen:</p>
+<ul><li><b>Ét katalog</b>, der pushes til alle terminaler. Ingen lokale produkter.</li><li><b>Ingen generiske knapper</b> som «Øl» eller «Anden Øl». De skjulte 138.000 kr salg, hvor man ikke kan se hvad der blev solgt.</li><li>Nye produkter oprettes ét sted — af én person.</li></ul>
+<h3>Terminaler</h3>
+<p>16 terminaler er oprettet i Zettle, men historikken viser <b>30 forskellige navne</b>: «Ekstra terminal 1–8», «Mobil Kasse 1–3», «Ekstra kasse 1–2» osv. Navngivningen er skredet, fordi der oprettes nye terminaler ad hoc ved store arrangementer.</p>
+<p>Anbefalet fast navngivning i OnlinePOS, så omsætning pr. salgssted kan aflæses over tid:</p>
+<div class="tw"><table><thead><tr><th>Navn</th><th>Placering</th><th>Andel af omsætning (3 år)</th></tr></thead><tbody><tr><td><code>BAR-SAL-1</code> … <code>BAR-SAL-3</code></td><td>Barerne i salen</td><td>38 %</td></tr><tr><td><code>BAR-FOYER</code></td><td>Baren i foyeren</td><td>13 %</td></tr><tr><td><code>GARDEROBE</code></td><td>Garderobe/indgang</td><td>9 %</td></tr><tr><td><code>MOBIL-1</code> … <code>MOBIL-3</code></td><td>Mobile kasser ved store arrangementer</td><td>resten</td></tr></tbody></table></div>
+<p>Ved ekstraordinære arrangementer bruges de eksisterende mobile numre igen — der oprettes ikke nye.</p>
+<hr>
+<h2>6. Kontanthåndtering kan skæres ned</h2>
+<p>Kontantandelen er faldet til <b>2,9 % i 2026</b> — under 13.000 kr på et år, fordelt på 16 terminaler. MobilePay er reelt ophørt efter 2023.</p>
+<p>Overvej at have <b>kontant i én eller to kasser</b> (indgang/garderobe og én bar) og køre resten kortkun. Det sparer optælling, kassedifferencer og byttepenge. Beslutningen er driftsmæssig, ikke teknisk — men tallene understøtter den.</p>
+<hr>
+<h2>7. Åbne punkter til opsætningsmødet med OnlinePOS</h2>
+<ol><li><b>Bogføringsintegration til e-conomic</b> — kan OnlinePOS sende dagsopgøret direkte, og kan varegrupperne mappes til konti 1100/1110/1200/1210/1220/1420?</li><li><b>Betalingsformer</b> — kan man oprette egne betalingsformer (afsnit 4), og kommer de med i integrationen som separate linjer?</li><li><b>Dimension/arrangement</b> — kan et salg mærkes med arrangement, og følger mærkatet med til e-conomic? (<a href="03-rapporteringskrav.html">03-rapporteringskrav.md</a> A1 kræver tal pr. koncert.)</li><li><b>Billetter i kassen</b> — skal dørsalg fortsat oprettes som produkter pr. koncert, eller kan OnlinePOS håndtere det som en billettype? I dag oprettes en ny knap pr. koncert, hvilket har givet 100+ engangsprodukter i biblioteket.</li><li><b>Lager</b> — skal lagerstyring aktiveres? Zettle-lageret er ikke vedligeholdt, så det er reelt en ny beslutning.</li><li><b>Dataadgang</b> — kan man trække rådata (salgslinjer) ud af OnlinePOS via API eller eksport? Erfaringen fra Zettle er, at 3-års-grænsen kom bag på jer. Afklar opbevaringsperioden <b>inden</b> kontrakten underskrives.</li></ol>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>

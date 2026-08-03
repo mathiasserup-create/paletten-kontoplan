@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Checkliste — Spillestedet Paletten</title>
+<style>
+  :root{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+      --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+      --warn:#e0b165; --warn-soft:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17161a; --panel:#201f24; --ink:#eeece8; --muted:#a09a94; --line:#332f35;
+    --accent:#f0916a; --accent-soft:#2b1f1a; --ok:#7fc99a; --ok-soft:#1a2620;
+    --warn:#e0b165; --warn-soft:#2a2318;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --panel:#fff; --ink:#1c1917; --muted:#6b6560; --line:#e5e1db;
+    --accent:#9a3412; --accent-soft:#fdf1e7; --ok:#166534; --ok-soft:#eef7f0;
+    --warn:#92400e; --warn-soft:#fdf6e7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px}
+  header{border-bottom:3px solid var(--accent); padding-bottom:20px; margin-bottom:36px}
+  .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:650}
+  h1{font-size:2rem; line-height:1.2; margin:.35em 0 .2em; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px}
+  h2{font-size:1.3rem; margin:2.6em 0 .6em; letter-spacing:-.01em; padding-top:.4em}
+  h3{font-size:1.02rem; margin:1.8em 0 .4em}
+  p{margin:.7em 0}
+  .lead{font-size:1.08rem; color:var(--ink)}
+  ul,ol{padding-left:1.25em; margin:.6em 0}
+  li{margin:.32em 0}
+  code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--accent-soft); color:var(--accent); padding:.1em .38em; border-radius:4px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:24px 0}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+  .stat .n{font-size:1.6rem; font-weight:660; letter-spacing:-.02em; display:block; line-height:1.15}
+  .stat .l{font-size:12.5px; color:var(--muted); margin-top:3px; display:block}
+  .tw{overflow-x:auto; margin:16px 0; border:1px solid var(--line); border-radius:10px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:480px}
+  th,td{text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:640; background:var(--bg)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; padding:14px 18px; margin:20px 0}
+  .box.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box .t{font-weight:650; font-size:14px; display:block; margin-bottom:.25em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0; font-size:14px}
+  .node{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 12px}
+  .node b{display:block; font-size:12.5px; color:var(--muted); font-weight:600}
+  .node.key{border-color:var(--accent); background:var(--accent-soft)}
+  .arrow{color:var(--muted)}
+  .tag{display:inline-block; font-size:11.5px; font-weight:640; padding:2px 7px; border-radius:5px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+  .tag.ok{background:var(--ok-soft); color:var(--ok)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  table.plan{font-size:13.5px}
+  table.plan td{padding:7px 14px}
+  .kn{font:12.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--accent); background:var(--accent-soft); padding:2px 5px; border-radius:4px; margin-right:5px}
+  tr.sec td{background:var(--accent-soft); color:var(--accent); font-weight:660; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  tr.hdr td, tr.tot td{font-weight:650; background:var(--bg)}
+  tr.tot td{color:var(--muted)}
+  .src{margin:1px 0}
+  .src.none{color:var(--muted); font-style:italic}
+  .mk{font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:2px}
+  @media print{
+    body{background:#fff} .wrap{max-width:none; padding:0}
+    h2{page-break-after:avoid} .tw,.box{page-break-inside:avoid}
+  }
+</style>
+<style>
+  .nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;font-size:13px}
+  .nav:last-of-type{margin-bottom:28px}
+  .navlabel{color:var(--muted);opacity:.7;font-size:11px;letter-spacing:.08em;
+            text-transform:uppercase;min-width:82px}
+  .nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px}
+  .nav a:hover{color:var(--accent);border-color:var(--accent)}
+  .nav a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 10px 10px 0}
+  blockquote p:first-child{margin-top:0} blockquote p:last-child{margin-bottom:0}
+  h1{font-size:1.9rem} h4{font-size:.95rem;margin:1.5em 0 .3em;color:var(--muted)}
+  hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+  a{color:var(--accent)}
+</style>
+</head><body><div class="wrap">
+<header><div class="eyebrow">Spillestedet Paletten · Kasseskift Zettle → OnlinePOS</div>
+<h1>Checkliste</h1>
+<div class="meta">Fra Zettle til OnlinePOS inden 15. august</div></header>
+<div class="nav"><span class="navlabel">Kontoplan</span><a class="" href="index.html">Oplæg</a><a class="" href="01-designprincipper.html">Designprincipper</a><a class="" href="02-ny-kontoplan.html">Den nye kontoplan</a><a class="" href="03-rapporteringskrav.html">Rapporteringskrav</a><a class="" href="04-sammenhaeng-aarsrapport.html">Sammenhæng med årsrapporten</a><a class="" href="05-mapping-gammel-ny.html">Mapping gammel → ny</a><a class="" href="06-konverteringsplan.html">Konverteringsplan</a><a class="" href="07-renummereringsguide.html">Renummereringsguide</a></div><div class="nav"><span class="navlabel">Kasseskift</span><a class="" href="kasse-01-udtraek-og-arkiv.html">Udtræk og arkiv</a><a class="" href="kasse-02-salgsanalyse.html">Salgsanalyse</a><a class="" href="kasse-03-varegrupper-og-kontoplan.html">Varegrupper → konti</a><a class="" href="kasse-04-opsaetning-onlinepos.html">Opsætning af OnlinePOS</a><a class="on" href="kasse-05-checkliste.html">Checkliste</a></div>
+<p>Rækkefølgen er valgt, så intet er afhængigt af noget, der ikke er gjort endnu. Sæt initialer og dato ved hvert punkt.</p>
+<hr>
+<h2>A. Sikring af data — gjort ✅</h2>
+<div class="tw"><table><thead><tr><th></th><th>Opgave</th><th>Status</th></tr></thead><tbody><tr><td>A1</td><td>Fuldt udtræk af salgshistorik, produkter, layout og terminaler</td><td>✅ 3.8.2026</td></tr><tr><td>A2</td><td>Arkiveret i OneDrive (<code>Zettle-arkiv/</code>)</td><td>✅</td></tr><tr><td>A3</td><td>Aggregerede CSV&#x27;er i repoet (<code>kasse/csv/</code>)</td><td>✅</td></tr></tbody></table></div>
+<blockquote><p><b>Luk ikke Zettle-abonnementet, før OnlinePOS kører stabilt.</b> Så længe kontoen er åben, kan udtrækket gentages. Historik før 3.8.2023 er allerede tabt.</p></blockquote>
+<hr>
+<h2>B. Beslutninger inden opsætning</h2>
+<div class="tw"><table><thead><tr><th></th><th>Beslutning</th><th>Ansvarlig</th><th>Frist</th></tr></thead><tbody><tr><td>B1</td><td>Godkend sortimentet på 48 produkter (<a href="onlinepos-sortiment.csv">onlinepos-sortiment.csv</a>)</td><td>Bar/daglig leder</td><td>6.8.</td></tr><tr><td>B2</td><td>Bekræft eller ret priserne — særligt «Sure Fisk 4 stk» (30 → 100 kr) og JamNight (0 → 60 kr)</td><td>Bar</td><td>6.8.</td></tr><tr><td>B3</td><td>Indhent <b>aktuelle kostpriser</b> fra Carlsberg m.fl. og øvrige leverandører</td><td>Indkøb</td><td>8.8.</td></tr><tr><td>B4</td><td>Godkend de fem betalingsformer (<a href="kasse-04-opsaetning-onlinepos.html">04-opsaetning-onlinepos.md</a> afsnit 4)</td><td>MSP + bogholder</td><td>6.8.</td></tr><tr><td>B5</td><td>Beslut hvor mange kasser der skal have kontant</td><td>Daglig leder</td><td>8.8.</td></tr><tr><td>B6</td><td>Beslut hvor medlemslisten skal bo fremover (ikke i kassen)</td><td>Daglig leder</td><td>8.8.</td></tr></tbody></table></div>
+<hr>
+<h2>C. Afklares med OnlinePOS</h2>
+<div class="tw"><table><thead><tr><th></th><th>Spørgsmål</th><th>Konsekvens hvis nej</th></tr></thead><tbody><tr><td>C1</td><td>Kan varegrupper mappes til konti 1100/1110/1200/1210/1220/1420?</td><td>Dagsopgøret skal fordeles manuelt</td></tr><tr><td>C2</td><td>Kan man oprette <b>egne betalingsformer</b>?</td><td>Gratisudleveringer kan ikke adskilles — hovedformålet falder</td></tr><tr><td>C3</td><td>Kan et salg mærkes med <b>arrangement</b>, og følger det med til e-conomic?</td><td>Honorarstøtterapporten skal laves i hånden</td></tr><tr><td>C4</td><td>Kan dagsopgøret sendes automatisk til <b>e-conomic</b>?</td><td>Manuel kassekladde pr. spilledag</td></tr><tr><td>C5</td><td>Findes der <b>API/eksport af rådata</b>, og hvor længe gemmes historikken?</td><td>Samme fælde som Zettles 3-årsgrænse</td></tr><tr><td>C6</td><td>Hvordan håndteres <b>billetter pr. koncert</b> — produkt eller billettype?</td><td>100+ engangsprodukter igen</td></tr><tr><td>C7</td><td>Kan alle terminaler tvinges til <b>ét fælles katalog</b>?</td><td>Dobbeltknapper opstår igen</td></tr></tbody></table></div>
+<p>Spørgsmålene står også i <a href="kasse-04-opsaetning-onlinepos.html">04-opsaetning-onlinepos.md</a> afsnit 7.</p>
+<hr>
+<h2>D. Opsætning</h2>
+<div class="tw"><table><thead><tr><th></th><th>Opgave</th><th>Frist</th></tr></thead><tbody><tr><td>D1</td><td>Opret de 14 varegrupper med kontomapping</td><td>10.8.</td></tr><tr><td>D2</td><td>Opret de 48 produkter med pris, moms 25 % og <b>kostpris</b></td><td>11.8.</td></tr><tr><td>D3</td><td>Opret de fem betalingsformer</td><td>11.8.</td></tr><tr><td>D4</td><td>Byg knap-layoutet — samme mappestruktur som i dag (FADØL, DRINKS 4cl, ON THE ROX, SHOTS, VIN, SODAVAND, BREEZER, forside: Garderobe/Kaffe/Kildevand/Snacks)</td><td>12.8.</td></tr><tr><td>D5</td><td>Navngiv terminalerne fast (<code>BAR-SAL-1</code>…, <code>BAR-FOYER</code>, <code>GARDEROBE</code>, <code>MOBIL-1</code>…)</td><td>12.8.</td></tr><tr><td>D6</td><td>Opret billetknapper til de første koncerter i efterårssæsonen</td><td>13.8.</td></tr><tr><td>D7</td><td>Testsalg på hver terminal — ét pr. varegruppe + ét pr. betalingsform</td><td>13.8.</td></tr><tr><td>D8</td><td>Kontrollér at testsalgene lander på de rigtige konti i dagsopgøret</td><td>13.8.</td></tr></tbody></table></div>
+<hr>
+<h2>E. Bemanding og drift</h2>
+<div class="tw"><table><thead><tr><th></th><th>Opgave</th><th>Frist</th></tr></thead><tbody><tr><td>E1</td><td>Instruktion til barpersonalet: <b>ingen 100 %-rabat — vælg betalingsform</b></td><td>14.8.</td></tr><tr><td>E2</td><td>Ét A5-ark ved hver kasse med de fem betalingsformer og hvornår de bruges</td><td>14.8.</td></tr><tr><td>E3</td><td>Aftal hvem der opdaterer kostpriser ved leverandørprisændringer</td><td>14.8.</td></tr><tr><td>E4</td><td>Aftal fast procedure for dagsopgør → bogholder</td><td>14.8.</td></tr></tbody></table></div>
+<hr>
+<h2>F. Efter åbning</h2>
+<div class="tw"><table><thead><tr><th></th><th>Opgave</th><th>Hvornår</th></tr></thead><tbody><tr><td>F1</td><td>Kontrollér første dagsopgør linje for linje mod kassens rapport</td><td>Første spilledag</td></tr><tr><td>F2</td><td>Sammenlign omsætning pr. varegruppe med Zettle-tallene i <a href="kasse-02-salgsanalyse.html">02-salgsanalyse.md</a></td><td>Efter 3 spilledage</td></tr><tr><td>F3</td><td>Kontrollér at betalingsformerne rent faktisk bruges (ikke bare kort/kontant)</td><td>Efter 3 spilledage</td></tr><tr><td>F4</td><td>Nyt fuldt dataudtræk fra OnlinePOS — kontrollér at eksporten virker</td><td>Efter 1 måned</td></tr><tr><td>F5</td><td>Luk Zettle-abonnementet</td><td>Når F4 er OK</td></tr></tbody></table></div>
+<hr>
+<h2>Referencer</h2>
+<ul><li><a href="kasse-01-udtraek-og-arkiv.html">01-udtraek-og-arkiv.md</a> — hvad er hentet og hvor det ligger</li><li><a href="kasse-02-salgsanalyse.html">02-salgsanalyse.md</a> — tallene bag anbefalingerne</li><li><a href="kasse-03-varegrupper-og-kontoplan.html">03-varegrupper-og-kontoplan.md</a> — mapping til kontoplanen og kontering af dagsopgøret</li><li><a href="kasse-04-opsaetning-onlinepos.html">04-opsaetning-onlinepos.md</a> — den konkrete opsætning</li><li><a href="onlinepos-sortiment.csv">onlinepos-sortiment.csv</a> — sortimentet klar til indtastning</li><li><code>../kontoplan/</code> — den nye kontoplan, som mappingen peger på</li></ul>
+<footer>Del af dokumentationen for Palettens nye kontoplan · opdateret 31. juli 2026 · <a href="index.html">tilbage til oplægget</a></footer>
+</div></body></html>
