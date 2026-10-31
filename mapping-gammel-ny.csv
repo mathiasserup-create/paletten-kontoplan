@@ -46,7 +46,7 @@ gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
 2610;Underentreprænører B-honorar, skal indb.;4376;1:1;15;B-honorar til ikke-kunstnere. Ny konto 4376 oprettet.
 2620;Kulturambassadør / Julia;4376 / 4375;SPLIT;4;Kulturambassadør-projekt. Honorar til privatperson → 4376, faktura fra CVR → 4375. Tilskudssiden ligger på 1605.
 3020;Gager og lønninger;3010 / 3020;SPLIT;235;Fast personale → 3010. Timelønnede/afløsere → 3020 (kræver oplysning fra lønsystem).
-3021;Aconto løn;8200;1:1;0;Aconto løn er en balancepost (skyldig løn), ikke drift. Ubrugt.
+3021;Aconto løn;spærres;LUKKES;134;Driftskonto med 134 posteringer 2013–2018 (netto -170 kr.) — kan derfor ikke renummereres til statuskontoen 8200. Spærres med historikken; 8200 Skyldig løn oprettes ny. Rettet 31.10.2026.
 3022;Ledighedsdage;3020;1:1;1;Ledighedsdage — timelønnede.
 3023;Store Bededagstillæg;3040;1:1;12;Store Bededagstillæg.
 3024;Skattefri godtgørelse;3260 / 3270;SPLIT;2;Skattefri godtgørelse: kørsel → 3260, rejse → 3270.
@@ -124,15 +124,15 @@ gammel_nr;gammel_navn;ny_nr;metode;posteringer;note
 4755;Kassedifference mv.;4860;1:1;6;Kassedifference (finansiel).
 4760;Valutadifferencer;4850;1:1;65;Valutakursdifferencer.
 4999;Fejlkonto;4999;1:1;0;Fejlkonto — bevares, afstemmes til 0.
-5101;Indretning af lejede lokaler, primo;5100;SAMLES;2;Primo og tilgang samles på én kostpriskonto 5100.
-5102;Indretning af lejede lokaler, tilgang;5100;SAMLES;5;Tilgang bogføres direkte på 5100.
-5111;Afskrivninger primo;5110;SAMLES;3;Afskrivninger primo → 5110.
-5115;Årets afskrivninger;5110;SAMLES;10;Årets afskrivninger → 5110 (modpost drift 4610).
+5101;Indretning af lejede lokaler, primo;5100;1:1;2;Primo → 5100. Tilgang har nu egen bevægelseskonto 5105 (rettet 31.10.2026).
+5102;Indretning af lejede lokaler, tilgang;5105;1:1;5;Tilgang → bevægelseskontoen 5105 (v4). Rettet 31.10.2026.
+5111;Afskrivninger primo;5110;1:1;3;Afskrivninger primo → 5110. Årets afskrivning bliver på 5115 (rettet 31.10.2026).
+5115;Årets afskrivninger;5115;1:1;10;Årets afskrivninger. Beholder nummeret: ny 5115 er netop "— årets afskrivning" (modpost drift 4610). Rettet 31.10.2026 — en fletning ville blokere nummeret.
 5701;Anskaffelsessum, primo;5200 / 5300;SPLIT;16;Anskaffelsessum primo. Teknik (lyd/lys) udskilles til 5300, øvrigt driftsmateriel → 5200.
-5702;Tilgang i årets løb;5200 / 5300;SPLIT;38;Tilgang i året — samme opdeling.
+5702;Tilgang i årets løb;5205 / 5305;SPLIT;38;Tilgang i året → bevægelseskontiene 5205 / 5305, samme opdeling som kostpris (v4). Rettet 31.10.2026.
 5703;Årets afgang;5200 / 5300;SPLIT;7;Årets afgang — samme opdeling.
 5711;Afskrivninger, primo;5210 / 5310;SPLIT;18;Afskrivninger primo — samme opdeling.
-5715;Årets afskrivninger;5210 / 5310;SPLIT;49;Årets afskrivninger — samme opdeling.
+5715;Årets afskrivninger;5215 / 5315;SPLIT;49;Årets afskrivninger. Renummereres til 5215 "— årets afskrivning"; teknikandelen flyttes til 5315. Rettet 31.10.2026.
 5716;Tilbageførte afskrivninger;5210 / 5310;SPLIT;8;Tilbageførte afskrivninger ved afgang.
 6540;Varebeholdning;6100;1:1;18;Varebeholdning, bar.
 6550;Kunst;5400;1:1;2;Kunst flyttes til anlægsaktiver (afskrives ikke).
